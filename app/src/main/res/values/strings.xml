@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">MathQA</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_select_subject">SelectSubjectActivity</string>
+    <string name="title_activity_browse_learning_concepts">BrowseLearningConceptsActivity</string>
+    <string name="title_activity_logout">Logout</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_image_capture">ImageCaptureActivity</string>
+    <string name="title_activity_enter_text">EnterTextActivity</string>
+    <string name="title_activity_enter_formula">EnterFormulaActivity</string>
+    <string name="title_activity_question_list">QuestionListActivity</string>
+    <string name="title_activity_question">QuestionActivity</string>
+    <string name="title_activity_learning_concept">LearningConceptActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="camera_permission">Camera access is required</string>
+    <string name="camera_rw_permission">Camera and read/write access to memory is needed to
+    take pictures.</string>
+    <string name="settings_str">Settings</string>
+    <string name="title_activity_image_preview">ImagePreview</string>
+</resources>

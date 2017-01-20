@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Toolbar-->
+    <string name="main_logo">MathQA</string>
+    <string name="tb_topics">Topics</string>
+    <!--ConceptDetail-->
+    <string name="tb_view_concept">View Concept</string>
+    <string name="tb_concept">Concept</string>
+    <string name="tb_questions">Questions</string>
+    <!--QuestionDetail-->
+    <string name="tb_view_question">View Question</string>
+    <string name="tb_question">Question</string>
+    <string name="tb_solution">Solution</string>
+    <!--Search-->
+    <string name="tb_search_questions">Search Questions</string>
+    <string name="tb_text">Text</string>
+    <string name="tb_formula">Formula</string>
+    <string name="tb_tag">Tag</string>
+
+
+    <!--Buttons-->
+    <!--Subject Levels-->
+    <string name="btn_elementary">Elementary Mathematics</string>
+    <string name="btn_psle">PSLE Mathematics</string>
+    <string name="btn_h2">H2 Mathematics</string>
+    <string name="btn_advanced">Additional Mathematics</string>
+    <!--Account-->
+    <string name="btn_signup">Sign Up</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_home">Go Home</string>
+    <!--Topics-->
+    <string name="btn_explore">Explore</string>
+    <string name="btn_search">Search</string>
+    <!--Concept-->
+    <string name="btn_key_points">Key Points</string>
+    <string name="btn_sample_questions">Sample Questions</string>
+    <!--OCR-->
+    <string name="btn_retake">Retake</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_cancel">Cancel</string>
+
+
+    <!--EditText-->
+    <!--Account-->
+    <string name="et_reg_username">Pick a username</string>
+    <string name="et_reg_password">Pick a password</string>
+    <string name="et_reg_email">Enter your email</string>
+    <string name="et_log_username">Username</string>
+    <string name="et_log_password">Password</string>
+    <!--Search-->
+    <string name="et_search_text">Enter text or capture an image...</string>
+    <string name="et_search_formula">Enter a formula...</string>
+
+
+    <!--TextField-->
+    <!--Account-->
+    <string name="tf_login_or_signup">Login / SignUp</string>
+    <string name="tf_signup">Sign up for new user</string>
+    <string name="tf_forgot_pw">Forgot Password</string>
+    <!--Error-->
+    <string name="tf_error">404</string>
+    <string name="tf_error_msg">Sorry, the page you are trying to reach is unavailable at the moment</string>
+    <!--Search-->
+    <string name="tf_text_ocr">Text Recognition</string>
+    <string name="tf_text_preview">Text Preview</string>
+    <string name="tf_latex_preview">Latex Preview</string>
+    <string name="tf_insert_formula">Insert Formula</string>
+
+
+    <!--Formulas-->
+    <string name="formula_fraction">\frac{x}{y}</string>
+    <string name="formula_square">x^{2}</string>
+    <string name="formula_sqrt">\sqrt{x}</string>
+    <string name="formula_cubicroot">\sqrt[3]{x}</string>
+    <string name="formula_eps">e^{x}</string>
+    <string name="formula_sub">x_{2}</string>
+    <string name="formula_log">\log x</string>
+    <string name="formula_ln">\ln x</string>
+    <string name="formula_sin">\sin x</string>
+    <string name="formula_cos">\cos x</string>
+    <string name="formula_tan">\tan x</string>
+    <string name="formula_cot">\cot x</string>
+    <string name="formula_sum">\sum_{i=0}^{n} {a}_{n}</string>
+    <string name="formula_lim">\lim_{x\to\infty}</string>
+    <string name="formula_overrightarrow">\overrightarrow{AB}</string>
+    <string name="formula_integral">\int_{-1}^{1} xdx</string>
+
+</resources>
