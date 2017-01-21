@@ -3,6 +3,10 @@ package dekauliya.fyp.mathqa;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -13,6 +17,14 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.googlecode.leptonica.android.AdaptiveMap;
+import com.googlecode.leptonica.android.Binarize;
+import com.googlecode.leptonica.android.Enhance;
+import com.googlecode.leptonica.android.Pix;
+import com.googlecode.leptonica.android.ReadFile;
+import com.googlecode.leptonica.android.Rotate;
+import com.googlecode.leptonica.android.Skew;
+import com.googlecode.leptonica.android.WriteFile;
 import com.orhanobut.logger.Logger;
 
 import org.androidannotations.annotations.Background;
@@ -43,7 +55,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
         Uri uri = intent.getParcelableExtra(MainActivity_.CAPTURED_IMAGE_URI);
         try{
             if (uri != null){
-                displayBitmapImage(uri);
+                preprocessImage(uri);
             }
         }catch(Exception e){
             Logger.e(getClass().getName(), e);
@@ -51,11 +63,6 @@ public class ImagePreviewActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @UiThread
-    void displayBitmapImage(Uri uri){
-        getBitmapFromUri(uri, imagePreview);
     }
 
     @Override
@@ -82,7 +89,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
     }
 
     @Background
-    protected void getBitmapFromUri(Uri imageUri, ImageView imageView) {
+    protected void preprocessImage(Uri imageUri) {
         BitmapFactory.Options opts = new BitmapFactory.Options();
 
         try {
@@ -110,7 +117,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
             Bitmap bitmap = BitmapFactory.decodeStream(input, null, opts);
             input.close();
 
-            imageView.setImageBitmap(bitmap);
+            preprocessingPipeline(bitmap);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -124,6 +131,40 @@ public class ImagePreviewActivity extends AppCompatActivity {
         int k = Integer.highestOneBit((int)Math.floor(ratio));
         if(k==0) return 1;
         else return k;
+    }
+
+    @Background
+    public void toGrayscale(Bitmap bmpOriginal){
+        int width = bmpOriginal.getWidth();
+        int height = bmpOriginal.getHeight();
+
+        Bitmap bmpGrayscale = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bmpGrayscale);
+        Paint paint = new Paint();
+        ColorMatrix cm = new ColorMatrix();
+        cm.setSaturation(0);
+        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+        paint.setColorFilter(f);
+        canvas.drawBitmap(bmpOriginal, 0, 0, paint);
+
+        updateImage(bmpGrayscale);
+    }
+
+    @Background
+    public void preprocessingPipeline(Bitmap bmpOriginal){
+        Pix pixs = ReadFile.readBitmap(bmpOriginal);
+        pixs = Enhance.unsharpMasking(pixs);
+        pixs = AdaptiveMap.pixContrastNorm(pixs);
+        pixs = Binarize.otsuAdaptiveThreshold(pixs);
+        double angle = Skew.findSkew(pixs);
+        pixs = Rotate.rotate(pixs, (float) angle);
+
+        updateImage(WriteFile.writeBitmap(pixs));
+    }
+
+    @UiThread
+    public void updateImage(Bitmap bmp){
+        imagePreview.setImageBitmap(bmp);
     }
 
 }

@@ -5,4 +5,5 @@ package dekauliya.fyp.mathqa;
  */
 
 public class ImagePreprocessing {
+
 }
