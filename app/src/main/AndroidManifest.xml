@@ -24,7 +24,6 @@
         <activity android:name=".MainActivity_">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -92,9 +91,12 @@
         <activity android:name=".RestApiActivity">
         </activity>
         <activity
-            android:name=".ImagePreviewActivity"
+            android:name=".ImagePreviewActivity_"
             android:label="@string/title_activity_image_preview"
             android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dekauliya.fyp.mathqa.MainActivity_" />
         </activity>
     </application>
 

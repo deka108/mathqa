@@ -38,4 +38,5 @@
     take pictures.</string>
     <string name="settings_str">Settings</string>
     <string name="title_activity_image_preview">ImagePreview</string>
+    <string name="no_network_connection_toast">No Network Connection.</string>
 </resources>

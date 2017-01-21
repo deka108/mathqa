@@ -5,7 +5,6 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +19,7 @@ import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.multi.SnackbarOnAnyDeniedMultiplePermissionsListener;
+import com.orhanobut.logger.Logger;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import org.androidannotations.annotations.Click;
@@ -40,11 +40,17 @@ public class MainActivity extends AppCompatActivity {
     @ViewById(android.R.id.content) ViewGroup rootView;
     @ViewById(R.id.image_preview) ImageView mImagePreview;
     private Uri mCropImageUri;
-    public static final String IMAGE_URI = "imageUri";;
+    public static final String CAPTURED_IMAGE_URI = "imageUri";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        int screenHeight = getResources().getSystem().getDisplayMetrics().heightPixels;
+        int screenWidth = getResources().getSystem().getDisplayMetrics().widthPixels;
+
+        Logger.d(getClass().getName() + String.format("Height: %d, Width: %d, Resolution: %f",
+                screenHeight, screenWidth, getResources().getDisplayMetrics().density));
 
         cameraReadWritePermissionListeners = SnackbarOnAnyDeniedMultiplePermissionsListener.Builder
                 .with(rootView, cameraReadWritePermissionMsg)
@@ -85,40 +91,26 @@ public class MainActivity extends AppCompatActivity {
             if (CropImage.isReadExternalStoragePermissionsRequired(this, imageUri)) {
                 // request permissions and handle the result in onRequestPermissionsResult()
                 mCropImageUri = imageUri;
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
+                startCropImageActivity(mCropImageUri);
             } else {
-                // no permissions required or already grunted, can start crop image activity
+                // No permissions required or already granted, can start crop image activity
                 startCropImageActivity(imageUri);
             }
         }else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == Activity.RESULT_OK) {
                 Uri resultUri = result.getUri();
-                Intent intent = new Intent(this, ImagePreviewActivity.class);
-                intent.putExtra(IMAGE_URI, resultUri);
-//                mImagePreview.setImageURI(resultUri);
-            }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
-                Exception error= result.getError();
 
+                Intent intent = new Intent(this, ImagePreviewActivity_.class);
+                intent.putExtra(CAPTURED_IMAGE_URI, resultUri);
+                startActivity(intent);
+            }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                 /* Error dialog */
                 Toast.makeText(this, "Unable to capture or read image from device. " +
                         "Check if your app permission is correct", Toast.LENGTH_LONG).show();
             }
         }
     }
-
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        if (requestCode == CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE) {
-            if (mCropImageUri != null && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // required permissions granted, start crop image activity
-                startCropImageActivity(mCropImageUri);
-            } else {
-                Toast.makeText(this, "Cancelling, required permissions are not granted", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-
 
     private void startCropImageActivity(Uri mCropImageUri) {
         CropImage.activity(mCropImageUri).start(this);

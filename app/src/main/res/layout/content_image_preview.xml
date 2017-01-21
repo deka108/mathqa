@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,7 +11,24 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="dekauliya.fyp.mathqa.ImagePreviewActivity"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="dekauliya.fyp.mathqa.ImagePreviewActivity_"
     tools:showIn="@layout/activity_image_preview">
+    <ImageView
+        android:id="@+id/ip_image_preview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/ic_menu_camera"/>
+    <TextView
+        android:id="@+id/ip_ocr_result"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textAlignment="center"
+        android:layout_weight="1"
+        android:text="PREVIEW"
+        android:gravity="center"
+        ></TextView>
 
-</RelativeLayout>
+</LinearLayout>
