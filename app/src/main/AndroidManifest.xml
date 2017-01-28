@@ -8,6 +8,7 @@
 
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
@@ -21,33 +22,29 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity_">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+        <activity android:name=".CameraCaptureActivity_">
         </activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:parentActivityName=".MainActivity_">
+            android:parentActivityName=".CameraCaptureActivity_">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="dekauliya.fyp.mathqa.MainActivity"/>
+                android:value="dekauliya.fyp.mathqa.CameraCaptureActivity"/>
         </activity>
         <activity
-            android:name=".SelectSubjectActivity"
+            android:name=".SelectSubjectActivity_"
             android:label="@string/title_activity_select_subject"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-            android:name=".ConceptListActivity"
-            android:label="@string/title_activity_browse_learning_concepts"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
@@ -71,7 +68,7 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".QuestionListActivity"
+            android:name=".QuestionListActivity_"
             android:label="@string/title_activity_question_list"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
@@ -96,7 +93,14 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="dekauliya.fyp.mathqa.MainActivity_" />
+                android:value="dekauliya.fyp.mathqa.CameraCaptureActivity_"/>
+        </activity>
+        <activity android:name=".MathListActivity">
+        </activity>
+        <activity
+            android:name=".MainActivity_"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

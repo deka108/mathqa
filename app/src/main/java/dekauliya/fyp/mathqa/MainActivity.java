@@ -1,118 +1,128 @@
 package dekauliya.fyp.mathqa;
 
-
-import android.Manifest;
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.listener.DexterError;
-import com.karumi.dexter.listener.PermissionRequestErrorListener;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.karumi.dexter.listener.multi.SnackbarOnAnyDeniedMultiplePermissionsListener;
-import com.orhanobut.logger.Logger;
-import com.theartofdev.edmodo.cropper.CropImage;
-
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.res.StringRes;
 
+import dekauliya.fyp.mathqa.dummy.DummyContent;
 
-@EActivity(R.layout.activity_main)
-public class MainActivity extends AppCompatActivity {
-    private PermissionRequestErrorListener errorListener;
-    private MultiplePermissionsListener cameraReadWritePermissionListeners;
+@EActivity
+public class MainActivity extends AppCompatActivity implements OnListFragmentInteractionListener {
 
-    @StringRes(R.string.camera_permission) String cameraPermissionMsg;
-    @StringRes(R.string.settings_str) String settingsStr;
-    @StringRes(R.string.camera_rw_permission) String cameraReadWritePermissionMsg;
+    /**
+     * The {@link android.support.v4.view.PagerAdapter} that will provide
+     * fragments for each of the sections. We use a
+     * {@link FragmentPagerAdapter} derivative, which will keep every
+     * loaded fragment in memory. If this becomes too memory intensive, it
+     * may be best to switch to a
+     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+     */
+    private SectionsPagerAdapter mSectionsPagerAdapter;
 
-    @ViewById(android.R.id.content) ViewGroup rootView;
-    @ViewById(R.id.image_preview) ImageView mImagePreview;
-    private Uri mCropImageUri;
-    public static final String CAPTURED_IMAGE_URI = "imageUri";
+    /**
+     * The {@link ViewPager} that will host the section contents.
+     */
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        int screenHeight = getResources().getSystem().getDisplayMetrics().heightPixels;
-        int screenWidth = getResources().getSystem().getDisplayMetrics().widthPixels;
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the activity.
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        Logger.d(getClass().getName() + String.format("Height: %d, Width: %d, Resolution: %f",
-                screenHeight, screenWidth, getResources().getDisplayMetrics().density));
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        cameraReadWritePermissionListeners = SnackbarOnAnyDeniedMultiplePermissionsListener.Builder
-                .with(rootView, cameraReadWritePermissionMsg)
-                .withOpenSettingsButton("Settings")
-                .build();
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
 
-        errorListener = new PermissionRequestErrorListener() {
-            @Override public void onError(DexterError error) {
-                Log.e("Dexter", "There was an error: " + error.toString());
-            }
-        };
-
-        Dexter.withActivity(this).continueRequestingPendingPermissions(cameraReadWritePermissionListeners);
     }
 
 
-    @Click(R.id.btn_click_image) public void onSelectImageClick(){
-        Dexter.withActivity(this)
-                .withPermissions(
-                        Manifest.permission.CAMERA,
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .withListener(cameraReadWritePermissionListeners)
-                .withErrorListener(errorListener)
-                .check();
-
-        CropImage.startPickImageActivity(this);
-    }
-
-    @TargetApi(Build.VERSION_CODES.M)
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // handle result of pick image chooser
-        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            Uri imageUri = CropImage.getPickImageResultUri(this, data);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
-            // For API >= 23 we need to check specifically that we have permissions to read external storage.
-            if (CropImage.isReadExternalStoragePermissionsRequired(this, imageUri)) {
-                // request permissions and handle the result in onRequestPermissionsResult()
-                mCropImageUri = imageUri;
-                startCropImageActivity(mCropImageUri);
-            } else {
-                // No permissions required or already granted, can start crop image activity
-                startCropImageActivity(imageUri);
-            }
-        }else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == Activity.RESULT_OK) {
-                Uri resultUri = result.getUri();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
-                Intent intent = new Intent(this, ImagePreviewActivity_.class);
-                intent.putExtra(CAPTURED_IMAGE_URI, resultUri);
-                startActivity(intent);
-            }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
-                /* Error dialog */
-                Toast.makeText(this, "Unable to capture or read image from device. " +
-                        "Check if your app permission is correct", Toast.LENGTH_LONG).show();
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+        Toast.makeText(getApplicationContext(), "hello", Toast.LENGTH_SHORT).show();
+    }
+
+
+    /**
+     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+     * one of the sections/tabs/pages.
+     */
+    public static class SectionsPagerAdapter extends FragmentPagerAdapter {
+        private static int NUM_ITEMS = 2;
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            switch(position){
+                case 0:
+                    return TopicListFragment.newInstance(0);
+                case 1:
+                    return QuestionListFragment.newInstance(1);
+                default:
+                    return null;
             }
         }
-    }
 
-    private void startCropImageActivity(Uri mCropImageUri) {
-        CropImage.activity(mCropImageUri).start(this);
+        @Override
+        public int getCount() {
+            // Show 2 total pages.
+            return NUM_ITEMS;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return "Topics";
+                case 1:
+                    return "Questions";
+            }
+            return null;
+        }
     }
 }

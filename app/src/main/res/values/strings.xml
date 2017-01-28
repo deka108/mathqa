@@ -39,4 +39,7 @@
     <string name="settings_str">Settings</string>
     <string name="title_activity_image_preview">ImagePreview</string>
     <string name="no_network_connection_toast">No Network Connection.</string>
+    <string name="title_activity_topic_list">TopicListActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

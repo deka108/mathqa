@@ -8,57 +8,56 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/main_logo"
-        android:textSize="@dimen/fonts_large"
+        android:textSize="@dimen/material_typography_regular_display_1_text_size"
         android:textColor="@color/colorPrimary"/>
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/btn_subject_marginTop"
+        android:layout_marginTop="@dimen/btn_subject_marginvertical"
+        android:layout_marginBottom="@dimen/btn_subject_marginvertical"
         >
         <Button
+            android:id="@+id/btn_subj_psle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorAccent"
-            android:text="@string/btn_elementary"
-            android:textColor="@color/colorTextIcon"
-            android:layout_margin="@dimen/btn_subject_margin"
-            android:paddingLeft="@dimen/btn_subject_padding"
-            android:paddingRight="@dimen/btn_subject_padding"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorAccent"
+            android:layout_height="@dimen/material_button_touch_target_height_minimum"
             android:text="@string/btn_psle"
-            android:textColor="@color/colorTextIcon"
-            android:layout_margin="@dimen/btn_subject_margin"
-            android:paddingLeft="@dimen/btn_subject_padding"
-            android:paddingRight="@dimen/btn_subject_padding"/>
+            android:paddingLeft="@dimen/material_button_padding_horizontal"
+            android:paddingRight="@dimen/material_button_padding_horizontal"
+            style="@style/SelectSubjectButton"/>
         <Button
+            android:id="@+id/btn_subj_elem"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorAccent"
-            android:text="@string/btn_h2"
-            android:textColor="@color/colorTextIcon"
-            android:layout_margin="@dimen/btn_subject_margin"
-            android:paddingLeft="@dimen/btn_subject_padding"
-            android:paddingRight="@dimen/btn_subject_padding"/>
+            android:layout_height="@dimen/material_button_touch_target_height_minimum"
+            android:text="@string/btn_elementary"
+            android:paddingLeft="@dimen/material_button_padding_horizontal"
+            android:paddingRight="@dimen/material_button_padding_horizontal"
+            style="@style/SelectSubjectButton"/>
         <Button
+            android:id="@+id/btn_subj_add"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorAccent"
+            android:layout_height="@dimen/material_button_touch_target_height_minimum"
             android:text="@string/btn_advanced"
-            android:textColor="@color/colorTextIcon"
-            android:layout_margin="@dimen/btn_subject_margin"
-            android:paddingLeft="@dimen/btn_subject_padding"
-            android:paddingRight="@dimen/btn_subject_padding"/>
+            android:paddingLeft="@dimen/material_button_padding_horizontal"
+            android:paddingRight="@dimen/material_button_padding_horizontal"
+            style="@style/SelectSubjectButton"/>
+        <Button
+            android:id="@+id/btn_subj_h2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/material_button_touch_target_height_minimum"
+            android:text="@string/btn_h2"
+            android:paddingLeft="@dimen/material_button_padding_horizontal"
+            android:paddingRight="@dimen/material_button_padding_horizontal"
+            style="@style/SelectSubjectButton"/>
+
     </LinearLayout>
-        <TextView
+
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tf_login_or_signup"
-            android:textSize="@dimen/fonts_body"
+            android:textSize="@dimen/material_typography_regular_subheading_text_size"
             android:textColor="@color/colorPrimary"
-            android:gravity="bottom"
             />
 </LinearLayout>

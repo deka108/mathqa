@@ -27,7 +27,7 @@
     <dimen name="fonts_caption">12sp</dimen>
 
     <!--Subjects-->
-    <dimen name="btn_subject_marginTop">20dp</dimen>
+    <dimen name="btn_subject_marginvertical">30dp</dimen>
     <dimen name="btn_subject_margin">5dp</dimen>
     <dimen name="btn_subject_padding">10dp</dimen>
 
@@ -37,4 +37,5 @@
     <dimen name="logo_padding">5dp</dimen>
 
     <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

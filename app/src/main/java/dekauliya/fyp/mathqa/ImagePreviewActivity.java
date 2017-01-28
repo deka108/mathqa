@@ -1,5 +1,6 @@
 package dekauliya.fyp.mathqa;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,12 +15,10 @@ import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.googlecode.leptonica.android.AdaptiveMap;
 import com.googlecode.leptonica.android.Binarize;
-import com.googlecode.leptonica.android.Enhance;
 import com.googlecode.leptonica.android.Pix;
 import com.googlecode.leptonica.android.ReadFile;
 import com.googlecode.leptonica.android.Rotate;
@@ -36,15 +35,24 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import Catalano.Imaging.FastBitmap;
+import Catalano.Imaging.Tools.DocumentSkewChecker;
+import dekauliya.fyp.mathqa.TesseractTool.TessEngine;
+
 
 @EActivity()
 public class ImagePreviewActivity extends AppCompatActivity {
 
     @ViewById(R.id.toolbar) Toolbar toolbar;
     @ViewById(R.id.ip_image_preview) ImageView imagePreview;
-    @ViewById(R.id.ip_ocr_result) TextView ocrResult;
+    @ViewById(R.id.ip_ocr_result)
+    EditText ocrResult;
 
     public static final int MAX_RESCALED_SIZE = 640;
+    private static final int PROCESSOR_LEPTONICA = 1;
+    private static final int PROCESSOR_CATALANO = 2;
+    private static final String TAG = ImagePreviewActivity_.class.getSimpleName();
+    private TessEngine tessEngine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +60,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image_preview);
 
         Intent intent = getIntent();
-        Uri uri = intent.getParcelableExtra(MainActivity_.CAPTURED_IMAGE_URI);
+        Uri uri = intent.getParcelableExtra(CameraCaptureActivity_.CAPTURED_IMAGE_URI);
         try{
             if (uri != null){
                 preprocessImage(uri);
@@ -63,6 +71,17 @@ public class ImagePreviewActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (tessEngine == null){
+            // Initialize the OCR engine
+            tessEngine = TessEngine.getInstance(this);
+            tessEngine.initOcrEngine();
+        }
+
     }
 
     @Override
@@ -88,7 +107,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Background
+    @Background(serial="ocr")
     protected void preprocessImage(Uri imageUri) {
         BitmapFactory.Options opts = new BitmapFactory.Options();
 
@@ -117,7 +136,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
             Bitmap bitmap = BitmapFactory.decodeStream(input, null, opts);
             input.close();
 
-            preprocessingPipeline(bitmap);
+            preprocessingPipeline(bitmap, PROCESSOR_LEPTONICA);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -133,8 +152,17 @@ public class ImagePreviewActivity extends AppCompatActivity {
         else return k;
     }
 
-    @Background
-    public void toGrayscale(Bitmap bmpOriginal){
+
+    public void preprocessingPipeline(Bitmap bmp, int processor){
+        if (processor == PROCESSOR_LEPTONICA){
+            convertGrayscale(bmp, processor);
+        }else if (processor == PROCESSOR_CATALANO){
+            preprocessingCatalano(bmp);
+        }
+    }
+
+    @Background(serial="ocr")
+    public void convertGrayscale(Bitmap bmpOriginal, int processor){
         int width = bmpOriginal.getWidth();
         int height = bmpOriginal.getHeight();
 
@@ -147,14 +175,18 @@ public class ImagePreviewActivity extends AppCompatActivity {
         paint.setColorFilter(f);
         canvas.drawBitmap(bmpOriginal, 0, 0, paint);
 
-        updateImage(bmpGrayscale);
+        if (processor == PROCESSOR_LEPTONICA) {
+            preprocessingLeptonica(bmpGrayscale);
+        }else if (processor == PROCESSOR_CATALANO){
+            preprocessingCatalano(bmpGrayscale);
+        }
     }
 
-    @Background
-    public void preprocessingPipeline(Bitmap bmpOriginal){
+    @Background(serial="ocr")
+    public void preprocessingLeptonica(Bitmap bmpOriginal){
         Pix pixs = ReadFile.readBitmap(bmpOriginal);
-        pixs = Enhance.unsharpMasking(pixs);
-        pixs = AdaptiveMap.pixContrastNorm(pixs);
+//        pixs = AdaptiveMap.pixContrastNorm(pixs);
+//        pixs = AdaptiveMap.backgroundNormMorph(pixs);
         pixs = Binarize.otsuAdaptiveThreshold(pixs);
         double angle = Skew.findSkew(pixs);
         pixs = Rotate.rotate(pixs, (float) angle);
@@ -162,9 +194,56 @@ public class ImagePreviewActivity extends AppCompatActivity {
         updateImage(WriteFile.writeBitmap(pixs));
     }
 
+    @Background(serial="ocr")
+    public void preprocessingCatalano(Bitmap bmpOriginal){
+        Logger.d("Catalano Preprocessing");
+        Bitmap mutableBitmap = bmpOriginal.copy(Bitmap.Config.ARGB_8888, true);
+        FastBitmap fBmp = new FastBitmap(mutableBitmap);
+        fBmp.toGrayscale();
+
+//        OtsuThreshold ot = new OtsuThreshold();
+//        MaximumEntropyThreshold met = new MaximumEntropyThreshold();
+//        BradleyLocalThreshold blt = new BradleyLocalThreshold();
+//        blt.applyInPlace(fBmp);
+//        DifferenceEdgeDetector ded = new DifferenceEdgeDetector();
+//        ConservativeSmoothing cs = new ConservativeSmoothing();
+        DocumentSkewChecker dsc = new DocumentSkewChecker();
+//        ot.applyInPlace(fBmp);
+//        cs.applyInPlace(fBmp);
+//        ded.applyInPlace(fBmp);
+        double angle = dsc.getSkewAngle(fBmp);
+        Catalano.Imaging.Filters.Rotate r = new Catalano.Imaging.Filters.Rotate(angle, true);
+        r.applyInPlace(fBmp);
+
+        updateImage(fBmp.toBitmap());
+    }
+
+
     @UiThread
     public void updateImage(Bitmap bmp){
         imagePreview.setImageBitmap(bmp);
+        ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setMessage("Processing...");
+        dialog.show();
+        recogniseText(bmp, dialog);
+
+    }
+
+    @Background(serial="ocr")
+    public void recogniseText(Bitmap bmp, final ProgressDialog dialog){
+        tessEngine.detectText(bmp, new IOnOcrProcessingListener() {
+            @Override
+            public void onOcrProcessed(String result) {
+                updateOcrResult(result, dialog);
+            }
+        });
+    }
+
+    @UiThread
+    void updateOcrResult(String textResult, ProgressDialog dialog) {
+        Logger.d("Reach this state: " + textResult);
+        ocrResult.setText(textResult);
+        if (dialog != null && dialog.isShowing()) {dialog.dismiss();}
     }
 
 }

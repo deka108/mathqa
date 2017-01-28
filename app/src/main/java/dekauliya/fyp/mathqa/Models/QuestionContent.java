@@ -5,7 +5,15 @@ package dekauliya.fyp.mathqa.Models;
  */
 
 public class QuestionContent {
-    private Image img;
-    private MathExpression mathExpression;
+    static int counter;
+    public final int questionNo;
+    public final String content;
+    public final int difficulty;
 
+    public QuestionContent(String content, int difficulty) {
+        this.content = content;
+        this.difficulty = difficulty;
+        counter++;
+        this.questionNo = counter;
+    }
 }

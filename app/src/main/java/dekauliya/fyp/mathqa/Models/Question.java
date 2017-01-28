@@ -1,66 +1,91 @@
 package dekauliya.fyp.mathqa.Models;
 
-import com.google.gson.annotations.SerializedName;
-
-import org.parceler.Parcel;
-
 /**
- * Created by dekauliya on 20/9/16.
+ * Created by dekauliya on 29/1/17.
  */
 
-@Parcel
 public class Question {
-//    private static int counter = 0;
-    @SerializedName("id")
-    int id;
-    String title;
-//    private int difficulty;
-//    private String subtopic;
-//    private String topic;
-//    private QuestionContent qContent;
-    @SerializedName("question_text")
-    public String content;
+    private String questionType;
+    private String usedFor;
+    private int marks;
+    private String difficultyLevel;
+    private String responseType;
+    private String source;
+    private String content;
+    private Boolean isSample;
 
-    public Question(){
-
-    }
-
-    public Question(int id, String content){
+    public Question(String questionType, String usedFor, int marks, String difficultyLevel, String responseType, String source, String content, Boolean isSample) {
+        this.questionType = questionType;
+        this.usedFor = usedFor;
+        this.marks = marks;
+        this.difficultyLevel = difficultyLevel;
+        this.responseType = responseType;
+        this.source = source;
         this.content = content;
-
-        this.id = id;
-//        this.id = counter++;
+        this.isSample = isSample;
     }
 
-//    public Question(String title, String content){
-//        this.content = content;
-//        this.title = title;
-//        this.id = counter++;
-//    }
-//
-//    public void setTitle(String title){
-//        this.title = title;
-//    }
-
-    @Override
-    public String toString() {
-        return this.getTitle() + this.content;
+    public String getQuestionType() {
+        return questionType;
     }
 
-    public void setContent(String content){
-        this.content = content;
+    public void setQuestionType(String questionType) {
+        this.questionType = questionType;
     }
 
-    public String getContent(){
+    public String getUsedFor() {
+        return usedFor;
+    }
+
+    public void setUsedFor(String usedFor) {
+        this.usedFor = usedFor;
+    }
+
+    public int getMarks() {
+        return marks;
+    }
+
+    public void setMarks(int marks) {
+        this.marks = marks;
+    }
+
+    public String getDifficultyLevel() {
+        return difficultyLevel;
+    }
+
+    public void setDifficultyLevel(String difficultyLevel) {
+        this.difficultyLevel = difficultyLevel;
+    }
+
+    public String getResponseType() {
+        return responseType;
+    }
+
+    public void setResponseType(String responseType) {
+        this.responseType = responseType;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getContent() {
         return content;
     }
 
-    public int getId(){
-        return id;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getTitle(){
-//        return title;
-        return (this.title == null) ? ("Question " + this.id) : this.title;
+    public Boolean isSample() {
+        return isSample;
+    }
+
+    public void setSample(Boolean sample) {
+        isSample = sample;
     }
 }

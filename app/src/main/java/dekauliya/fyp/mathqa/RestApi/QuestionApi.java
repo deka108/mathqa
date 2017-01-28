@@ -6,15 +6,15 @@ package dekauliya.fyp.mathqa.RestApi;
 
 import java.util.List;
 
-import dekauliya.fyp.mathqa.Models.Question;
+import dekauliya.fyp.mathqa.Models.QuestionTest;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface QuestionApi{
     @GET("questions/")
-    Call<List<Question>> loadQuestions();
+    Call<List<QuestionTest>> loadQuestions();
 
     @GET("questions/{id}")
-    Call<Question> loadQuestionDetail(@Path("id") int questionId);
+    Call<QuestionTest> loadQuestionDetail(@Path("id") int questionId);
 }

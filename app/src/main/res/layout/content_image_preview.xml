@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:src="@drawable/ic_menu_camera"/>
-    <TextView
+    <EditText
         android:id="@+id/ip_ocr_result"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
@@ -29,6 +29,6 @@
         android:layout_weight="1"
         android:text="PREVIEW"
         android:gravity="center"
-        ></TextView>
+        ></EditText>
 
 </LinearLayout>
