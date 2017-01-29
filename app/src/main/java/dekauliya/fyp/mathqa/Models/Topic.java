@@ -5,8 +5,8 @@ package dekauliya.fyp.mathqa.Models;
  */
 
 public class Topic {
+    private int id;
     private String name;
-//    private Subject subject;
 
 
     public Topic(String name) {
@@ -19,5 +19,10 @@ public class Topic {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

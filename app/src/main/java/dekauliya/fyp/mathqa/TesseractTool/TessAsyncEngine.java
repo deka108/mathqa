@@ -11,8 +11,6 @@ import com.orhanobut.logger.Logger;
 
 import java.io.IOException;
 
-import dekauliya.fyp.mathqa.AsyncResponse;
-
 
 /**
  * Created by dekauliya on 25/9/16.

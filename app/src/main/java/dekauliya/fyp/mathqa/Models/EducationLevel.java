@@ -5,6 +5,7 @@ package dekauliya.fyp.mathqa.Models;
  */
 
 public class EducationLevel {
+    private int id;
     private String name;
     private String description;
 
@@ -12,6 +13,16 @@ public class EducationLevel {
         this.name = name;
         this.description = description;
     }
+
+    public EducationLevel(int id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 
     public String getName() {
         return name;

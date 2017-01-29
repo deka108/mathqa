@@ -5,16 +5,33 @@ package dekauliya.fyp.mathqa.Models;
  */
 
 public class Paper {
+    private String id;
     private int year;
     private String month;
     private int number;
     private int noOfQuestion;
+
+    public Paper(String id, int year, String month, int number, int noOfQuestion) {
+        this.id = id;
+        this.year = year;
+        this.month = month;
+        this.number = number;
+        this.noOfQuestion = noOfQuestion;
+    }
 
     public Paper(int year, String month, int number, int noOfQuestion) {
         this.year = year;
         this.month = month;
         this.number = number;
         this.noOfQuestion = noOfQuestion;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getYear() {

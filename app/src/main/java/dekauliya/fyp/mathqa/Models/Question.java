@@ -5,6 +5,7 @@ package dekauliya.fyp.mathqa.Models;
  */
 
 public class Question {
+    private String id;
     private String questionType;
     private String usedFor;
     private int marks;
@@ -13,6 +14,20 @@ public class Question {
     private String source;
     private String content;
     private Boolean isSample;
+
+    public Question(String id, String questionType, String usedFor, int marks,
+                    String difficultyLevel, String responseType, String source, String content,
+                    Boolean isSample) {
+        this.id = id;
+        this.questionType = questionType;
+        this.usedFor = usedFor;
+        this.marks = marks;
+        this.difficultyLevel = difficultyLevel;
+        this.responseType = responseType;
+        this.source = source;
+        this.content = content;
+        this.isSample = isSample;
+    }
 
     public Question(String questionType, String usedFor, int marks, String difficultyLevel, String responseType, String source, String content, Boolean isSample) {
         this.questionType = questionType;
@@ -23,6 +38,18 @@ public class Question {
         this.source = source;
         this.content = content;
         this.isSample = isSample;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Boolean getSample() {
+        return isSample;
     }
 
     public String getQuestionType() {

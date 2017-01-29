@@ -1,4 +1,4 @@
-package dekauliya.fyp.mathqa;
+package dekauliya.fyp.mathqa.TesseractTool;
 
 /**
  * Created by dekauliya on 26/9/16.

@@ -5,7 +5,13 @@ package dekauliya.fyp.mathqa.Models;
  */
 
 public class SubConcept {
+    private int id;
     private String name;
+
+    public SubConcept(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public SubConcept(String name) {
         this.name = name;
@@ -13,6 +19,14 @@ public class SubConcept {
 
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
