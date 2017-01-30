@@ -1,18 +1,17 @@
-package dekauliya.fyp.mathqa;
+package dekauliya.fyp.mathqa.dummy;
 
 import org.androidannotations.annotations.EBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import dekauliya.fyp.mathqa.Models.IFinder;
 import dekauliya.fyp.mathqa.Models.QuestionContent;
 
 /**
  * Created by dekauliya on 23/1/17.
  */
 @EBean
-public class QuestionFinder implements IFinder {
+public class QuestionDummyFinder implements IFinder {
 
     List<QuestionContent> questionContents;
     String[] questions = new String[]{
@@ -37,7 +36,7 @@ public class QuestionFinder implements IFinder {
     };
     int[] difficulty = new int[]{2, 3, 1, 2, 3, 1, 2, 3, 1};
 
-    public QuestionFinder(){
+    public QuestionDummyFinder(){
         questionContents = new ArrayList();
         initQuestions();
     }

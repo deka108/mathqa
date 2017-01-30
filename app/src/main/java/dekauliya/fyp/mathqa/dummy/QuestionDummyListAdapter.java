@@ -1,4 +1,4 @@
-package dekauliya.fyp.mathqa;
+package dekauliya.fyp.mathqa.dummy;
 
 import android.content.Context;
 import android.view.View;
@@ -18,18 +18,18 @@ import dekauliya.fyp.mathqa.Models.QuestionContent;
  * Created by dekauliya on 23/1/17.
  */
 @EBean
-public class QuestionListAdapter extends BaseAdapter {
+public class QuestionDummyListAdapter extends BaseAdapter {
     List<QuestionContent> questions;
 
-    @Bean(QuestionFinder.class)
-    QuestionFinder questionFinder;
+    @Bean(QuestionDummyFinder.class)
+    QuestionDummyFinder questionDummyFinder;
 
     @RootContext
     Context context;
 
     @AfterInject
     void initAdapter(){
-        questions = questionFinder.findAllQuestions();
+        questions = questionDummyFinder.findAllQuestions();
     }
 
     @Override
@@ -49,12 +49,12 @@ public class QuestionListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        QuestionItemView qiv;
+        QuestionDummyItemView qiv;
 
         if (view == null){
-            qiv = QuestionItemView_.build(context);
+            qiv = QuestionDummyItemView_.build(context);
         }else{
-            qiv = (QuestionItemView) view;
+            qiv = (QuestionDummyItemView) view;
         }
 
         qiv.bind((QuestionContent) getItem(i));

@@ -9,10 +9,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="dekauliya.fyp.mathqa.TestExpandableActivity">
+    tools:context="dekauliya.fyp.mathqa.dummy.TestExpandableActivity">
     <ExpandableListView
+        android:id="@+id/expandableListView"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:indicator/>
+        android:indicatorRight="?android:attr/expandableListPreferredItemIndicatorRight"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="0.5dp" />
 
 </RelativeLayout>

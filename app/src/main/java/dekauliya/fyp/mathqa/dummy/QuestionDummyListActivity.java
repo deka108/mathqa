@@ -1,4 +1,4 @@
-package dekauliya.fyp.mathqa;
+package dekauliya.fyp.mathqa.dummy;
 
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
@@ -12,18 +12,19 @@ import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.ViewById;
 
 import dekauliya.fyp.mathqa.Models.QuestionContent;
+import dekauliya.fyp.mathqa.R;
 
 import static android.widget.Toast.LENGTH_SHORT;
 import static android.widget.Toast.makeText;
 
 @EActivity(R.layout.question_list)
-public class QuestionListActivity extends AppCompatActivity {
+public class QuestionDummyListActivity extends AppCompatActivity {
 
     @ViewById(R.id.question_list)
     ListView questionList;
 
     @Bean
-    QuestionListAdapter adapter;
+    QuestionDummyListAdapter adapter;
 
     @AfterViews
     void bindAdapter(){

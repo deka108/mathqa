@@ -1,7 +1,9 @@
-package dekauliya.fyp.mathqa;
+package dekauliya.fyp.mathqa.UI.CameraOcr;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import dekauliya.fyp.mathqa.R;
 
 public class CropActivity extends AppCompatActivity {
 

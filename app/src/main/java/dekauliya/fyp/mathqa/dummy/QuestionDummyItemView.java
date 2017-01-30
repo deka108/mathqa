@@ -1,4 +1,4 @@
-package dekauliya.fyp.mathqa;
+package dekauliya.fyp.mathqa.dummy;
 
 import android.content.Context;
 import android.widget.LinearLayout;
@@ -8,6 +8,7 @@ import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
 import dekauliya.fyp.mathqa.Models.QuestionContent;
+import dekauliya.fyp.mathqa.R;
 import io.github.kexanie.library.MathView;
 
 /**
@@ -15,7 +16,7 @@ import io.github.kexanie.library.MathView;
  */
 
 @EViewGroup(R.layout.item_question)
-public class QuestionItemView extends LinearLayout {
+public class QuestionDummyItemView extends LinearLayout {
 
     @ViewById(R.id.question_no) TextView questionNo;
     @ViewById(R.id.question_content)
@@ -23,7 +24,7 @@ public class QuestionItemView extends LinearLayout {
 //    @ViewById(R.id.question_content) TextView questionContent;
     @ViewById(R.id.question_foot) TextView questionFoot;
 
-    public QuestionItemView(Context mContext){
+    public QuestionDummyItemView(Context mContext){
         super(mContext);
     }
 

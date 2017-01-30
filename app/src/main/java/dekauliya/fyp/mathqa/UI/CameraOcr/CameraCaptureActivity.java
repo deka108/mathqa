@@ -1,4 +1,4 @@
-package dekauliya.fyp.mathqa;
+package dekauliya.fyp.mathqa.UI.CameraOcr;
 
 
 import android.Manifest;
@@ -26,6 +26,8 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 
+import dekauliya.fyp.mathqa.R;
+
 
 @EActivity(R.layout.activity_camera_capture)
 public class CameraCaptureActivity extends AppCompatActivity {
@@ -42,7 +44,7 @@ public class CameraCaptureActivity extends AppCompatActivity {
     public static final String CAPTURED_IMAGE_URI = "imageUri";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         int screenHeight = getResources().getSystem().getDisplayMetrics().heightPixels;
@@ -79,7 +81,7 @@ public class CameraCaptureActivity extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.M)
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // handle result of pick image chooser
         if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             Uri imageUri = CropImage.getPickImageResultUri(this, data);

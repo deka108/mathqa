@@ -8,7 +8,7 @@ import com.googlecode.tesseract.android.TessBaseAPI;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
 
-import dekauliya.fyp.mathqa.IOnOcrProcessingListener;
+import dekauliya.fyp.mathqa.UI.CameraOcr.IOnOcrProcessingListener;
 
 /**
  * Created by dekauliya on 25/9/16.

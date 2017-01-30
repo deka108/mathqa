@@ -1,4 +1,4 @@
-package dekauliya.fyp.mathqa;
+package dekauliya.fyp.mathqa.UI.CameraOcr;
 
 import android.graphics.Bitmap;
 

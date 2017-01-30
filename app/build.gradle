@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 25
@@ -51,6 +50,12 @@ dependencies {
     compile 'com.github.vlonjatg:progress-activity:v1.0.3'
     compile 'com.google.android.gms:play-services-vision:10.0.1'
     compile 'com.google.dagger:dagger:2.0'
+    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    compile 'com.jakewharton.rxbinding:rxbinding:1.0.0'
+//    compile 'com.jakewharton.rxbinding:rxbinding-support-v4:1.0.0'
+//    compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:1.0.0'
+//    compile 'com.jakewharton.rxbinding:rxbinding-design:1.0.0'
+    compile 'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:1.0.0'
     compile 'com.karumi:dexter:3.0.1'
     compile 'com.orhanobut:logger:1.15'
     compile 'com.rmtheis:tess-two:6.1.1'
@@ -59,14 +64,17 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.sromku:simple-storage:1.2.0'
-    compile 'com.theartofdev.edmodo:android-image-cropper:2.3.+'
-    compile 'io.github.kexanie.library:MathView:0.+'
-    compile 'org.androidannotations:androidannotations-api:4.+'
-    compile 'org.androidannotations:rest-spring:4.+'
-    compile 'org.parceler:parceler-api:1.+'
-    compile 'com.android.support:support-v4:25.1.0'
+    compile 'com.theartofdev.edmodo:android-image-cropper:2.3.1'
+    compile 'eu.davidea:flexible-adapter:5.0.0-rc1'
+    compile 'io.github.kexanie.library:MathView:0.0.6'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.1'
+    compile 'org.androidannotations:androidannotations-api:4.2.0'
+    compile 'org.parceler:parceler-api:1.1.6'
+
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.0'
+    annotationProcessor 'org.androidannotations:androidannotations:4.2.0'
+    annotationProcessor 'org.parceler:parceler:1.1.6'
+
     testCompile 'junit:junit:4.12'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.+'
-    apt 'org.androidannotations:androidannotations:4.+'
-    apt 'org.parceler:parceler:1.+'
 }

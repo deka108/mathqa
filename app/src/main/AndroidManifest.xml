@@ -22,7 +22,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CameraCaptureActivity_">
+        <activity android:name=".UI.CameraOcr.CameraCaptureActivity_">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".LoginActivity"
@@ -30,7 +34,8 @@
             android:parentActivityName=".CameraCaptureActivity_">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="dekauliya.fyp.mathqa.CameraCaptureActivity"/>
+                android:value=".UI.CameraOcr.CameraCaptureActivity_"/>
+
         </activity>
         <activity
             android:name=".SelectSubjectActivity_"
@@ -48,11 +53,6 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".ImageCaptureActivity"
-            android:label="@string/title_activity_image_capture"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
             android:name=".EnterTextActivity"
             android:label="@string/title_activity_enter_text"
             android:theme="@style/AppTheme.NoActionBar">
@@ -63,7 +63,7 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".QuestionListActivity_"
+            android:name=".dummy.QuestionDummyListActivity_"
             android:label="@string/title_activity_question_list"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
@@ -78,17 +78,17 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"/>
-        <activity android:name=".CropActivity">
+        <activity android:name=".UI.CameraOcr.CropActivity">
         </activity>
         <activity android:name=".RetrofitRestApi.RestApiActivity">
         </activity>
         <activity
-            android:name=".ImagePreviewActivity_"
+            android:name=".UI.CameraOcr.ImagePreviewActivity_"
             android:label="@string/title_activity_image_preview"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="dekauliya.fyp.mathqa.CameraCaptureActivity_"/>
+                android:value="dekauliya.fyp.mathqa.UI.CameraOcr.CameraCaptureActivity_"/>
         </activity>
         <activity android:name=".MathListActivity">
         </activity>
@@ -97,12 +97,7 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".TestExpandableActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+        <activity android:name=".dummy.TestExpandableActivity">
         </activity>
     </application>
 

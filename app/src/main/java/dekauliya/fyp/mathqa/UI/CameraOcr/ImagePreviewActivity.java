@@ -1,4 +1,4 @@
-package dekauliya.fyp.mathqa;
+package dekauliya.fyp.mathqa.UI.CameraOcr;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -37,6 +37,7 @@ import java.io.InputStream;
 
 import Catalano.Imaging.FastBitmap;
 import Catalano.Imaging.Tools.DocumentSkewChecker;
+import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.TesseractTool.TessEngine;
 
 
