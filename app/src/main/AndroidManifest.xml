@@ -23,15 +23,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".UI.CameraOcr.CameraCaptureActivity_">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:parentActivityName=".CameraCaptureActivity_">
+            android:parentActivityName=".UI.CameraOcr.CameraCaptureActivity_">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".UI.CameraOcr.CameraCaptureActivity_"/>
@@ -41,6 +37,10 @@
             android:name=".SelectSubjectActivity_"
             android:label="@string/title_activity_select_subject"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".RegisterActivity"

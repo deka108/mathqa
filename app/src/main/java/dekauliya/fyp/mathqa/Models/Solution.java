@@ -7,6 +7,13 @@ package dekauliya.fyp.mathqa.Models;
 public class Solution {
     private int id;
     private String content;
+    private int Question;
+
+    public Solution(int id, String content, int question) {
+        this.id = id;
+        this.content = content;
+        Question = question;
+    }
 
     public Solution(int id, String content) {
         this.id = id;
@@ -33,5 +40,11 @@ public class Solution {
         this.content = content;
     }
 
+    public int getQuestion() {
+        return Question;
+    }
 
+    public void setQuestion(int question) {
+        Question = question;
+    }
 }

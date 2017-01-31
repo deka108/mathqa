@@ -11,4 +11,6 @@
     <color name="colorTextIcon">#FFFFFF</color>
     <color name="colorDivider">#BDBDBD</color>
     <color name="colorTransparent">#00000000</color>
+    <color name="list_choice_normal_bg_light">#fffafafa</color>
+    <color name="list_choice_pressed_bg_light">#fddd</color>
 </resources>

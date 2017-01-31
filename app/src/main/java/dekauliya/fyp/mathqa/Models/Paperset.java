@@ -7,6 +7,13 @@ package dekauliya.fyp.mathqa.Models;
 public class Paperset {
     private int id;
     private String name;
+    private int subject;
+
+    public Paperset(int id, String name, int subject) {
+        this.id = id;
+        this.name = name;
+        this.subject = subject;
+    }
 
     public Paperset(int id, String name) {
         this.id = id;
@@ -15,6 +22,14 @@ public class Paperset {
 
     public Paperset(String name) {
         this.name = name;
+    }
+
+    public int getSubject() {
+        return subject;
+    }
+
+    public void setSubject(int subject) {
+        this.subject = subject;
     }
 
     public String getName() {

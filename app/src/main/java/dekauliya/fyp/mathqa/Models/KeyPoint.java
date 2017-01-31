@@ -9,6 +9,15 @@ public class KeyPoint {
     private String name;
     private String type;
     private String content;
+    private int concept;
+
+    public KeyPoint(int id, String name, String type, String content, int concept) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.content = content;
+        this.concept = concept;
+    }
 
     public KeyPoint(int id, String name, String type, String content) {
         this.id = id;
@@ -21,6 +30,14 @@ public class KeyPoint {
         this.name = name;
         this.type = type;
         this.content = content;
+    }
+
+    public int getConcept() {
+        return concept;
+    }
+
+    public void setConcept(int concept) {
+        this.concept = concept;
     }
 
     public int getId() {

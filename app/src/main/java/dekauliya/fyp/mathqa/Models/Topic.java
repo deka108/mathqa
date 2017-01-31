@@ -7,10 +7,17 @@ package dekauliya.fyp.mathqa.Models;
 public class Topic {
     private int id;
     private String name;
+    private int subject;
 
     public Topic(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Topic(int id, String name, int subject) {
+        this.id = id;
+        this.name = name;
+        this.subject = subject;
     }
 
     public Topic(String name) {
@@ -31,6 +38,14 @@ public class Topic {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getSubject() {
+        return subject;
+    }
+
+    public void setSubject(int subject) {
+        this.subject = subject;
     }
 
     @Override

@@ -11,8 +11,10 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 @EActivity
-public class SelectSubjectActivity extends AppCompatActivity {
+public class SelectSubjectActivity extends AppCompatActivity{
 
     @Pref
     MathQaPrefs_ mathQaPrefs;
@@ -46,7 +48,8 @@ public class SelectSubjectActivity extends AppCompatActivity {
         }
 
         Logger.d("BUTTON CLICKED + " + btn.getText());
-        MainActivity_.intent(getApplicationContext()).start();
+//        MainActivity_.intent(getApplicationContext()).start();
+        MainActivity_.intent(getApplicationContext()).flags(FLAG_ACTIVITY_NEW_TASK).start();
     }
 
 }

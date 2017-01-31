@@ -10,6 +10,18 @@ public class Paper {
     private String month;
     private int number;
     private int noOfQuestion;
+    private int paperset;
+    private int subject;
+
+    public Paper(String id, int year, String month, int number, int noOfQuestion, int paperset, int subject) {
+        this.id = id;
+        this.year = year;
+        this.month = month;
+        this.number = number;
+        this.noOfQuestion = noOfQuestion;
+        this.paperset = paperset;
+        this.subject = subject;
+    }
 
     public Paper(String id, int year, String month, int number, int noOfQuestion) {
         this.id = id;
@@ -64,5 +76,21 @@ public class Paper {
 
     public void setNoOfQuestion(int noOfQuestion) {
         this.noOfQuestion = noOfQuestion;
+    }
+
+    public int getPaperset() {
+        return paperset;
+    }
+
+    public void setPaperset(int paperset) {
+        this.paperset = paperset;
+    }
+
+    public int getSubject() {
+        return subject;
+    }
+
+    public void setSubject(int subject) {
+        this.subject = subject;
     }
 }

@@ -14,6 +14,31 @@ public class Question {
     private String source;
     private String content;
     private Boolean isSample;
+    private int concept;
+    private int subconcept;
+    private int paper;
+    private int keypoints;
+    private int keywords;
+
+    public Question(String id, String questionType, String usedFor, int marks,
+                    String difficultyLevel, String responseType, String source, String content,
+                    Boolean isSample, int concept, int subconcept, int paper, int keypoints,
+                    int keywords) {
+        this.id = id;
+        this.questionType = questionType;
+        this.usedFor = usedFor;
+        this.marks = marks;
+        this.difficultyLevel = difficultyLevel;
+        this.responseType = responseType;
+        this.source = source;
+        this.content = content;
+        this.isSample = isSample;
+        this.concept = concept;
+        this.subconcept = subconcept;
+        this.paper = paper;
+        this.keypoints = keypoints;
+        this.keywords = keywords;
+    }
 
     public Question(String id, String questionType, String usedFor, int marks,
                     String difficultyLevel, String responseType, String source, String content,
@@ -114,5 +139,45 @@ public class Question {
 
     public void setSample(Boolean sample) {
         isSample = sample;
+    }
+
+    public int getConcept() {
+        return concept;
+    }
+
+    public void setConcept(int concept) {
+        this.concept = concept;
+    }
+
+    public int getSubconcept() {
+        return subconcept;
+    }
+
+    public void setSubconcept(int subconcept) {
+        this.subconcept = subconcept;
+    }
+
+    public int getPaper() {
+        return paper;
+    }
+
+    public void setPaper(int paper) {
+        this.paper = paper;
+    }
+
+    public int getKeypoints() {
+        return keypoints;
+    }
+
+    public void setKeypoints(int keypoints) {
+        this.keypoints = keypoints;
+    }
+
+    public int getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(int keywords) {
+        this.keywords = keywords;
     }
 }
