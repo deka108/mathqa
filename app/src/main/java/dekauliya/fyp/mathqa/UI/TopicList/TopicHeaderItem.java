@@ -11,6 +11,7 @@ import java.util.List;
 
 import dekauliya.fyp.mathqa.Models.Topic;
 import dekauliya.fyp.mathqa.R;
+import dekauliya.fyp.mathqa.Utils.GraphicUtils;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.AbstractExpandableHeaderItem;
 import eu.davidea.viewholders.ExpandableViewHolder;
@@ -19,7 +20,7 @@ import eu.davidea.viewholders.ExpandableViewHolder;
  */
 
 public class TopicHeaderItem extends AbstractExpandableHeaderItem<
-        TopicHeaderItem.TopicHeaderItemViewHolder, ConceptItem> {
+        TopicHeaderItem.TopicHeaderItemViewHolder, ConceptSubItem> {
 
     private Topic topic;
 
@@ -38,7 +39,7 @@ public class TopicHeaderItem extends AbstractExpandableHeaderItem<
 
     @Override
     public int getLayoutRes() {
-        return R.layout.recycler_topic_header;
+        return R.layout.recycler_text_header_item;
     }
 
     @Override
@@ -54,7 +55,7 @@ public class TopicHeaderItem extends AbstractExpandableHeaderItem<
         } else {
             holder.mTopicTitle.setText(topic.getName());
         }
-        holder.mTopicSubtitle.setText("Test subtitle");
+        holder.mTopicSubtitle.setText("Contains " + getSubItemsCount() + " concepts");
     }
 
     @Override
@@ -72,8 +73,13 @@ public class TopicHeaderItem extends AbstractExpandableHeaderItem<
 
         public TopicHeaderItemViewHolder(View view, FlexibleAdapter adapter) {
             super(view, adapter, true); // sticky
-            mTopicTitle = (TextView) view.findViewById(R.id.topic_title);
-            mTopicSubtitle = (TextView) view.findViewById(R.id.topic_subtitle);
+            mTopicTitle = (TextView) view.findViewById(R.id.rv_header_title_text);
+            mTopicSubtitle = (TextView) view.findViewById(R.id.rv_header_subtitle_text);
+        }
+
+        @Override
+        public float getActivationElevation() {
+            return GraphicUtils.dpToPx(itemView.getContext(), 4f);
         }
 
         @Override

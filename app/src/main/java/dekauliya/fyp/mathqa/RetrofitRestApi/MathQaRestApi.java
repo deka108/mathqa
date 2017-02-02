@@ -25,46 +25,51 @@ public interface MathQaRestApi {
     @GET("subjects/")
     Call<List<Subject>> getSubjects();
     @GET("subjects/{id}")
-    Call<Subject> getSubject(@Path ("id") int subjectId);
+    Call<Subject> getSubject(@Path ("id") Integer subjectId);
 
     @GET("topics/")
-    Call<List<Topic>> getTopics(@Query("subject") int subjectId);
+    Call<List<Topic>> getTopics(@Query("subject") Integer subjectId);
     @GET("topics/{id}")
-    Call<Topic> getTopic(@Path("id") int topicId);
+    Call<Topic> getTopic(@Path("id") Integer topicId);
 
     @GET("concepts/")
-    Call<List<Concept>> getConcepts(@Query("topic") int topicId);
+    Call<List<Concept>> getConcepts(@Query("topic") Integer topicId);
     @GET("concepts/{id}")
-    Call<Concept> getConcept(@Path("id") int conceptId);
+    Call<Concept> getConcept(@Path("id") Integer conceptId);
 
     @GET("subconcepts/")
-    Call<List<SubConcept>> getSubConcepts(@Query("concept") int subconceptId);
+    Call<List<SubConcept>> getSubConcepts(@Query("concept") Integer conceptId);
     @GET("subconcepts/{id}")
-    Call<SubConcept> getSubconcept(@Path("id") int subConceptId);
+    Call<SubConcept> getSubconcept(@Path("id") Integer subConceptId);
 
-    @GET("keypoints/")
-    Call<List<KeyPoint>> getKeypoints(@Query("concept") int conceptId);
+
     @GET("keypoints/{id}")
-    Call<KeyPoint> getKeypoint(@Path ("id") int keyPointId);
+    Call<KeyPoint> getKeypoints(@Path ("id") Integer keyPointId);
+    @GET("keypoints/?type=C")
+    Call<List<KeyPoint>> getKeypointConcepts(@Query("concept") Integer conceptId);
+    @GET("keypoints/?type=F")
+    Call<List<KeyPoint>> getKeypointFormulas(@Query("concept") Integer conceptId);
+
 
     @GET("keywords/")
     Call<List<Keyword>> getKeywords();
     @GET("keywords/{id}")
-    Call<List<Keyword>> getKeywords(@Path ("id") int keywordId);
+    Call<List<Keyword>> getKeywords(@Path ("id") Integer keywordId);
 
     @GET("questions")
-    Call<List<Question>> getQuestions(@Query("concept") int conceptId, @Query("subconcept") int
-            subconceptId);
+    Call<List<Question>> getQuestions(@Query("concept") Integer conceptId, @Query("subconcept")
+            Integer subconceptId);
     @GET("questions/{id}")
-    Call<Question> getQuestion(@Path ("id") int questionId);
+    Call<Question> getQuestion(@Path ("id") Integer questionId);
 
     @GET("solutions/")
     Call<List<Solution>> getSolutions();
     @GET("solutions/{id}")
-    Call<Solution> getSolution(@Path ("id") int solutionId);
+    Call<Solution> getSolution(@Path ("id") Integer solutionId);
 
     @POST("dsearch/")
     Call<String> searchDatabase(@Body String query);
     @POST("fsearch/")
     Call<String> searchFromula(@Body String formula);
+
 }

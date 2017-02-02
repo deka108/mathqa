@@ -1,13 +1,16 @@
 package dekauliya.fyp.mathqa.Models;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 /**
  * Created by dekauliya on 29/1/17.
  */
-
+@Parcel
 public class SubConcept {
-    private int id;
-    private String name;
-    private int concept;
+    int id;
+    String name;
+    int concept;
 
     public SubConcept(int id, String name, int concept) {
         this.id = id;
@@ -20,6 +23,7 @@ public class SubConcept {
         this.name = name;
     }
 
+    @ParcelConstructor
     public SubConcept(String name) {
         this.name = name;
     }

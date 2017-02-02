@@ -1,14 +1,18 @@
 package dekauliya.fyp.mathqa.Models;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 /**
  * Created by dekauliya on 29/1/17.
  */
-
+@Parcel
 public class EducationLevel {
-    private int id;
-    private String name;
-    private String description;
+    int id;
+    String name;
+    String description;
 
+    @ParcelConstructor
     public EducationLevel(String name, String description) {
         this.name = name;
         this.description = description;

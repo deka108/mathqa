@@ -4,10 +4,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/material_expansion_list_collapsed_height"
                 android:background="@color/material_color_blue_500"
-                android:elevation="@dimen/material_elevation_app_bar">
+                android:elevation="@dimen/material_elevation_app_bar" >
 
     <LinearLayout
-        android:id="@+id/topic_container"
+        android:id="@+id/rv_header_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/material_content_edge_margin_horizontal"
@@ -18,7 +18,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/topic_title"
+            android:id="@+id/rv_header_title_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -27,7 +27,7 @@
             tools:text="Header"/>
 
         <TextView
-            android:id="@+id/topic_subtitle"
+            android:id="@+id/rv_header_subtitle_text"
             android:layout_marginTop="2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

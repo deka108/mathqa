@@ -1,7 +1,11 @@
 package dekauliya.fyp.mathqa;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.design.widget.TabLayout;
+import android.support.v13.view.ViewCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -16,22 +20,21 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.orhanobut.logger.Logger;
-
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.PageSelected;
 
-import dekauliya.fyp.mathqa.Services.DataService;
-import dekauliya.fyp.mathqa.UI.TopicList.ConceptItem;
-import dekauliya.fyp.mathqa.dummy.DummyContent;
+import dekauliya.fyp.mathqa.DataServices.DataService;
+import dekauliya.fyp.mathqa.UI.TopicList.ConceptSubItem;
 import eu.davidea.fastscroller.FastScroller;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.SelectableAdapter;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
 import eu.davidea.flexibleadapter.items.IFlexible;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 @EActivity
-public class MainActivity extends AppCompatActivity implements OnListFragmentInteractionListener,
+public class MainActivity extends AppCompatActivity implements
         FlexibleAdapter.OnUpdateListener, FlexibleAdapter.OnItemClickListener,
         FastScroller.OnScrollStateChangeListener,
         OnFragmentInteractionListener {
@@ -52,26 +55,26 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
 
     private RecyclerView mRecyclerView;
     private FlexibleAdapter<AbstractFlexibleItem> mAdapter;
-//    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 //    private Fragment mFragment;
 //
-//    private final Handler mRefreshHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
-//        public boolean handleMessage(Message message) {
-//            switch (message.what) {
-//                case 0: // Stop
-//                    mSwipeRefreshLayout.setRefreshing(false);
-//                    return true;
-//                case 1: // Start
-//                    mSwipeRefreshLayout.setRefreshing(true);
-//                    return true;
-//                case 2: // Show empty view
-//                    ViewCompat.animate(findViewById(R.id.empty_view)).alpha(1);
-//                    return true;
-//                default:
-//                    return false;
-//            }
-//        }
-//    });
+    private final Handler mRefreshHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
+        public boolean handleMessage(Message message) {
+            switch (message.what) {
+                case 0: // Stop
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    return true;
+                case 1: // Start
+                    mSwipeRefreshLayout.setRefreshing(true);
+                    return true;
+                case 2: // Show empty view
+                    ViewCompat.animate(findViewById(R.id.empty_view)).alpha(1);
+                    return true;
+                default:
+                    return false;
+            }
+        }
+    });
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -97,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.main_tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
     }
 
     @Override
@@ -130,11 +132,6 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-        Toast.makeText(getApplicationContext(), "hello", Toast.LENGTH_SHORT).show();
     }
 
     @PageSelected(R.id.main_viewpager)
@@ -208,12 +205,12 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
 
 
     @Override
-    public void onFragmentChange(SwipeRefreshLayout swipeRefreshLayout, RecyclerView recyclerView, @SelectableAdapter.Mode int mode) {
+    public void onFragmentChange(SwipeRefreshLayout swipeRefreshLayout, RecyclerView recyclerView,
+                                 @SelectableAdapter.Mode int mode) {
         mRecyclerView = recyclerView;
         mAdapter = (FlexibleAdapter) recyclerView.getAdapter();
-//        mSwipeRefreshLayout = swipeRefreshLayout;
-//        initializeSwipeToRefresh();
-//        initializeActionModeHelper(mode);
+        mSwipeRefreshLayout = swipeRefreshLayout;
+        initializeSwipeToRefresh();
     }
 
     @Override
@@ -221,14 +218,36 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
 
     }
 
+    private void initializeSwipeToRefresh() {
+        // Swipe down to force synchronize
+        //mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setDistanceToTriggerSync(390);
+        //mSwipeRefreshLayout.setEnabled(true); //Controlled by fragments!
+        mSwipeRefreshLayout.setColorSchemeResources(
+                android.R.color.holo_purple, android.R.color.holo_blue_light,
+                android.R.color.holo_green_light, android.R.color.holo_orange_light);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Passing true as parameter we always animate the changes between the old and the new data set
+                DataService.getInstance().updateNewItems();
+                mAdapter.updateDataSet(DataService.getInstance().getData(),
+                        true);
+                mSwipeRefreshLayout.setRefreshing(true);
+                mRefreshHandler.sendEmptyMessageDelayed(0, 1500L); //Simulate network time
+            }
+        });
+    }
+
+
     @Override
     public boolean onItemClick(int position) {
         IFlexible flexibleItem = mAdapter.getItem(position);
 
-       if (flexibleItem instanceof ConceptItem) {
-           ConceptItem conceptItem = (ConceptItem) flexibleItem;
-           Toast.makeText(this, conceptItem.getConcept().getName(), Toast.LENGTH_SHORT).show();
-           Logger.d("Concept clicked: " +  conceptItem.getConcept().getName());
+       if (flexibleItem instanceof ConceptSubItem) {
+           ConceptSubItem conceptSubItem = (ConceptSubItem) flexibleItem;
+           ConceptActivity_.intent(getApplicationContext()).flags(FLAG_ACTIVITY_NEW_TASK)
+                   .concept(conceptSubItem.getConcept()).start();
        }
         return false;
     }
@@ -239,23 +258,17 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
         View emptyView = findViewById(R.id.empty_view);
         TextView emptyText = (TextView) findViewById(R.id.empty_text);
 
-        Logger.d("Some : " + fastScroller);
-//        if (emptyText != null)
-//            emptyText.setText(getString(R.string.no_items));
-//        if (size > 0) {
-//            fastScroller.setVisibility(View.VISIBLE);
-////            mRefreshHandler.removeMessages(2);
-//            emptyView.setAlpha(0);
-//        } else {
-//            emptyView.setAlpha(0);
-////            mRefreshHandler.sendEmptyMessage(2);
-//            fastScroller.setVisibility(View.GONE);
-//        }
-//        if (mAdapter != null) {
-//            String message = (mAdapter.hasSearchText() ? "Filtered " : "Refreshed ");
-//            message += size + " items in " + mAdapter.getTime() + "ms";
-//            Snackbar.make(findViewById(R.id.select_subject_view), message, Snackbar.LENGTH_SHORT).show();
-//        }
+        if (emptyText != null)
+            emptyText.setText(getString(R.string.no_items));
+        if (size > 0) {
+            fastScroller.setVisibility(View.VISIBLE);
+            mRefreshHandler.removeMessages(2);
+            emptyView.setAlpha(0);
+        } else {
+            emptyView.setAlpha(0);
+            mRefreshHandler.sendEmptyMessage(2);
+            fastScroller.setVisibility(View.GONE);
+        }
     }
 
     @Override

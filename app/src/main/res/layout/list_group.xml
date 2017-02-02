@@ -17,7 +17,7 @@
                 android:elevation="@dimen/material_elevation_app_bar">
 
     <LinearLayout
-        android:id="@+id/topic_container"
+        android:id="@+id/rv_header_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/material_content_edge_margin_horizontal"
@@ -37,7 +37,7 @@
             tools:text="Header"/>
 
         <TextView
-            android:id="@+id/topic_subtitle"
+            android:id="@+id/rv_header_subtitle_text"
             android:layout_marginTop="2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

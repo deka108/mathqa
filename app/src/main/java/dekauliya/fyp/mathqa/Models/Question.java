@@ -1,24 +1,27 @@
 package dekauliya.fyp.mathqa.Models;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 /**
  * Created by dekauliya on 29/1/17.
  */
-
+@Parcel
 public class Question {
-    private String id;
-    private String questionType;
-    private String usedFor;
-    private int marks;
-    private String difficultyLevel;
-    private String responseType;
-    private String source;
-    private String content;
-    private Boolean isSample;
-    private int concept;
-    private int subconcept;
-    private int paper;
-    private int keypoints;
-    private int keywords;
+    String id;
+    String questionType;
+    String usedFor;
+    int marks;
+    String difficultyLevel;
+    String responseType;
+    String source;
+    String content;
+    Boolean isSample;
+    int concept;
+    int subconcept;
+    int paper;
+    int keypoints;
+    int keywords;
 
     public Question(String id, String questionType, String usedFor, int marks,
                     String difficultyLevel, String responseType, String source, String content,
@@ -54,7 +57,9 @@ public class Question {
         this.isSample = isSample;
     }
 
-    public Question(String questionType, String usedFor, int marks, String difficultyLevel, String responseType, String source, String content, Boolean isSample) {
+    @ParcelConstructor
+    public Question(String questionType, String usedFor, int marks, String difficultyLevel,
+                    String responseType, String source, String content, Boolean isSample) {
         this.questionType = questionType;
         this.usedFor = usedFor;
         this.marks = marks;

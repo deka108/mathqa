@@ -1,13 +1,16 @@
 package dekauliya.fyp.mathqa.Models;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 /**
  * Created by dekauliya on 29/1/17.
  */
-
+@Parcel
 public class Solution {
-    private int id;
-    private String content;
-    private int Question;
+    int id;
+    String content;
+    int Question;
 
     public Solution(int id, String content, int question) {
         this.id = id;
@@ -20,6 +23,7 @@ public class Solution {
         this.content = content;
     }
 
+    @ParcelConstructor
     public Solution(String content) {
         this.content = content;
     }

@@ -1,15 +1,18 @@
 package dekauliya.fyp.mathqa.Models;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 /**
  * Created by dekauliya on 29/1/17.
  */
-
+@Parcel
 public class KeyPoint {
-    private int id;
-    private String name;
-    private String type;
-    private String content;
-    private int concept;
+    int id;
+    String name;
+    String type;
+    String content;
+    int concept;
 
     public KeyPoint(int id, String name, String type, String content, int concept) {
         this.id = id;
@@ -26,6 +29,7 @@ public class KeyPoint {
         this.content = content;
     }
 
+    @ParcelConstructor
     public KeyPoint(String name, String type, String content) {
         this.name = name;
         this.type = type;

@@ -42,10 +42,12 @@ public interface MathQaRestRxJavaApi {
     @GET("subconcepts/{id}")
     Observable<SubConcept> getSubconcept(@Path("id") int subConceptId);
 
-    @GET("keypoints/")
-    Observable<List<KeyPoint>> getKeypoints(@Query("concept") int conceptId);
     @GET("keypoints/{id}")
-    Observable<KeyPoint> getKeypoint(@Path("id") int keyPointId);
+    Observable<KeyPoint> getKeypoints(@Path ("id") int keyPointId);
+    @GET("keypoints/?type=C")
+    Observable<List<KeyPoint>> getKeypointConcepts(@Query("concept") int conceptId);
+    @GET("keypoints/?type=F")
+    Observable<List<KeyPoint>> getKeypointFormulas(@Query("concept") int conceptId);
 
     @GET("keywords/")
     Observable<List<Keyword>> getKeywords();

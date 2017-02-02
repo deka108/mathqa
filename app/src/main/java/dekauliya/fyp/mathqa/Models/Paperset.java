@@ -1,13 +1,16 @@
 package dekauliya.fyp.mathqa.Models;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 /**
  * Created by dekauliya on 29/1/17.
  */
-
+@Parcel
 public class Paperset {
-    private int id;
-    private String name;
-    private int subject;
+    int id;
+    String name;
+    int subject;
 
     public Paperset(int id, String name, int subject) {
         this.id = id;
@@ -20,6 +23,7 @@ public class Paperset {
         this.name = name;
     }
 
+    @ParcelConstructor
     public Paperset(String name) {
         this.name = name;
     }

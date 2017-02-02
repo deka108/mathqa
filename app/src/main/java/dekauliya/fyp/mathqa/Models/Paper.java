@@ -1,17 +1,20 @@
 package dekauliya.fyp.mathqa.Models;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 /**
  * Created by dekauliya on 29/1/17.
  */
-
+@Parcel
 public class Paper {
-    private String id;
-    private int year;
-    private String month;
-    private int number;
-    private int noOfQuestion;
-    private int paperset;
-    private int subject;
+    String id;
+    int year;
+    String month;
+    int number;
+    int noOfQuestion;
+    int paperset;
+    int subject;
 
     public Paper(String id, int year, String month, int number, int noOfQuestion, int paperset, int subject) {
         this.id = id;
@@ -31,6 +34,7 @@ public class Paper {
         this.noOfQuestion = noOfQuestion;
     }
 
+    @ParcelConstructor
     public Paper(int year, String month, int number, int noOfQuestion) {
         this.year = year;
         this.month = month;

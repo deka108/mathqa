@@ -31,7 +31,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".UI.CameraOcr.CameraCaptureActivity_"/>
-
         </activity>
         <activity
             android:name=".SelectSubjectActivity_"
@@ -39,6 +38,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -72,11 +72,6 @@
             android:label="@string/title_activity_question"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity
-            android:name=".ConceptActivity"
-            android:label="@string/title_activity_learning_concept"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"/>
         <activity android:name=".UI.CameraOcr.CropActivity">
         </activity>
@@ -98,6 +93,15 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".dummy.TestExpandableActivity">
+        </activity>
+        <activity
+            android:name=".ConceptActivity_"
+            android:label="@string/title_activity_concept"
+            android:parentActivityName=".MainActivity_"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dekauliya.fyp.mathqa.MainActivity_"/>
         </activity>
     </application>
 

@@ -2,6 +2,8 @@ package dekauliya.fyp.mathqa.RetrofitRestApi;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import dekauliya.fyp.mathqa.MathQaConstants;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -12,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class MathQaRestRxJavaService {
-    public static final String BASE_URL =  "http://10.27.4.160:8001/apiv2/";
+    public static String BASE_URL = MathQaConstants.BASE_URL;
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
     private static HttpLoggingInterceptor logging = new HttpLoggingInterceptor().setLevel
@@ -21,7 +23,7 @@ public class MathQaRestRxJavaService {
     private static Retrofit retrofit;
     private static Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()));
 
     public static <S> S createService(Class<S> serviceClass) {
         if (!httpClient.interceptors().contains(logging)) {
