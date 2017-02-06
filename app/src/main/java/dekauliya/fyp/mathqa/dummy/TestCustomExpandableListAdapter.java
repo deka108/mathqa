@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 
+import dekauliya.fyp.mathqa.Models.Question;
 import dekauliya.fyp.mathqa.R;
 
 /**
@@ -20,10 +21,18 @@ import dekauliya.fyp.mathqa.R;
 public class TestCustomExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> expandableListTitle;
-    private HashMap<String, List<String>> expandableListDetail;
+//    private HashMap<String, List<String>> expandableListDetail;
+    private HashMap<String, List<Question>> expandableListDetail;
+
+//    public TestCustomExpandableListAdapter(Context context, List<String> expandableListTitle,
+//                                           HashMap<String, List<String>> expandableListDetail) {
+//        this.context = context;
+//        this.expandableListTitle = expandableListTitle;
+//        this.expandableListDetail = expandableListDetail;
+//    }
 
     public TestCustomExpandableListAdapter(Context context, List<String> expandableListTitle,
-                                           HashMap<String, List<String>> expandableListDetail) {
+                                           HashMap<String, List<Question>> expandableListDetail) {
         this.context = context;
         this.expandableListTitle = expandableListTitle;
         this.expandableListDetail = expandableListDetail;
@@ -89,11 +98,12 @@ public class TestCustomExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null){
             LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context
                     .LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.list_item, null);
+//            convertView = layoutInflater.inflate(R.layout.list_item, null);
+            convertView = layoutInflater.inflate(R.layout.question_item, null);
         }
 
-        TextView expandedListTextView = (TextView) convertView.findViewById(R.id.expandedListItem);
-        expandedListTextView.setText(expandedListText);
+//        TextView expandedListTextView = (TextView) convertView.findViewById(R.id.expandedListItem);
+//        expandedListTextView.setText(expandedListText);
 
         return convertView;
     }

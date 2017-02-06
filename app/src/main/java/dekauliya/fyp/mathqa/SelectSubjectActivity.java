@@ -23,8 +23,6 @@ public class SelectSubjectActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_subject);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
     }
 
     @Click({R.id.btn_subj_psle, R.id.btn_subj_elem, R.id.btn_subj_add, R.id.btn_subj_h2})
@@ -48,8 +46,7 @@ public class SelectSubjectActivity extends AppCompatActivity{
         }
 
         Logger.d("BUTTON CLICKED + " + btn.getText());
-//        MainActivity_.intent(getApplicationContext()).start();
-        MainActivity_.intent(getApplicationContext()).flags(FLAG_ACTIVITY_NEW_TASK).start();
+        RealMainActivity_.intent(getApplicationContext()).flags(FLAG_ACTIVITY_NEW_TASK).start();
     }
 
 }

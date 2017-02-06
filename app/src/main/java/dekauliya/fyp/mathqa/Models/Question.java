@@ -9,33 +9,33 @@ import org.parceler.ParcelConstructor;
 @Parcel
 public class Question {
     String id;
-    String questionType;
+    String question_type;
     String usedFor;
     int marks;
-    String difficultyLevel;
-    String responseType;
+    String difficulty_level;
+    String response_type;
     String source;
     String content;
-    Boolean isSample;
+    Boolean is_sample;
     int concept;
     int subconcept;
-    int paper;
-    int keypoints;
-    int keywords;
+    String paper;
+    int[] keypoints;
+    int[] keywords;
 
-    public Question(String id, String questionType, String usedFor, int marks,
-                    String difficultyLevel, String responseType, String source, String content,
-                    Boolean isSample, int concept, int subconcept, int paper, int keypoints,
-                    int keywords) {
+    public Question(String id, String question_type, String usedFor, int marks,
+                    String difficulty_level, String response_type, String source,
+                    String content, Boolean is_sample, int concept, int subconcept, String paper,
+                    int[] keypoints, int[] keywords) {
         this.id = id;
-        this.questionType = questionType;
+        this.question_type = question_type;
         this.usedFor = usedFor;
         this.marks = marks;
-        this.difficultyLevel = difficultyLevel;
-        this.responseType = responseType;
+        this.difficulty_level = difficulty_level;
+        this.response_type = response_type;
         this.source = source;
         this.content = content;
-        this.isSample = isSample;
+        this.is_sample = is_sample;
         this.concept = concept;
         this.subconcept = subconcept;
         this.paper = paper;
@@ -43,31 +43,31 @@ public class Question {
         this.keywords = keywords;
     }
 
-    public Question(String id, String questionType, String usedFor, int marks,
-                    String difficultyLevel, String responseType, String source, String content,
-                    Boolean isSample) {
+    @ParcelConstructor
+    public Question(String id, String question_type, String usedFor, int marks,
+                    String difficulty_level, String response_type, String source, String content,
+                    Boolean is_sample) {
         this.id = id;
-        this.questionType = questionType;
+        this.question_type = question_type;
         this.usedFor = usedFor;
         this.marks = marks;
-        this.difficultyLevel = difficultyLevel;
-        this.responseType = responseType;
+        this.difficulty_level = difficulty_level;
+        this.response_type = response_type;
         this.source = source;
         this.content = content;
-        this.isSample = isSample;
+        this.is_sample = is_sample;
     }
 
-    @ParcelConstructor
-    public Question(String questionType, String usedFor, int marks, String difficultyLevel,
-                    String responseType, String source, String content, Boolean isSample) {
-        this.questionType = questionType;
+    public Question(String question_type, String usedFor, int marks, String difficulty_level,
+                    String response_type, String source, String content, Boolean is_sample) {
+        this.question_type = question_type;
         this.usedFor = usedFor;
         this.marks = marks;
-        this.difficultyLevel = difficultyLevel;
-        this.responseType = responseType;
+        this.difficulty_level = difficulty_level;
+        this.response_type = response_type;
         this.source = source;
         this.content = content;
-        this.isSample = isSample;
+        this.is_sample = is_sample;
     }
 
     public String getId() {
@@ -79,15 +79,15 @@ public class Question {
     }
 
     public Boolean getSample() {
-        return isSample;
+        return is_sample;
     }
 
-    public String getQuestionType() {
-        return questionType;
+    public String getQuestion_type() {
+        return question_type;
     }
 
-    public void setQuestionType(String questionType) {
-        this.questionType = questionType;
+    public void setQuestion_type(String question_type) {
+        this.question_type = question_type;
     }
 
     public String getUsedFor() {
@@ -106,20 +106,20 @@ public class Question {
         this.marks = marks;
     }
 
-    public String getDifficultyLevel() {
-        return difficultyLevel;
+    public String getDifficulty_level() {
+        return difficulty_level;
     }
 
-    public void setDifficultyLevel(String difficultyLevel) {
-        this.difficultyLevel = difficultyLevel;
+    public void setDifficulty_level(String difficulty_level) {
+        this.difficulty_level = difficulty_level;
     }
 
-    public String getResponseType() {
-        return responseType;
+    public String getResponse_type() {
+        return response_type;
     }
 
-    public void setResponseType(String responseType) {
-        this.responseType = responseType;
+    public void setResponse_type(String response_type) {
+        this.response_type = response_type;
     }
 
     public String getSource() {
@@ -139,11 +139,11 @@ public class Question {
     }
 
     public Boolean isSample() {
-        return isSample;
+        return is_sample;
     }
 
     public void setSample(Boolean sample) {
-        isSample = sample;
+        is_sample = sample;
     }
 
     public int getConcept() {
@@ -162,27 +162,35 @@ public class Question {
         this.subconcept = subconcept;
     }
 
-    public int getPaper() {
-        return paper;
-    }
-
-    public void setPaper(int paper) {
+    public void setPaper(String paper) {
         this.paper = paper;
     }
 
-    public int getKeypoints() {
+    public Boolean getIs_sample() {
+        return is_sample;
+    }
+
+    public void setIs_sample(Boolean is_sample) {
+        this.is_sample = is_sample;
+    }
+
+    public String getPaper() {
+        return paper;
+    }
+
+    public int[] getKeypoints() {
         return keypoints;
     }
 
-    public void setKeypoints(int keypoints) {
+    public void setKeypoints(int[] keypoints) {
         this.keypoints = keypoints;
     }
 
-    public int getKeywords() {
+    public int[] getKeywords() {
         return keywords;
     }
 
-    public void setKeywords(int keywords) {
+    public void setKeywords(int[] keywords) {
         this.keywords = keywords;
     }
 }

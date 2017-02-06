@@ -7,6 +7,24 @@
         <item name="colorPrimary">@color/material_color_blue_500</item>
     </style>
 
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/material_color_amber_500</item>
+        <item name="colorPrimaryDark">@color/material_color_blue_700</item>
+        <item name="colorPrimary">@color/material_color_blue_500</item>
+
+        <item name="windowActionModeOverlay">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!-- For selection -->
+        <item name="selectableItemBackground">@drawable/selector_item_light</item>
+        <!--<item name="primaryTextSelector">@drawable/primary_text_selector_light</item>-->
+
+        <!-- Spinner -->
+        <item name="android:spinnerStyle">@style/Spinner</item>
+        <item name="android:spinnerItemStyle">@style/SpinnerItem</item>
+    </style>
+
     <style name="SelectSubjectButton" parent="Base.Widget.AppCompat.Button.Colored">
         <item name="colorButtonNormal">@color/material_color_amber_500</item>
         <item name="android:textAllCaps">true</item>
@@ -29,4 +47,38 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <style name="commonListItemStyle">
+    </style>
+
+    <style name="myRecyclerViewStyle">
+        <!-- NOTE: clipChildren should be true on API level 10 -->
+        <item name="android:clipChildren">true</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:paddingBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingTop">@dimen/activity_vertical_margin</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
+    <style name="Spinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:dropDownWidth">160dp</item>
+    </style>
+
+    <style name="SpinnerItem" parent="Widget.AppCompat.TextView.SpinnerItem">
+        <item name="android:background">@drawable/selector_item_light</item>
+        <item name="android:textAppearance">@style/TextAppearanceSpinnerItem</item>
+    </style>
+
+    <style name="TextAppearanceSpinnerItem" parent="TextAppearance.AppCompat.Widget.TextView.SpinnerItem">
+        <item name="android:textColor">@color/material_color_amber_500</item>
+    </style>
+
+    <style name="AppTheme.BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+    </style>
 </resources>

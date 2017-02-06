@@ -6,15 +6,9 @@ package dekauliya.fyp.mathqa.DataServices;
 
 public enum DataType {
     NONE,
-    CONCEPT,
-    EDUCATION_LEVEL,
-    KEYPOINT,
-    KEYWORD,
-    PAPER,
-    PAPERSET,
-    QUESTION,
-    SOLUTION,
-    SUBCONCEPT,
-    SUBJECT,
-    TOPIC
+    TOPIC_CONCEPT,
+    QUESTION_TOPIC,
+    KEYPOINT_CONCEPT,
+    KEYPOINT_FORMULA,
+    QUESTION_CONCEPT
 }

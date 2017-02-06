@@ -24,6 +24,9 @@ public class MathQaRestService{
     public static <S> S createService(Class<S> serviceClass) {
         if (!httpClient.interceptors().contains(logging)) {
             httpClient.addInterceptor(logging);
+        }
+
+        if (retrofit == null) {
             builder.client(httpClient.build());
             retrofit = builder.build();
         }

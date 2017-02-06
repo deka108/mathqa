@@ -12,14 +12,15 @@ import org.androidannotations.annotations.RootContext;
 
 import java.util.List;
 
-import dekauliya.fyp.mathqa.Models.QuestionContent;
+import dekauliya.fyp.mathqa.Models.Question;
 
 /**
  * Created by dekauliya on 23/1/17.
  */
 @EBean
 public class QuestionDummyListAdapter extends BaseAdapter {
-    List<QuestionContent> questions;
+//    List<QuestionContent> questions;
+    List<Question> questions;
 
     @Bean(QuestionDummyFinder.class)
     QuestionDummyFinder questionDummyFinder;
@@ -29,7 +30,14 @@ public class QuestionDummyListAdapter extends BaseAdapter {
 
     @AfterInject
     void initAdapter(){
-        questions = questionDummyFinder.findAllQuestions();
+//        questions = questionDummyFinder.findAllQuestions();
+        questionDummyFinder.findAllQuestionObjects(new QuestionDummyFinder.ICompleted(){
+
+            @Override
+            public List<Question> onFinish() {
+                return questionDummyFinder.questionObjects;
+            }
+        });
     }
 
     @Override
@@ -52,14 +60,15 @@ public class QuestionDummyListAdapter extends BaseAdapter {
         QuestionDummyItemView qiv;
 
         if (view == null){
-            qiv = QuestionDummyItemView_.build(context);
+//            qiv = QuestionDummyItemView_.build(context);
         }else{
             qiv = (QuestionDummyItemView) view;
         }
 
-        qiv.bind((QuestionContent) getItem(i));
+//        qiv.bind((QuestionContent) getItem(i));
 
-        return qiv;
+//        return qiv;
+        return null;
     }
 
 }

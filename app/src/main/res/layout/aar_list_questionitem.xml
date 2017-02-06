@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    style="@style/commonListItemStyle"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_item_height"
+    android:background="@drawable/bg_swipe_item_neutral"
+    xmlns:auto="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/aar_qcontainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_item_normal_state"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/aar_question_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/material_color_amber_500"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:text="Question Title"/>
+            <RatingBar
+                android:id="@+id/aar_question_ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                style="?android:ratingBarStyleSmall"
+                />
+        </LinearLayout>
+        <io.github.kexanie.library.MathView
+            android:id="@+id/aar_question_latex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/material_color_black"
+            tools:text="Question content"
+            auto:engine="MathJax"/>
+        <TextView
+            android:id="@+id/aar_question_concept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textStyle="italic"
+            android:textColor="@color/material_color_amber_500"
+            tools:text="Question content"
+            android:layout_gravity="right"/>
+
+    </FrameLayout>
+
+</FrameLayout>

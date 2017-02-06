@@ -25,45 +25,45 @@ public interface MathQaRestRxJavaApi {
     @GET("subjects/")
     Observable<List<Subject>> getSubjects();
     @GET("subjects/{id}")
-    Observable<Subject> getSubject(@Path("id") int subjectId);
+    Observable<Subject> getSubject(@Path("id") Integer subjectId);
 
     @GET("topics/")
-    Observable<List<Topic>> getTopics(@Query("subject") int subjectId);
+    Observable<List<Topic>> getTopics(@Query("subject") Integer subjectId);
     @GET("topics/{id}")
-    Observable<Topic> getTopic(@Path("id") int topicId);
+    Observable<Topic> getTopic(@Path("id") Integer topicId);
 
     @GET("concepts/")
-    Observable<List<Concept>> getConcepts(@Query("topic") int topicId);
+    Observable<List<Concept>> getConcepts(@Query("topic") Integer topicId);
     @GET("concepts/{id}")
-    Observable<Concept> getConcept(@Path("id") int conceptId);
+    Observable<Concept> getConcept(@Path("id") Integer conceptId);
 
     @GET("subconcepts/")
-    Observable<List<SubConcept>> getSubConcepts(@Query("concept") int subconceptId);
+    Observable<List<SubConcept>> getSubConcepts(@Query("concept") Integer conceptId);
     @GET("subconcepts/{id}")
-    Observable<SubConcept> getSubconcept(@Path("id") int subConceptId);
+    Observable<SubConcept> getSubconcept(@Path("id") Integer subConceptId);
 
-    @GET("keypoints/{id}")
-    Observable<KeyPoint> getKeypoints(@Path ("id") int keyPointId);
-    @GET("keypoints/?type=C")
-    Observable<List<KeyPoint>> getKeypointConcepts(@Query("concept") int conceptId);
-    @GET("keypoints/?type=F")
-    Observable<List<KeyPoint>> getKeypointFormulas(@Query("concept") int conceptId);
+    @GET("keypoIntegers/{id}")
+    Observable<KeyPoint> getKeypoints(@Path ("id") Integer keyPoIntegerId);
+    @GET("keypoIntegers/?type=C")
+    Observable<List<KeyPoint>> getKeypointConcepts(@Query("concept") Integer conceptId);
+    @GET("keypoIntegers/?type=F")
+    Observable<List<KeyPoint>> getKeypointFormulas(@Query("concept") Integer conceptId);
 
     @GET("keywords/")
     Observable<List<Keyword>> getKeywords();
     @GET("keywords/{id}")
-    Observable<List<Keyword>> getKeywords(@Path("id") int keywordId);
+    Observable<List<Keyword>> getKeywords(@Path("id") Integer keywordId);
 
     @GET("questions")
-    Observable<List<Question>> getQuestions(@Query("concept") int conceptId, @Query("subconcept") int
+    Observable<List<Question>> getQuestions(@Query("concept") Integer conceptId, @Query("subconcept") Integer
             subconceptId);
     @GET("questions/{id}")
-    Observable<Question> getQuestion(@Path("id") int questionId);
+    Observable<Question> getQuestion(@Path("id") String questionId);
 
     @GET("solutions/")
-    Observable<List<Solution>> getSolutions();
+    Observable<List<Solution>> getSolutions(@Query("question") String questionId);
     @GET("solutions/{id}")
-    Observable<Solution> getSolution(@Path("id") int solutionId);
+    Observable<Solution> getSolution(@Path("id") Integer solutionId);
 
     @POST("dsearch/")
     Observable<String> searchDatabase(@Body String query);

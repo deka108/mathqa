@@ -3,7 +3,6 @@ package dekauliya.fyp.mathqa.RetrofitRestApi;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import dekauliya.fyp.mathqa.MathQaConstants;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -23,11 +22,14 @@ public class MathQaRestRxJavaService {
     private static Retrofit retrofit;
     private static Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()));
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
 
     public static <S> S createService(Class<S> serviceClass) {
         if (!httpClient.interceptors().contains(logging)) {
             httpClient.addInterceptor(logging);
+        }
+
+        if (retrofit == null){
             builder.client(httpClient.build());
             retrofit = builder.build();
         }

@@ -45,4 +45,7 @@
 
     <string name="no_items">No data available.</string>
     <string name="title_activity_concept">ConceptActivity</string>
+    <string name="title_activity_test_recycler_math_view">TestRecyclerMathView</string>
+    <string name="title_activity_real_main">RealMainActivity</string>
+    <string name="title_activity_concept_detail">ConceptDetailActivity</string>
 </resources>

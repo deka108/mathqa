@@ -8,7 +8,7 @@
                 android:background="?attr/selectableItemBackground">
 
     <LinearLayout
-        android:id="@+id/rv_subitem_container_alltext"
+        android:id="@+id/question_item_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/material_content_edge_margin_horizontal"

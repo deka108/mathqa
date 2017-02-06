@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import dekauliya.fyp.mathqa.Models.Question;
 import dekauliya.fyp.mathqa.R;
 
 public class TestExpandableActivity extends AppCompatActivity {
@@ -18,7 +19,8 @@ public class TestExpandableActivity extends AppCompatActivity {
     ExpandableListAdapter expandableListAdapter;
     ExpandableListView expandableListView;
     List<String> expandableListTitle;
-    HashMap<String, List<String>> expandableListDetail;
+//    HashMap<String, List<String>> expandableListDetail;
+    HashMap<String, List<Question>> expandableListDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,10 @@ public class TestExpandableActivity extends AppCompatActivity {
 
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
         expandableListDetail = TestExpandableData.getData();
-        expandableListTitle =  new ArrayList<String>(expandableListDetail.keySet());
+//        expandableListTitle =  new ArrayList<String>(expandableListDetail.keySet());
+        expandableListTitle =  new ArrayList<>(expandableListDetail.keySet());
+//        expandableListAdapter = new TestCustomExpandableListAdapter(this, expandableListTitle,
+//                expandableListDetail);
         expandableListAdapter = new TestCustomExpandableListAdapter(this, expandableListTitle,
                 expandableListDetail);
 

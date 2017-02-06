@@ -1,10 +1,12 @@
 package dekauliya.fyp.mathqa.dummy;
 
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import dekauliya.fyp.mathqa.Models.Question;
 import dekauliya.fyp.mathqa.Models.QuestionContent;
 
 /**
@@ -14,6 +16,7 @@ import dekauliya.fyp.mathqa.Models.QuestionContent;
 public class QuestionDummyFinder implements IFinder {
 
     List<QuestionContent> questionContents;
+    List<Question> questionObjects;
     String[] questions = new String[]{
             "$$\\int 5e^{2x-1} {d}x$$",
             "This come from string. You can insert inline formula:" +
@@ -36,22 +39,54 @@ public class QuestionDummyFinder implements IFinder {
     };
     int[] difficulty = new int[]{2, 3, 1, 2, 3, 1, 2, 3, 1};
 
+
     public QuestionDummyFinder(){
         questionContents = new ArrayList();
-        initQuestions();
+        questionObjects = new ArrayList();
+//        initQuestions();
     }
 
-    public void initQuestions(){
-        for(int i=0; i<questions.length; i++){
-            questionContents.add(new QuestionContent(questions[i], difficulty[i]));
-        }
+//    public void initQuestions(){
+//        for(int i=0; i<questions.length; i++){
+//            questionContents.add(new QuestionContent(questions[i], difficulty[i]));
+//        }
+//    }
+
+    @Background
+    public void initQuestions(final ICompleted iCompleted){
+//        for(int i=0; i<questions.length; i++){
+//            questionContents.add(new QuestionContent(questions[i], difficulty[i]));
+//        }
+//        DataServiceRef_.getInstance().getQuestionsBySubject(1, new IListener() {
+//            @Override
+//            public void onComplete(List<Question> questions) {
+////                returnQuestions(questions);
+//                questionObjects = questions;
+//                iCompleted.onFinish();
+//            }
+//        });
     }
+
+    private List<Question> returnQuestions() {
+        return questionObjects;
+    }
+
+//    @Override
+//    public List<QuestionContent> findAllQuestions() {
+//        if (questionContents.isEmpty()){
+//            initQuestions();;
+//        }
+//        return questionContents;
+//    }
 
     @Override
-    public List<QuestionContent> findAllQuestions() {
-        if (questionContents.isEmpty()){
-            initQuestions();;
+    public void findAllQuestionObjects(ICompleted iCompleted) {
+        if (questionObjects.isEmpty()){
+            initQuestions(iCompleted);
         }
-        return questionContents;
+    }
+
+    interface ICompleted{
+        List<Question> onFinish();
     }
 }
