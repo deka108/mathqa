@@ -12,13 +12,13 @@ public class Keyword {
      String name;
      String content;
 
+    @ParcelConstructor
     public Keyword(int id, String name, String content) {
         this.id = id;
         this.name = name;
         this.content = content;
     }
 
-    @ParcelConstructor
     public Keyword(String name, String content) {
         this.name = name;
         this.content = content;

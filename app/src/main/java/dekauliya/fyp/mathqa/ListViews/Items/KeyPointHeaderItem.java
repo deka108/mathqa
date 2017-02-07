@@ -13,14 +13,13 @@ import dekauliya.fyp.mathqa.Models.KeyPoint;
 import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.Utils.GraphicUtils;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
-import eu.davidea.flexibleadapter.items.AbstractExpandableHeaderItem;
 import eu.davidea.viewholders.ExpandableViewHolder;
 
 /**
  * Created by dekauliya on 2/2/17.
  */
 
-public class KeyPointHeaderItem extends AbstractExpandableHeaderItem<KeyPointHeaderItem
+public class KeyPointHeaderItem extends ExpandableHeaderItem<KeyPointHeaderItem
         .KeypointHeaderViewHolder, KeyPointSubItem> {
 
     private KeyPoint keypoint;
@@ -45,6 +44,11 @@ public class KeyPointHeaderItem extends AbstractExpandableHeaderItem<KeyPointHea
             return this.getKeyPoint().equals(k.getKeyPoint());
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getKeyPoint().hashCode();
     }
 
     @Override

@@ -23,6 +23,7 @@ public class Question {
     int[] keypoints;
     int[] keywords;
 
+    @ParcelConstructor
     public Question(String id, String question_type, String usedFor, int marks,
                     String difficulty_level, String response_type, String source,
                     String content, Boolean is_sample, int concept, int subconcept, String paper,
@@ -43,7 +44,6 @@ public class Question {
         this.keywords = keywords;
     }
 
-    @ParcelConstructor
     public Question(String id, String question_type, String usedFor, int marks,
                     String difficulty_level, String response_type, String source, String content,
                     Boolean is_sample) {

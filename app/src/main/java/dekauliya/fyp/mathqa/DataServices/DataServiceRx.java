@@ -52,7 +52,6 @@ public class DataServiceRx {
     HashMap<Integer, Concept> mConcepts = new HashMap<>();
     HashMap<Integer, SubConcept> mSubConcepts = new HashMap<>();
 
-
     public void getTopicConceptData(int subjectId, final IDataListener mListener){
         final DataType dataType = DataType.TOPIC_CONCEPT;
         clearItems(dataType);
@@ -109,7 +108,6 @@ public class DataServiceRx {
                     }
                 });
     }
-
 
     public void getQuestionTopicData(int subjectId, final IDataListener mListener){
         final DataType dataType = DataType.QUESTION_TOPIC;
@@ -184,11 +182,11 @@ public class DataServiceRx {
             });
     }
 
-    public void getConceptKeypointData(Concept concept, final IDataListener mListener){
+    public void getConceptKeypointData(int conceptId, final IDataListener mListener){
         final DataType dataType = DataType.KEYPOINT_CONCEPT;
         clearItems(dataType);
 
-        client.getKeypointConcepts(concept.getId())
+        client.getKeypointConcepts(conceptId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<KeyPoint>>() {
@@ -202,8 +200,7 @@ public class DataServiceRx {
                         for(KeyPoint keyPoint: value){
                             KeyPointHeaderItem keyPointHeaderItem = new KeyPointHeaderItem
                                     (keyPoint);
-                            KeyPointSubItem keyPointSubItem = new KeyPointSubItem
-                                    (keyPointHeaderItem, keyPoint);
+                            KeyPointSubItem keyPointSubItem = new KeyPointSubItem(keyPointHeaderItem);
                             keyPointHeaderItem.addSubItem(keyPointSubItem);
                             addItem(keyPointHeaderItem, dataType, mComparator);
                         }
@@ -221,13 +218,13 @@ public class DataServiceRx {
                 });
     }
 
-    public void getConceptFormulaData(Concept concept, final IDataListener mListener){
+    public void getConceptFormulaData(int conceptId, final IDataListener mListener){
         final DataType dataType = DataType.KEYPOINT_FORMULA;
         clearItems(dataType);
 
         mSubConcepts.clear();
 
-        client.getKeypointFormulas(concept.getId())
+        client.getKeypointFormulas(conceptId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<KeyPoint>>() {
@@ -241,8 +238,7 @@ public class DataServiceRx {
                         for(KeyPoint keyPoint: value){
                             KeyPointHeaderItem keyPointHeaderItem = new KeyPointHeaderItem
                                     (keyPoint);
-                            KeyPointSubItem keyPointSubItem = new KeyPointSubItem
-                                    (keyPointHeaderItem, keyPoint);
+                            KeyPointSubItem keyPointSubItem = new KeyPointSubItem(keyPointHeaderItem);
                             keyPointHeaderItem.addSubItem(keyPointSubItem);
                             addItem(keyPointHeaderItem, dataType, mComparator);
                         }
@@ -260,13 +256,13 @@ public class DataServiceRx {
                 });
     }
 
-    public void getQuestionConceptData(Concept concept, final IDataListener mListener){
+    public void getQuestionConceptData(int conceptid, final IDataListener mListener){
         final DataType dataType = DataType.QUESTION_CONCEPT;
         clearItems(dataType);
 
         mSubConcepts.clear();
 
-        client.getSubConcepts(concept.getId())
+        client.getSubConcepts(conceptid)
                 .flatMap(new Function<List<SubConcept>, ObservableSource<SubConcept>>() {
                     @Override
                     public ObservableSource<SubConcept> apply(List<SubConcept> subConcepts) throws
@@ -320,8 +316,8 @@ public class DataServiceRx {
                 });
     }
 
-    public void getSolution(Question question, final IDataListener mListener){
-        client.getSolutions(question.getId())
+    public void getSolution(String questionId, final ISolutionListener mListener){
+        client.getSolutions(questionId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<Solution>>() {
@@ -332,7 +328,9 @@ public class DataServiceRx {
 
                     @Override
                     public void onNext(List<Solution> value) {
-
+                        if (value.size() > 0) {
+                            mListener.onSolutionRetrieved(value.get(0));
+                        }
                     }
 
                     @Override
@@ -342,7 +340,7 @@ public class DataServiceRx {
 
                     @Override
                     public void onComplete() {
-                        mListener.onDataRetrieved();
+
                     }
                 });
     }
@@ -386,9 +384,6 @@ public class DataServiceRx {
             } else if (o1 instanceof KeyPointHeaderItem && o2 instanceof KeyPointHeaderItem){
                 return ((KeyPointHeaderItem) o1).getKeyPoint().getName()
                         .compareTo(((KeyPointHeaderItem) o2).getKeyPoint().getName());
-            } else if (o1 instanceof KeyPointSubItem && o2 instanceof KeyPointSubItem){
-                return ((KeyPointSubItem) o1).getKeyPoint().getName()
-                        .compareTo(((KeyPointSubItem) o2).getKeyPoint().getName());
             } else if (o1 instanceof QuestionSubItem && o2 instanceof QuestionSubItem) {
                 int res = Integer.parseInt  (((QuestionSubItem) o1).getQuestion()
                         .getDifficulty_level()) - Integer.parseInt(((QuestionSubItem) o2)
@@ -405,4 +400,8 @@ public class DataServiceRx {
             return 0;
         }
     };
+
+    public interface ISolutionListener{
+        void onSolutionRetrieved(Solution solution);
+    }
 }

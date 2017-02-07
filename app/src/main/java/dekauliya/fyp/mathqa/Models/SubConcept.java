@@ -12,6 +12,7 @@ public class SubConcept {
     String name;
     int concept;
 
+    @ParcelConstructor
     public SubConcept(int id, String name, int concept) {
         this.id = id;
         this.name = name;
@@ -23,7 +24,6 @@ public class SubConcept {
         this.name = name;
     }
 
-    @ParcelConstructor
     public SubConcept(String name) {
         this.name = name;
     }

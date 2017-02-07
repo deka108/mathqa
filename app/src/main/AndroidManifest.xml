@@ -62,20 +62,8 @@
             android:label="@string/tf_insert_formula"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity
-            android:name=".dummy.QuestionDummyListActivity_"
-            android:label="@string/title_activity_question_list"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-            android:name=".DetailViews.QuestionDetailActivity"
-            android:label="@string/title_activity_question"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"/>
         <activity android:name=".CameraOcr.CropActivity">
-        </activity>
-        <activity android:name=".RetrofitRestApi.RestApiActivity">
         </activity>
         <activity
             android:name=".CameraOcr.ImagePreviewActivity_"
@@ -90,10 +78,8 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".dummy.TestExpandableActivity">
-        </activity>
         <activity
-            android:name=".ConceptActivity_"
+            android:name=".DetailViews.ConceptDetailActivity_"
             android:label="@string/title_activity_concept"
             android:parentActivityName=".MainActivity_"
             android:theme="@style/AppTheme.NoActionBar">
@@ -116,8 +102,8 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".DetailViews.ConceptDetailActivity_"
-            android:label="@string/title_activity_concept_detail"
+            android:name=".DetailViews.QuestionDetailActivity_"
+            android:label="@string/title_activity_question_detail"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>

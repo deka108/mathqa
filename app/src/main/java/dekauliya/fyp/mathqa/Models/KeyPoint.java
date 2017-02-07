@@ -14,6 +14,7 @@ public class KeyPoint {
     String content;
     int concept;
 
+    @ParcelConstructor
     public KeyPoint(int id, String name, String type, String content, int concept) {
         this.id = id;
         this.name = name;
@@ -29,7 +30,6 @@ public class KeyPoint {
         this.content = content;
     }
 
-    @ParcelConstructor
     public KeyPoint(String name, String type, String content) {
         this.name = name;
         this.type = type;

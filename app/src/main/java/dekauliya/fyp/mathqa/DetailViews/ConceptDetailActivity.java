@@ -1,29 +1,40 @@
 package dekauliya.fyp.mathqa.DetailViews;
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
+import org.androidannotations.annotations.ViewById;
 
-import dekauliya.fyp.mathqa.ListViews.KeypointConceptFragment_;
-import dekauliya.fyp.mathqa.ListViews.QuestionConceptFragment_;
+import dekauliya.fyp.mathqa.ListViews.KeypointConceptListFragment_;
+import dekauliya.fyp.mathqa.ListViews.KeypointFormulaListFragment_;
+import dekauliya.fyp.mathqa.ListViews.OnListFragmentInteractionListener;
+import dekauliya.fyp.mathqa.ListViews.QuestionConceptListFragment_;
 import dekauliya.fyp.mathqa.Models.Concept;
 import dekauliya.fyp.mathqa.R;
+import dekauliya.fyp.mathqa.Utils.FabUtils;
+import eu.davidea.fastscroller.FastScroller;
+import eu.davidea.flexibleadapter.SelectableAdapter;
 
 
 @EActivity
-public class ConceptDetailActivity extends AppCompatActivity {
+public class ConceptDetailActivity extends AppCompatActivity implements
+        OnListFragmentInteractionListener,
+        OnDetailFragmentInteractionListener, FastScroller.OnScrollStateChangeListener{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -41,12 +52,15 @@ public class ConceptDetailActivity extends AppCompatActivity {
     private ViewPager mViewPager;
 
     @Extra("conceptExtra")
-    Concept concept;
+    Concept conceptExtra;
+
+    @ViewById(R.id.concept_detail_container)
+    CoordinatorLayout container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_concept);
+        setContentView(R.layout.activity_concept_detail);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -56,16 +70,13 @@ public class ConceptDetailActivity extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (ViewPager) findViewById(R.id.concept_detail_viewpager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-    }
 
-    @AfterInject
-    void afterInject(){
-        Toast.makeText(this, "Concept name: " + concept.getName(), Toast.LENGTH_SHORT).show();
+        FabUtils.setUpFab(this);
     }
 
 
@@ -74,6 +85,11 @@ public class ConceptDetailActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_concept, menu);
         return true;
+    }
+
+    @AfterViews
+    void receivedExtra(){
+        Snackbar.make(container, conceptExtra.getName(), Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
@@ -91,12 +107,29 @@ public class ConceptDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFastScrollerStateChange(boolean scrolling) {
+
+    }
+
+    @Override
+    public void onFragmentInteraction() {
+
+    }
+
+    @Override
+    public void onFragmentChange(SwipeRefreshLayout swipeRefreshLayout, RecyclerView recyclerView,
+                                 @SelectableAdapter.Mode int mode) {
+
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+        static final int PAGE_COUNT = 3;
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -107,11 +140,11 @@ public class ConceptDetailActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch(position){
                 case 0:
-                    return KeypointConceptFragment_.builder().build();
+                    return KeypointConceptListFragment_.builder().conceptArg(conceptExtra).build();
                 case 1:
-                    return KeypointFormulaFragment_.builder().build();
+                    return KeypointFormulaListFragment_.builder().conceptArg(conceptExtra).build();
                 case 2:
-                    return QuestionConceptFragment_.builder().build();
+                    return QuestionConceptListFragment_.builder().conceptArg(conceptExtra).build();
                 default:
                     return null;
             }
@@ -119,8 +152,7 @@ public class ConceptDetailActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            return PAGE_COUNT;
         }
 
         @Override

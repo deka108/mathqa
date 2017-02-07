@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,13 +16,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import org.androidannotations.annotations.EActivity;
 
 import dekauliya.fyp.mathqa.ListViews.OnListFragmentInteractionListener;
-import dekauliya.fyp.mathqa.ListViews.QuestionTopicFragment_;
-import dekauliya.fyp.mathqa.ListViews.TopicConceptFragment_;
+import dekauliya.fyp.mathqa.ListViews.QuestionTopicListFragment_;
+import dekauliya.fyp.mathqa.ListViews.TopicConceptListFragment_;
+import dekauliya.fyp.mathqa.Utils.FabUtils;
 import eu.davidea.fastscroller.FastScroller;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
@@ -89,14 +87,7 @@ public class RealMainActivity extends AppCompatActivity implements
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        FabUtils.setUpFab(this);
     }
 
 
@@ -122,11 +113,6 @@ public class RealMainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onListFragmentInteraction(AbstractFlexibleItem item) {
-
-    }
-
-    @Override
     public void onFastScrollerStateChange(boolean scrolling) {
 
     }
@@ -149,9 +135,9 @@ public class RealMainActivity extends AppCompatActivity implements
 //            return PlaceholderFragment.newInstance(position + 1);
             switch(position){
                 case 0:
-                    return TopicConceptFragment_.builder().build();
+                    return TopicConceptListFragment_.builder().build();
                 case 1:
-                    return QuestionTopicFragment_.builder().build();
+                    return QuestionTopicListFragment_.builder().build();
                 default:
                     return null;
             }

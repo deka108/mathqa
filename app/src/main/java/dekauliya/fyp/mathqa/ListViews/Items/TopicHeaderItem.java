@@ -37,6 +37,20 @@ public class TopicHeaderItem extends ExpandableHeaderItem<
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (o instanceof TopicHeaderItem){
+            TopicHeaderItem item = (TopicHeaderItem) o;
+            return this.topic.equals(item.getTopic());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.topic.hashCode();
+    }
+
+    @Override
     public int getLayoutRes() {
         return R.layout.header_text_content;
     }
@@ -54,16 +68,7 @@ public class TopicHeaderItem extends ExpandableHeaderItem<
         } else {
             holder.mTopicTitle.setText(topic.getName());
         }
-        holder.mTopicSubtitle.setText(getSubItemsCount() + " concepts available");
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o instanceof TopicHeaderItem){
-            TopicHeaderItem item = (TopicHeaderItem) o;
-            return this.topic.equals(item.getTopic());
-        }
-        return false;
+        holder.mTopicSubtitle.setText(getSubItemsCount() + " Concepts available");
     }
 
     static class TopicHeaderItemViewHolder extends ExpandableViewHolder {

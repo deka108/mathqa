@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.github.clans.fab.FloatingActionMenu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fab_search"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end|bottom"
+    fab:menu_colorNormal="@color/material_color_amber_500"
+    fab:menu_colorPressed="@color/material_color_amber_700"
+    android:layout_margin="@dimen/fab_margin"
+    >
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_textsearch"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        fab:fab_size="mini"
+        fab:fab_label="Text search"
+        fab:fab_colorNormal="@color/material_color_amber_500"
+        fab:fab_colorPressed="@color/material_color_amber_700"
+        />
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_imgsearch"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        fab:fab_size="mini"
+        fab:fab_label="Document image search"
+        fab:fab_colorNormal="@color/material_color_amber_500"
+        fab:fab_colorPressed="@color/material_color_amber_700"
+        />
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_formulasearch"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        fab:fab_size="mini"
+        fab:fab_label="Formula search"
+        fab:fab_colorNormal="@color/material_color_amber_500"
+        fab:fab_colorPressed="@color/material_color_amber_700"
+        />
+</com.github.clans.fab.FloatingActionMenu>

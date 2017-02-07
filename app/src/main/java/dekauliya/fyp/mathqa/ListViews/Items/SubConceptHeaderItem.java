@@ -54,7 +54,12 @@ public class SubConceptHeaderItem extends ExpandableHeaderItem<
         } else {
             holder.mSubConceptTitle.setText(subConcept.getName());
         }
-        holder.mSubConceptSubtitle.setText(getSubItemsCount() + " questions available.");
+        holder.mSubConceptSubtitle.setText(getSubItemsCount() + " Questions available");
+    }
+
+    @Override
+    public int hashCode() {
+        return this.subConcept.hashCode();
     }
 
     @Override

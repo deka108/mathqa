@@ -12,6 +12,7 @@ public class Paperset {
     String name;
     int subject;
 
+    @ParcelConstructor
     public Paperset(int id, String name, int subject) {
         this.id = id;
         this.name = name;
@@ -23,7 +24,6 @@ public class Paperset {
         this.name = name;
     }
 
-    @ParcelConstructor
     public Paperset(String name) {
         this.name = name;
     }

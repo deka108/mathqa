@@ -16,6 +16,7 @@ public class Paper {
     int paperset;
     int subject;
 
+    @ParcelConstructor
     public Paper(String id, int year, String month, int number, int noOfQuestion, int paperset, int subject) {
         this.id = id;
         this.year = year;
@@ -34,7 +35,6 @@ public class Paper {
         this.noOfQuestion = noOfQuestion;
     }
 
-    @ParcelConstructor
     public Paper(int year, String month, int number, int noOfQuestion) {
         this.year = year;
         this.month = month;

@@ -17,7 +17,6 @@ import android.widget.Toast;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.PageSelected;
 
-import dekauliya.fyp.mathqa.dummy.dummy.DataServiceRef;
 import eu.davidea.fastscroller.FastScroller;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
@@ -250,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onBackPressed() {
         // Close the App
-        DataServiceRef.onDestroy();
+//        DataServiceRef.onDestroy();
         super.onBackPressed();
     }
 }

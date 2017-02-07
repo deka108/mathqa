@@ -10,12 +10,13 @@ import org.parceler.ParcelConstructor;
 public class Solution {
     int id;
     String content;
-    int Question;
+    int question;
 
+    @ParcelConstructor
     public Solution(int id, String content, int question) {
         this.id = id;
         this.content = content;
-        Question = question;
+        this.question = question;
     }
 
     public Solution(int id, String content) {
@@ -23,7 +24,6 @@ public class Solution {
         this.content = content;
     }
 
-    @ParcelConstructor
     public Solution(String content) {
         this.content = content;
     }
@@ -45,10 +45,10 @@ public class Solution {
     }
 
     public int getQuestion() {
-        return Question;
+        return this.question;
     }
 
     public void setQuestion(int question) {
-        Question = question;
+        this.question = question;
     }
 }

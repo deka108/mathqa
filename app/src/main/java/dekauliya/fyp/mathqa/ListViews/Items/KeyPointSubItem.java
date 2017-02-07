@@ -11,6 +11,7 @@ import java.util.List;
 import dekauliya.fyp.mathqa.Models.KeyPoint;
 import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.Utils.GraphicUtils;
+import dekauliya.fyp.mathqa.Utils.ViewUtils;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.helpers.AnimatorHelper;
 import eu.davidea.flexibleadapter.items.AbstractSectionableItem;
@@ -25,25 +26,22 @@ import io.github.kexanie.library.MathView;
 public class KeyPointSubItem extends AbstractSectionableItem<KeyPointSubItem
         .KeyPointSubItemViewHolder, IHeader> {
 
-    private KeyPoint keyPoint;
-
-    public KeyPointSubItem(IHeader header, KeyPoint keyPoint) {
+    public KeyPointSubItem(IHeader header) {
         super(header);
-        this.keyPoint = keyPoint;
-    }
-
-
-    public KeyPoint getKeyPoint() {
-        return keyPoint;
-    }
-
-    public void setKeyPoint(KeyPoint keyPoint) {
-        this.keyPoint = keyPoint;
     }
 
     @Override
     public boolean equals(Object o) {
+        if (o instanceof KeyPointSubItem){
+            KeyPointSubItem k = (KeyPointSubItem) o;
+            return getHeader().equals(k.getHeader());
+        }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return ((KeyPointHeaderItem) getHeader()).hashCode();
     }
 
     @Override
@@ -59,7 +57,11 @@ public class KeyPointSubItem extends AbstractSectionableItem<KeyPointSubItem
 
     @Override
     public void bindViewHolder(FlexibleAdapter adapter, KeyPointSubItemViewHolder holder, int position, List payloads) {
-        holder.mMathView.setText(getKeyPoint().getContent());
+        IHeader header = getHeader();
+        if (header != null && header instanceof KeyPointHeaderItem) {
+            KeyPoint keypoint = ((KeyPointHeaderItem) getHeader()).getKeyPoint();
+            holder.mMathView.setText(ViewUtils.convertLatex(keypoint.getContent()));
+        }
     }
 
     static class KeyPointSubItemViewHolder extends FlexibleViewHolder{
@@ -68,7 +70,10 @@ public class KeyPointSubItem extends AbstractSectionableItem<KeyPointSubItem
 
         public KeyPointSubItemViewHolder(View view, FlexibleAdapter adapter) {
             super(view, adapter);
-            mMathView = (MathView) mMathView.findViewById(R.id.latex_item_latex);
+            mMathView = (MathView) view.findViewById(R.id.latex_item_latex);
+            mMathView.setFocusable(false);
+            mMathView.setFocusableInTouchMode(false);
+            mMathView.setClickable(false);
         }
 
         @Override
@@ -84,6 +89,6 @@ public class KeyPointSubItem extends AbstractSectionableItem<KeyPointSubItem
 
     @Override
     public String toString() {
-        return "SubItem[Keypoint: " + keyPoint.getName() + "]";
+        return "SubItem[Keypoint: " + getHeader().toString() + "]";
     }
 }

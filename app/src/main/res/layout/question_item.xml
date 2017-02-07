@@ -7,13 +7,8 @@
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
                 android:background="?attr/selectableItemBackground">
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        auto:cardElevation="2dp">
         <LinearLayout
-            android:id="@+id/question_item_container"
+            android:id="@+id/text_item_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/material_content_edge_margin_horizontal"
@@ -65,7 +60,5 @@
                 tools:text="Question content"
                 android:layout_gravity="right"/>
         </LinearLayout>
-
-    </android.support.v7.widget.CardView>
 
 </RelativeLayout>

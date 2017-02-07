@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/material_expansion_list_collapsed_height"
-                android:background="@color/material_color_blue_500"
-                android:elevation="@dimen/material_elevation_app_bar" >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/material_expansion_list_collapsed_height"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/material_color_blue_500"
+    android:elevation="@dimen/material_elevation_app_bar"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:id="@+id/header_text_container"
@@ -33,10 +34,10 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
+            android:textStyle="italic"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
             android:textColor="@color/material_color_white"
             tools:text="Subtitle"/>
 
     </LinearLayout>
-
 </RelativeLayout>

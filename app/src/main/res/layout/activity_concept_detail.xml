@@ -2,11 +2,11 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                  xmlns:app="http://schemas.android.com/apk/res-auto"
                                                  xmlns:tools="http://schemas.android.com/tools"
-                                                 android:id="@+id/main_content"
+                                                 android:id="@+id/concept_detail_container"
                                                  android:layout_width="match_parent"
                                                  android:layout_height="match_parent"
                                                  android:fitsSystemWindows="true"
-                                                 tools:context="dekauliya.fyp.mathqa.DetailViews.ConceptDetailActivity">
+                                                 tools:context="dekauliya.fyp.mathqa.DetailViews.ConceptDetailActivity_">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -28,22 +28,18 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
+            app:tabMaxWidth="0dp"
+            app:tabGravity="fill"
             android:layout_height="wrap_content"/>
 
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/container"
+        android:id="@+id/concept_detail_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email"/>
+    <include layout="@layout/clans_fab" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
-import dekauliya.fyp.mathqa.DataServices.DataType;
 import dekauliya.fyp.mathqa.DataServices.IDataListener;
 import dekauliya.fyp.mathqa.MathQaPrefs_;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
@@ -27,8 +26,6 @@ public abstract class AbstractListFragment extends Fragment implements IDataList
     MathQaPrefs_ prefs;
 
     protected FlexibleAdapter mAdapter;
-
-    DataType mDataType;
 
     int getSubjectId(){
         return prefs.subject_id().get();
@@ -63,7 +60,7 @@ public abstract class AbstractListFragment extends Fragment implements IDataList
             mListener = (OnListFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnListFragmentInteractionListener");
         }
     }
 
@@ -78,7 +75,4 @@ public abstract class AbstractListFragment extends Fragment implements IDataList
         return mAdapter;
     }
 
-    public DataType getDataType() {
-        return mDataType;
-    }
 }

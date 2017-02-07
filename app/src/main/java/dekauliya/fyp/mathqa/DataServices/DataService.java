@@ -25,7 +25,6 @@ import dekauliya.fyp.mathqa.Models.Topic;
 import dekauliya.fyp.mathqa.RetrofitRestApi.MathQaRestApi;
 import dekauliya.fyp.mathqa.RetrofitRestApi.MathQaRestService;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
-import eu.davidea.flexibleadapter.items.IHeader;
 import retrofit2.Call;
 
 /**
@@ -73,8 +72,7 @@ public class DataService {
             // Keypoints
             for(KeyPoint keypoint: keypoints) {
                 KeyPointHeaderItem keyPointHeaderItem = new KeyPointHeaderItem(keypoint);
-                KeyPointSubItem keyPointSubItem = new KeyPointSubItem((IHeader) keyPointHeaderItem,
-                        keypoint);
+                KeyPointSubItem keyPointSubItem = new KeyPointSubItem(keyPointHeaderItem);
                 keyPointHeaderItem.addSubItem(keyPointSubItem);
                 addItem(keyPointHeaderItem, mComparator);
             }
@@ -94,8 +92,7 @@ public class DataService {
             List<KeyPoint> keypoints = callKeypoint.execute().body();
             for(KeyPoint keypoint: keypoints) {
                 KeyPointHeaderItem keyPointHeaderItem = new KeyPointHeaderItem(keypoint);
-                KeyPointSubItem keyPointSubItem = new KeyPointSubItem((IHeader) keyPointHeaderItem,
-                        keypoint);
+                KeyPointSubItem keyPointSubItem = new KeyPointSubItem(keyPointHeaderItem);
                 keyPointHeaderItem.addSubItem(keyPointSubItem);
                 addItem(keyPointHeaderItem, mComparator);
             }
@@ -197,9 +194,6 @@ public class DataService {
             } else if (o1 instanceof KeyPointHeaderItem && o2 instanceof KeyPointHeaderItem){
                 return ((KeyPointHeaderItem) o1).getKeyPoint().getName()
                         .compareTo(((KeyPointHeaderItem) o2).getKeyPoint().getName());
-            } else if (o1 instanceof KeyPointSubItem && o2 instanceof KeyPointSubItem){
-                return ((KeyPointSubItem) o1).getKeyPoint().getName()
-                        .compareTo(((KeyPointSubItem) o2).getKeyPoint().getName());
             } else if (o1 instanceof QuestionSubItem && o2 instanceof QuestionSubItem) {
                 return ((QuestionSubItem) o1).getQuestion().getId()
                         .compareTo(((QuestionSubItem) o2).getQuestion().getId());

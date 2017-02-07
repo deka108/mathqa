@@ -12,6 +12,7 @@ public class Concept {
     String name;
     int topic;
 
+    @ParcelConstructor
     public Concept(int id, String name, int topic) {
         this.id = id;
         this.name = name;
@@ -23,7 +24,6 @@ public class Concept {
         this.name = name;
     }
 
-    @ParcelConstructor
     public Concept(String name) {
         this.name = name;
     }

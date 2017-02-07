@@ -8,13 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import dekauliya.fyp.mathqa.Models.Question;
 import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.Utils.GraphicUtils;
+import dekauliya.fyp.mathqa.Utils.ViewUtils;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.helpers.AnimatorHelper;
 import eu.davidea.flexibleadapter.items.AbstractSectionableItem;
@@ -53,6 +53,11 @@ public class QuestionSubItem extends AbstractSectionableItem<
     }
 
     @Override
+    public int hashCode() {
+        return this.question.hashCode();
+    }
+
+    @Override
     public int getLayoutRes() {
         return R.layout.question_item;
     }
@@ -70,8 +75,8 @@ public class QuestionSubItem extends AbstractSectionableItem<
         holder.mQuestionDifficulty.setNumStars(5);
 
         if (question.getDifficulty_level() != null) {
-            holder.mQuestionDifficulty.setRating(Float.parseFloat(question.getDifficulty_level())
-                    /2);
+            holder.mQuestionDifficulty.setRating(
+                    ViewUtils.getDifficultyLevelFloat(question.getDifficulty_level() ));
         }
         if (question.getContent() != null) {
             holder.mQuestionContent.setText(question.getContent());
@@ -122,7 +127,6 @@ public class QuestionSubItem extends AbstractSectionableItem<
         @Override
         public void onClick(View view) {
             super.onClick(view);
-            Toast.makeText(mContext, "Question clicked", Toast.LENGTH_SHORT).show();
             if (mAdapter.mItemClickListener != null){
                 mAdapter.mItemClickListener.onItemClick(getFlexibleAdapterPosition());
             }

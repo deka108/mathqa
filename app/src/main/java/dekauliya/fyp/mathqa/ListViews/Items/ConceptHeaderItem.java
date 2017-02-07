@@ -47,6 +47,11 @@ public class ConceptHeaderItem extends ExpandableHeaderItem<ConceptHeaderItem
     }
 
     @Override
+    public int hashCode() {
+        return this.concept.hashCode();
+    }
+
+    @Override
     public int getLayoutRes() {
         return R.layout.header_text_content;
     }
@@ -64,7 +69,7 @@ public class ConceptHeaderItem extends ExpandableHeaderItem<ConceptHeaderItem
         } else {
             holder.mConceptTitle.setText(concept.getName());
         }
-        holder.mConceptSubtitle.setText(getSubItemsCount() + " questions available.");
+        holder.mConceptSubtitle.setText(getSubItemsCount() + " Questions available");
     }
 
     static class ConceptHeaderItemViewHolder extends ExpandableViewHolder{

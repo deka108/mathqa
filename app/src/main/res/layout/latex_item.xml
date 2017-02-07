@@ -4,31 +4,20 @@
                 xmlns:auto="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
+                android:padding="@dimen/material_content_edge_margin_horizontal"
                 android:background="?attr/selectableItemBackground">
 
-    <LinearLayout
-        android:id="@+id/latex_item_container"
+    <io.github.kexanie.library.MathView
+        android:id="@+id/latex_item_latex"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/material_content_edge_margin_horizontal"
-        android:layout_marginStart="@dimen/material_content_edge_margin_horizontal"
-        android:layout_marginRight="@dimen/material_content_edge_margin_horizontal"
-        android:layout_marginEnd="@dimen/material_content_edge_margin_horizontal"
-        android:layout_centerInParent="true"
-        android:orientation="vertical">
-
-        <io.github.kexanie.library.MathView
-            android:id="@+id/latex_item_latex"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/material_color_black"
-            android:scrollbars="none"
-            tools:text="Content"
-            auto:engine="MathJax"/>
-
-    </LinearLayout>
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/material_color_black"
+        android:scrollbars="none"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        tools:text="Content"
+        auto:engine="KaTeX"/>
 
 </RelativeLayout>

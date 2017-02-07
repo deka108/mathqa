@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -43,7 +42,12 @@ public class ConceptSubItem extends AbstractSectionableItem<ConceptSubItem.Conce
 
     @Override
     public int getLayoutRes() {
-        return R.layout.recycler_text_subitem;
+        return R.layout.text_item;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.concept.hashCode();
     }
 
     @Override
@@ -72,7 +76,7 @@ public class ConceptSubItem extends AbstractSectionableItem<ConceptSubItem.Conce
         public ConceptSubItemViewHolder(View view, FlexibleAdapter adapter) {
             super(view, adapter);
             mContext = view.getContext();
-            mConceptTitle = (TextView) view.findViewById(R.id.rv_subitem_text);
+            mConceptTitle = (TextView) view.findViewById(R.id.text_subitem_text);
         }
 
         @Override
@@ -88,7 +92,6 @@ public class ConceptSubItem extends AbstractSectionableItem<ConceptSubItem.Conce
         @Override
         public void onClick(View view) {
             super.onClick(view);
-            Toast.makeText(mContext, "Concept clicked!", Toast.LENGTH_SHORT).show();
             if (mAdapter.mItemClickListener != null) {
                 mAdapter.mItemClickListener.onItemClick(getFlexibleAdapterPosition());
             }

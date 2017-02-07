@@ -97,7 +97,7 @@ public class TopicListFragment extends Fragment {
         Activity activity = getActivity();
         mAdapter = new FlexibleAdapter(data, activity);
 
-        mRecyclerView = (RecyclerView) getView().findViewById(R.id.recycler_view);
+        mRecyclerView = (RecyclerView) getView().findViewById(R.id.fragment_rv);
 
         LinearLayoutManager layoutManager = new SmoothScrollLinearLayoutManager(activity);
         mRecyclerView.setLayoutManager(layoutManager);

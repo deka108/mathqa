@@ -48,4 +48,5 @@
     <string name="title_activity_test_recycler_math_view">TestRecyclerMathView</string>
     <string name="title_activity_real_main">RealMainActivity</string>
     <string name="title_activity_concept_detail">ConceptDetailActivity</string>
+    <string name="title_activity_question_detail">QuestionDetailActivity</string>
 </resources>
