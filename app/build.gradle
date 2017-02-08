@@ -73,6 +73,7 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.sromku:simple-storage:1.2.0'
+    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.1@aar'
     compile 'com.theartofdev.edmodo:android-image-cropper:2.3.1'
     compile 'eu.davidea:flexible-adapter:5.0.0-rc1'
     compile 'io.github.kexanie.library:MathView:0.0.6'

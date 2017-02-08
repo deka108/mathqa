@@ -5,6 +5,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 
 import com.orhanobut.logger.Logger;
+import com.vlonjatg.progressactivity.ProgressActivity;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -22,6 +23,7 @@ import dekauliya.fyp.mathqa.ListViews.Items.SubConceptHeaderItem;
 import dekauliya.fyp.mathqa.Models.Concept;
 import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.Utils.GraphicUtils;
+import dekauliya.fyp.mathqa.Utils.ViewUtils;
 import eu.davidea.fastscroller.FastScroller;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.SelectableAdapter;
@@ -52,6 +54,9 @@ public class QuestionConceptListFragment extends AbstractListFragment {
     @FragmentArg("conceptArg")
     Concept conceptArg;
 
+    @ViewById(R.id.progress_activity)
+    ProgressActivity progressActivity;
+
     DataType dataType = DataType.QUESTION_CONCEPT;
 
     @AfterInject
@@ -61,6 +66,9 @@ public class QuestionConceptListFragment extends AbstractListFragment {
 
     @AfterViews
     void setUpListview(){
+        if (mAdapter == null) {
+            progressActivity.showLoading();
+        }
         mAdapter = new FlexibleAdapter(dataServiceRx.getDataByType(dataType), this);
         mRecyclerView.setLayoutManager(createNewLinearLayoutManager());
         mRecyclerView.setAdapter(mAdapter);
@@ -79,17 +87,32 @@ public class QuestionConceptListFragment extends AbstractListFragment {
     @Override
     public void onDataRetrieved() {
         mAdapter.updateDataSet(dataServiceRx.getData(dataType));
+        if (dataServiceRx.isDataEmpty(dataType)){
+            ViewUtils.showEmptyPage(progressActivity, getActivity(),
+                    getString(R.string.empty_question_for_concept));
+        }else{
+            progressActivity.showContent();
+        }
+    }
+
+    @Override
+    public void onError() {
+        ViewUtils.showErrorPage(progressActivity, getActivity());
     }
 
     @Override
     public boolean onItemClick(int position) {
         IFlexible item = mAdapter.getItem(position);
         if (item instanceof QuestionSubItem){
-            Logger.d(item.toString() + " CLICKED");
             QuestionSubItem q = (QuestionSubItem) item;
             SubConceptHeaderItem s = (SubConceptHeaderItem) q.getHeader();
-            QuestionDetailActivity_.intent(getContext()).questionExtra(q.getQuestion())
-                    .subconceptExtra(s.getSubConcept()).start();
+            Logger.d("QUESTION-CONCEPT, CONCEPT ARG: " + conceptArg.getName());
+            Logger.d("QUESTION-CONCEPT, SUBCONCEPT HEADER: " + s.getSubConcept().getName());
+            QuestionDetailActivity_.intent(getContext())
+                    .questionExtra(q.getQuestion())
+                    .conceptExtra(conceptArg)
+                    .subconceptExtra(s.getSubConcept())
+                    .start();
         }
         return false;
     }

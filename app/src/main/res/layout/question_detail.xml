@@ -5,65 +5,83 @@
     xmlns:auto="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
-    <LinearLayout
-        android:id="@+id/text_item_container"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/material_content_edge_margin_horizontal"
-        android:paddingRight="@dimen/material_content_edge_margin_horizontal"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:paddingBottom="72dp"
-        >
+        android:layout_height="match_parent">
         <LinearLayout
+            android:id="@+id/qd_question_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/material_content_edge_margin_horizontal"
+            android:paddingRight="@dimen/material_content_edge_margin_horizontal"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:paddingBottom="72dp"
+            >
             <TextView
                 android:id="@+id/qd_question_title"
-                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/material_color_amber_500"
+                android:textColor="@color/colorAccent"
                 android:textStyle="bold"
                 android:layout_weight="1"
-                android:text="Question Title"/>
+                android:text="@string/qd_title_tv"
+                />
+            <TextView
+                android:id="@+id/qd_question_concept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textStyle="italic"
+                android:textColor="@color/colorAccent"
+                android:text="@string/qd_concept_tv"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="italic"
+                    android:text="@string/qd_difficulty_level"/>
+                <RatingBar
+                    android:id="@+id/qd_question_ratingbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:isIndicator="true"
+                    style="?android:ratingBarStyleSmall"
+                    />
+            </LinearLayout>
+            <io.github.kexanie.library.MathView
+                android:layout_marginTop="@dimen/material_card_title_block_large_subtitle_margin_top"
+                android:id="@+id/qd_question_latex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="@string/question_content"
+                auto:engine="KaTeX"/>
+            <TextView
+                android:layout_marginTop="@dimen/material_card_title_block_large_subtitle_margin_top"
+                android:id="@+id/qd_question_latex_alt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/question_content"
+                tools:text="Question content" />
         </LinearLayout>
         <TextView
-            android:id="@+id/qd_question_concept"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            android:textStyle="bold"
-            android:textColor="@color/material_color_amber_500"
-            tools:text="Question Concept"
-            />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/material_color_amber_500"
-                android:textStyle="italic"
-                android:text="Difficulty Level: "/>
-            <RatingBar
-                android:id="@+id/qd_question_ratingbar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:isIndicator="true"
-                style="?android:ratingBarStyleSmall"
-                />
-        </LinearLayout>
-        <io.github.kexanie.library.MathView
-            android:layout_marginTop="@dimen/appbar_padding_top"
-            android:id="@+id/qd_question_latex"
+            android:layout_marginTop="@dimen/material_card_title_block_large_subtitle_margin_top"
+            android:id="@+id/qd_question_source"
+            android:textColor="@color/colorAccent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Question content"
-            auto:engine="MathJax"/>
-    </LinearLayout>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/md_content_padding_bottom"
+            android:text="@string/qd_source_tv"/>
+    </RelativeLayout>
 </ScrollView>

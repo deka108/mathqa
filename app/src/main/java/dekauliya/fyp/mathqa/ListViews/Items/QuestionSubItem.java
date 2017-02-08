@@ -78,9 +78,9 @@ public class QuestionSubItem extends AbstractSectionableItem<
             holder.mQuestionDifficulty.setRating(
                     ViewUtils.getDifficultyLevelFloat(question.getDifficulty_level() ));
         }
-        if (question.getContent() != null) {
-            holder.mQuestionContent.setText(question.getContent());
-        }
+//            holder.mQuestionContent.setText(ViewUtils.convertLatex(question.getContent()));
+        ViewUtils.displayLatex(holder.mQuestionContent, holder.mQuestionContentAlt, question
+                    .getContent());
 
         IHeader header = getHeader();
         if (header != null){
@@ -98,6 +98,7 @@ public class QuestionSubItem extends AbstractSectionableItem<
         Context mContext;
         TextView mQuestionTitle;
         MathView mQuestionContent;
+        TextView mQuestionContentAlt;
         RatingBar mQuestionDifficulty;
         TextView mQuestionConcept;
 
@@ -111,6 +112,7 @@ public class QuestionSubItem extends AbstractSectionableItem<
             mQuestionContent.setFocusable(false);
             mQuestionContent.setFocusableInTouchMode(false);
             mQuestionContent.setClickable(false);
+            mQuestionContentAlt = (TextView) view.findViewById(R.id.question_latex_alt);
             mQuestionConcept = (TextView) view.findViewById(R.id.question_concept);
         }
 

@@ -5,4 +5,5 @@ package dekauliya.fyp.mathqa.DataServices;
  */
 public interface IDataListener {
     void onDataRetrieved();
+    void onError();
 }

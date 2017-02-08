@@ -1,6 +1,6 @@
 package dekauliya.fyp.mathqa.RetrofitRestApi;
 
-import dekauliya.fyp.mathqa.MathQaConstants;
+import dekauliya.fyp.mathqa.MathQaInterface;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class MathQaRestService{
-    public static String BASE_URL = MathQaConstants.BASE_URL;
+    public static String BASE_URL = MathQaInterface.BASE_URL;
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
     private static HttpLoggingInterceptor logging = new HttpLoggingInterceptor().setLevel

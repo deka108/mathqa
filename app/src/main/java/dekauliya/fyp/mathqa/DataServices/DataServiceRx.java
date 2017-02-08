@@ -23,8 +23,6 @@ import dekauliya.fyp.mathqa.Models.Question;
 import dekauliya.fyp.mathqa.Models.Solution;
 import dekauliya.fyp.mathqa.Models.SubConcept;
 import dekauliya.fyp.mathqa.Models.Topic;
-import dekauliya.fyp.mathqa.RetrofitRestApi.MathQaRestRxJavaApi;
-import dekauliya.fyp.mathqa.RetrofitRestApi.MathQaRestRxJavaService;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -47,6 +45,7 @@ public class DataServiceRx {
     List<AbstractFlexibleItem> mConceptKeypointItems = new ArrayList<AbstractFlexibleItem>();
     List<AbstractFlexibleItem> mConceptFormulaItems = new ArrayList<AbstractFlexibleItem>();
     List<AbstractFlexibleItem> mQuestionConceptItems = new ArrayList<AbstractFlexibleItem>();
+    private Solution mSolution;
 
     HashMap<Integer, Topic> mTopics = new HashMap<>();
     HashMap<Integer, Concept> mConcepts = new HashMap<>();
@@ -99,6 +98,7 @@ public class DataServiceRx {
 
                     @Override
                     public void onError(Throwable e) {
+                        mListener.onError();
                         Logger.e(e.getMessage());
                     }
 
@@ -171,6 +171,7 @@ public class DataServiceRx {
 
                 @Override
                 public void onError(Throwable e) {
+                    mListener.onError();
                     Logger.e(e.getMessage());
                 }
 
@@ -208,6 +209,7 @@ public class DataServiceRx {
 
                     @Override
                     public void onError(Throwable e) {
+                        mListener.onError();
                         Logger.e(e.getMessage());
                     }
 
@@ -246,6 +248,7 @@ public class DataServiceRx {
 
                     @Override
                     public void onError(Throwable e) {
+                        mListener.onError();
                         Logger.e(e.getMessage());
                     }
 
@@ -306,7 +309,7 @@ public class DataServiceRx {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mListener.onError();
                     }
 
                     @Override
@@ -316,7 +319,7 @@ public class DataServiceRx {
                 });
     }
 
-    public void getSolution(String questionId, final ISolutionListener mListener){
+    public void getSolution(String questionId, final IDataListener mListener){
         client.getSolutions(questionId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -329,24 +332,33 @@ public class DataServiceRx {
                     @Override
                     public void onNext(List<Solution> value) {
                         if (value.size() > 0) {
-                            mListener.onSolutionRetrieved(value.get(0));
+                            mSolution = value.get(0);
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mListener.onError();
+                        Logger.e(e.getMessage());
                     }
 
                     @Override
                     public void onComplete() {
-
+                        mListener.onDataRetrieved();
                     }
                 });
     }
 
     public List<AbstractFlexibleItem> getData(DataType dataType){
         return new ArrayList<> (getDataByType(dataType));
+    }
+
+    public int getDataSize(DataType dataType){
+        return getDataByType(dataType).size();
+    }
+
+    public boolean isDataEmpty(DataType dataType){
+        return getDataByType(dataType).isEmpty();
     }
 
     public void clearItems(DataType type){
@@ -362,11 +374,11 @@ public class DataServiceRx {
 
     public List<AbstractFlexibleItem> getDataByType(DataType dataType){
         switch(dataType){
-            case TOPIC_CONCEPT: Logger.d("TOPIC_CONCEPT"); return mTopicConceptItems;
-            case QUESTION_TOPIC: Logger.d("QUESTION_TOPIC"); return mQuestionTopicItems;
-            case KEYPOINT_CONCEPT: Logger.d("KEYPOINT_CONCEPT"); return mConceptKeypointItems;
-            case KEYPOINT_FORMULA: Logger.d("KEYPOINT_FORMULA"); return mConceptFormulaItems;
-            case QUESTION_CONCEPT: Logger.d("QUESTION_CONCEPT");  return mQuestionConceptItems;
+            case TOPIC_CONCEPT: return mTopicConceptItems;
+            case QUESTION_TOPIC: return mQuestionTopicItems;
+            case KEYPOINT_CONCEPT: return mConceptKeypointItems;
+            case KEYPOINT_FORMULA: return mConceptFormulaItems;
+            case QUESTION_CONCEPT:  return mQuestionConceptItems;
             default: return null;
         }
     }
@@ -401,7 +413,11 @@ public class DataServiceRx {
         }
     };
 
-    public interface ISolutionListener{
-        void onSolutionRetrieved(Solution solution);
+    public Solution getSolution(){
+        return this.mSolution;
     }
+
+//    public interface ISolutionListener{
+//        void onSolutionRetrieved(Solution solution);
+//    }
 }

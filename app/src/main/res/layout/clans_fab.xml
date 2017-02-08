@@ -5,7 +5,7 @@
     android:id="@+id/fab_search"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="end|bottom"
+    android:layout_gravity="bottom|right|end"
     fab:menu_colorNormal="@color/material_color_amber_500"
     fab:menu_colorPressed="@color/material_color_amber_700"
     android:layout_margin="@dimen/fab_margin"
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         fab:fab_size="mini"
-        fab:fab_label="Text search"
+        fab:fab_label="@string/fab_text_search"
         fab:fab_colorNormal="@color/material_color_amber_500"
         fab:fab_colorPressed="@color/material_color_amber_700"
         />
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         fab:fab_size="mini"
-        fab:fab_label="Document image search"
+        fab:fab_label="@string/fab_img_search"
         fab:fab_colorNormal="@color/material_color_amber_500"
         fab:fab_colorPressed="@color/material_color_amber_700"
         />
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         fab:fab_size="mini"
-        fab:fab_label="Formula search"
+        fab:fab_label="@string/formula_search"
         fab:fab_colorNormal="@color/material_color_amber_500"
         fab:fab_colorPressed="@color/material_color_amber_700"
         />

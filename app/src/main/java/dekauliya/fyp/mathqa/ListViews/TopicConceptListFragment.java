@@ -4,6 +4,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 
+import com.vlonjatg.progressactivity.ProgressActivity;
+
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -15,7 +17,9 @@ import dekauliya.fyp.mathqa.DataServices.DataType;
 import dekauliya.fyp.mathqa.DetailViews.ConceptDetailActivity_;
 import dekauliya.fyp.mathqa.ListViews.Items.ConceptSubItem;
 import dekauliya.fyp.mathqa.R;
+import dekauliya.fyp.mathqa.TopicConceptActivity_;
 import dekauliya.fyp.mathqa.Utils.GraphicUtils;
+import dekauliya.fyp.mathqa.Utils.ViewUtils;
 import eu.davidea.fastscroller.FastScroller;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.SelectableAdapter;
@@ -42,6 +46,9 @@ public class TopicConceptListFragment extends AbstractListFragment{
     @ViewById(R.id.fragment_swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
+    @ViewById(R.id.progress_activity)
+    ProgressActivity progressActivity;
+
     DataType dataType = DataType.TOPIC_CONCEPT;
 
     @AfterInject
@@ -52,6 +59,9 @@ public class TopicConceptListFragment extends AbstractListFragment{
 
     @AfterViews
     void setUpListview(){
+        if (mAdapter == null) {
+            progressActivity.showLoading();
+        }
         mAdapter = new FlexibleAdapter(dataServiceRx.getDataByType(dataType), this);
         mRecyclerView.setLayoutManager(createNewLinearLayoutManager());
         mRecyclerView.setAdapter(mAdapter);
@@ -61,7 +71,7 @@ public class TopicConceptListFragment extends AbstractListFragment{
                 R.drawable.divider, 0));
 
         mAdapter.setFastScroller(mFastScroller, GraphicUtils.getColorAccent(getActivity()),
-                (dekauliya.fyp.mathqa.RealMainActivity_) getActivity());
+                (TopicConceptActivity_) getActivity());
         mSwipeRefreshLayout.setEnabled(false);
 
         mListener.onFragmentChange(mSwipeRefreshLayout, mRecyclerView, SelectableAdapter.MODE_IDLE);
@@ -70,15 +80,25 @@ public class TopicConceptListFragment extends AbstractListFragment{
     @Override
     public void onDataRetrieved() {
         mAdapter.updateDataSet(dataServiceRx.getData(dataType));
+        if (dataServiceRx.isDataEmpty(dataType)){
+            ViewUtils.showEmptyPage(progressActivity, getActivity(),
+                    getString(R.string.empty_topic_for_subject));
+        }else {
+            progressActivity.showContent();
+        }
+    }
+
+    @Override
+    public void onError() {
+        ViewUtils.showErrorPage(progressActivity, getActivity());
     }
 
     @Override
     public boolean onItemClick(int position) {
         IFlexible item = mAdapter.getItem(position);
         if (item instanceof ConceptSubItem){
-            ConceptDetailActivity_.intent(getContext()).conceptExtra(((ConceptSubItem) item)
-                    .getConcept()).start();
-
+            ConceptSubItem c = ((ConceptSubItem) item);
+            ConceptDetailActivity_.intent(getContext()).conceptExtra(c.getConcept()).start();
         }
         return false;
     }

@@ -6,63 +6,71 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
+import android.view.View;
 import android.view.animation.OvershootInterpolator;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
-import com.mikepenz.google_material_typeface_library.GoogleMaterial;
-import com.mikepenz.iconics.IconicsDrawable;
+
+import org.androidannotations.annotations.EBean;
 
 import dekauliya.fyp.mathqa.R;
 
 /**
  * Created by dekauliya on 7/2/17.
  */
+@EBean
 public class FabUtils {
 
     public static void setUpFab(Activity activity){
-        Drawable searchIcon = new IconicsDrawable(activity)
-                .icon(GoogleMaterial.Icon.gmd_search)
-                .colorRes(R.color.material_color_white)
-                .sizeDp(24);
-
-        Drawable textIcon = new IconicsDrawable(activity)
-                .icon(GoogleMaterial.Icon.gmd_text_format)
-                .colorRes(R.color.material_color_white)
-                .sizeDp(24);
-
-        Drawable imgIcon =  new IconicsDrawable(activity)
-                .icon(GoogleMaterial.Icon.gmd_photo_camera)
-                .colorRes(R.color.material_color_white)
-                .sizeDp(24);
-
-        Drawable formulaIcon = new IconicsDrawable(activity)
-                .icon(GoogleMaterial.Icon.gmd_functions)
-                .colorRes(R.color.material_color_white)
-                .sizeDp(24);
-
-        Drawable closeIcon = new IconicsDrawable(activity)
-                .icon(GoogleMaterial.Icon.gmd_close)
-                .colorRes(R.color.material_color_white)
-                .sizeDp(24);
+        Drawable searchIcon = DrawableUtils.getDrawable(DrawableType.SEARCH, activity,
+                R.color.material_color_white);
+        Drawable textIcon = DrawableUtils.getDrawable(DrawableType.TEXT_SEARCH, activity, 16,
+                R.color.material_color_white);
+        Drawable imgIcon =  DrawableUtils.getDrawable(DrawableType.CAMERA_SEARCH, activity, 16,
+                R.color.material_color_white);
+        Drawable formulaIcon = DrawableUtils.getDrawable(DrawableType.FORMULA_SEARCH, activity, 16,
+                R.color.material_color_white);
+        Drawable closeIcon = DrawableUtils.getDrawable(DrawableType.CLOSE, activity,
+                R.color.material_color_white);
 
         FloatingActionMenu fabSearch = (FloatingActionMenu) activity.findViewById(R.id.fab_search);
-        fabSearch.getMenuIconView().setImageDrawable(searchIcon);
-
         FloatingActionButton fabText = (FloatingActionButton) activity.findViewById(R.id
                 .fab_textsearch);
-        fabText.setImageDrawable(textIcon);
-
         FloatingActionButton fabImg = (FloatingActionButton) activity.findViewById(R.id
                 .fab_imgsearch);
-        fabImg.setImageDrawable(imgIcon);
-
         FloatingActionButton fabFormula = (FloatingActionButton) activity.findViewById(R.id
                 .fab_formulasearch);
+
+        fabSearch.getMenuIconView().setImageDrawable(searchIcon);
+        fabText.setImageDrawable(textIcon);
+        fabImg.setImageDrawable(imgIcon);
         fabFormula.setImageDrawable(formulaIcon);
 
         createCustomAnimation(fabSearch, searchIcon, closeIcon);
         fabSearch.setClosedOnTouchOutside(true);
+
+        fabText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        fabFormula.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        fabImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 
     private static void createCustomAnimation(final FloatingActionMenu menu, final Drawable open,

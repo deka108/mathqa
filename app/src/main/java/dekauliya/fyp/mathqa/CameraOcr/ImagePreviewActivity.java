@@ -52,7 +52,6 @@ public class ImagePreviewActivity extends AppCompatActivity {
     public static final int MAX_RESCALED_SIZE = 640;
     private static final int PROCESSOR_LEPTONICA = 1;
     private static final int PROCESSOR_CATALANO = 2;
-    private static final String TAG = ImagePreviewActivity_.class.getSimpleName();
     private TessEngine tessEngine;
 
     @Override

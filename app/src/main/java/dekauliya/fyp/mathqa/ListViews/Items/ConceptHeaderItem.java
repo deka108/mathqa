@@ -1,5 +1,6 @@
 package dekauliya.fyp.mathqa.ListViews.Items;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,15 +70,19 @@ public class ConceptHeaderItem extends ExpandableHeaderItem<ConceptHeaderItem
         } else {
             holder.mConceptTitle.setText(concept.getName());
         }
-        holder.mConceptSubtitle.setText(getSubItemsCount() + " Questions available");
+        holder.mConceptSubtitle.setText(
+                String.format(holder.mContext.getString(R.string.concept_header_subtitle),
+                        getSubItemsCount()));
     }
 
     static class ConceptHeaderItemViewHolder extends ExpandableViewHolder{
+        Context mContext;
         TextView mConceptTitle;
         TextView mConceptSubtitle;
 
         public ConceptHeaderItemViewHolder(View view, FlexibleAdapter adapter) {
             super(view, adapter, true);
+            mContext = view.getContext();
             mConceptTitle = (TextView) view.findViewById(R.id.header_title_text);
             mConceptSubtitle = (TextView) view.findViewById(R.id.header_subtitle_text);
         }

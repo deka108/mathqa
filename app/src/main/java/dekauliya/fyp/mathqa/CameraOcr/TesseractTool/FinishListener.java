@@ -29,7 +29,8 @@ import android.content.DialogInterface;
  *
  * The code for this class was adapted from the ZXing project: http://code.google.com/p/zxing
  */
-final class FinishListener implements DialogInterface.OnClickListener, DialogInterface.OnCancelListener, Runnable {
+public class FinishListener implements DialogInterface.OnClickListener, DialogInterface
+        .OnCancelListener, Runnable {
 
     private final Activity activityToFinish;
 

@@ -119,7 +119,10 @@ public class QuestionDetailActivity extends AppCompatActivity implements
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch(position){
                 case 0:
-                    return QuestionDetailFragment_.builder().questionArg(questionExtra).build();
+                    return QuestionDetailFragment_.builder()
+                            .questionArg(questionExtra)
+                            .conceptArg(conceptExtra)
+                            .subconceptArg(subconceptExtra).build();
                 case 1:
                     return SolutionDetailFragment_.builder().questionArg(questionExtra).build();
             }

@@ -28,7 +28,7 @@ import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
 
 @EActivity
-public class RealMainActivity extends AppCompatActivity implements
+public class TopicConceptActivity extends AppCompatActivity implements
         FastScroller.OnScrollStateChangeListener,
         FlexibleAdapter.OnUpdateListener,
         OnListFragmentInteractionListener {

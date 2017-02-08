@@ -15,6 +15,11 @@ public class QuestionSearchResultFragment extends AbstractListFragment{
     }
 
     @Override
+    public void onError() {
+
+    }
+
+    @Override
     public boolean onItemClick(int position) {
         return false;
     }

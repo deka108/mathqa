@@ -21,9 +21,9 @@ public class TessAsyncEngine extends AsyncTask<Object, Void, String> {
     private Bitmap mBitmap;
     private Activity mContext;
     private String mImagePath;
-    public AsyncResponse delegate = null;
+    public TesseractAsyncResponse delegate = null;
 
-    public TessAsyncEngine(AsyncResponse delegate){
+    public TessAsyncEngine(TesseractAsyncResponse delegate){
         this.delegate = delegate;
     }
 

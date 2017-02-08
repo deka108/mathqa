@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">MathQA</string>
-    <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
+    <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -13,40 +13,65 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."</string>
-    <string name="title_activity_register">Register</string>
-    <string name="title_activity_search">SearchActivity</string>
-    <string name="title_activity_select_subject">SelectSubjectActivity</string>
-    <string name="title_activity_browse_learning_concepts">BrowseLearningConceptsActivity</string>
     <string name="title_activity_logout">Logout</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_image_capture">ImageCaptureActivity</string>
+
     <string name="title_activity_enter_text">EnterTextActivity</string>
     <string name="title_activity_enter_formula">EnterFormulaActivity</string>
-    <string name="title_activity_question_list">QuestionListActivity</string>
-    <string name="title_activity_question">QuestionActivity</string>
-    <string name="title_activity_learning_concept">LearningConceptActivity</string>
-    <string name="title_activity_main2">Main2Activity</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settings_str">Settings</string>
+    <string name="title_activity_image_preview">ImagePreview</string>
+
+    <!-- App bar name -->
     <string name="camera_permission">Camera access is required</string>
     <string name="camera_rw_permission">Camera and read/write access to memory is needed to
     take pictures.</string>
-    <string name="settings_str">Settings</string>
-    <string name="title_activity_image_preview">ImagePreview</string>
+    <string name="title_activity_image_capture">Capture an Image</string>
+    <string name="title_activity_real_main">Explore Topics</string>
+    <string name="title_activity_concept_detail">View a Concept</string>
+    <string name="title_activity_question_detail">View a Question</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_select_subject">Select a Subject</string>
     <string name="no_network_connection_toast">No Network Connection.</string>
-    <string name="title_activity_topic_list">TopicListActivity</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_search">SearchActivity</string>
 
+    <!-- List & Detail Views -->
+    <string name="concept_header_subtitle">%1$d Questions available</string>
+    <string name="subconcept_header_subtitle">%1$d Questions available</string>
+    <string name="topic_header_subtitle">%1$d Concepts available</string>
+    <string name="qd_concept_subconcept">Concept: %1$s - %2$s</string>
+    <string name="qd_concept">Concept: %1$s</string>
+    <string name="qd_source">Source: %1$s</string>
+    <string name="qd_answer_title">Answer.</string>
+    <string name="qd_difficulty_level">Difficulty Level:</string>
+    <string name="qd_title_tv">Question Title</string>
+    <string name="qd_concept_tv">Concept: </string>
+    <string name="qd_source_tv">Source: </string>
+    <string name="solution_title">Solution Title</string>
+
+    <!-- Progress Activity -->
     <string name="no_items">No data available.</string>
-    <string name="title_activity_concept">ConceptActivity</string>
-    <string name="title_activity_test_recycler_math_view">TestRecyclerMathView</string>
-    <string name="title_activity_real_main">RealMainActivity</string>
-    <string name="title_activity_concept_detail">ConceptDetailActivity</string>
-    <string name="title_activity_question_detail">QuestionDetailActivity</string>
+    <string name="empty_topic_for_subject">No topic available for this subject.</string>
+    <string name="empty_question_for_topic">No question available under this topic.</string>
+    <string name="empty_question_for_concept">No question available under this concept.</string>
+    <string name="no_internet">No Internet connection.</string>
+    <string name="no_internet_desc">"Unable to connect with the server. Please try again once you
+        have access to the internet."</string>
+    <string name="error_try_again">Try Again.</string>
+    <string name="empty_formula_for_concept">No formula available under this concept.</string>
+    <string name="empty_keypoint_for_concept">No keypoint available under this concept.</string>
+    <string name="empty_solution_for_question">No solution available for this question.</string>
+    <string name="fab_text_search">Text search</string>
+    <string name="fab_img_search">Document image search</string>
+    <string name="formula_search">Formula search</string>
+    <string name="qd_question_title">Question Title</string>
+    <string name="question_content">Question content</string>
+    <string name="error_latex_rendering">LaTeX string format is unsupported by the rendering
+        engine. \n %1$s</string>
+    <string name="sd_solution_title">Solution to Q.%s</string>
+
 </resources>

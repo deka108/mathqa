@@ -3,8 +3,8 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay." parent="Theme.AppCompat">
@@ -28,6 +28,24 @@
         <item name="android:elevation" tools:targetApi="lollipop">
             @dimen/material_button_raised_elevation_resting
         </item>
+    </style>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/material_color_amber_500</item>
+        <item name="colorPrimaryDark">@color/material_color_blue_700</item>
+        <item name="colorPrimary">@color/material_color_blue_500</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
+        <!-- For selection -->
+        <item name="selectableItemBackground">@drawable/selector_item_light</item>
+
+        <!-- Spinner -->
+        <item name="android:spinnerStyle">@style/Spinner</item>
+        <item name="android:spinnerItemStyle">@style/SpinnerItem</item>
     </style>
 
 </resources>

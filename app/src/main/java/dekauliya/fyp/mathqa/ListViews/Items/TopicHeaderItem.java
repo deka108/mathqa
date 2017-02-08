@@ -1,5 +1,6 @@
 package dekauliya.fyp.mathqa.ListViews.Items;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,27 +57,33 @@ public class TopicHeaderItem extends ExpandableHeaderItem<
     }
 
     @Override
-    public TopicHeaderItemViewHolder createViewHolder(FlexibleAdapter adapter, LayoutInflater inflater, ViewGroup parent) {
+    public TopicHeaderItemViewHolder createViewHolder(FlexibleAdapter adapter,
+                                                      LayoutInflater inflater, ViewGroup parent) {
         return new TopicHeaderItemViewHolder(inflater.inflate(getLayoutRes(), parent, false),
                 adapter);
     }
 
     @Override
-    public void bindViewHolder(FlexibleAdapter adapter, TopicHeaderItemViewHolder holder, int position, List payloads) {
+    public void bindViewHolder(FlexibleAdapter adapter, TopicHeaderItemViewHolder holder,
+                               int position, List payloads) {
         if (payloads.size() > 0) {
             Logger.d("ExpandableHeaderItem Payload " + payloads);
         } else {
             holder.mTopicTitle.setText(topic.getName());
         }
-        holder.mTopicSubtitle.setText(getSubItemsCount() + " Concepts available");
+        holder.mTopicSubtitle.setText(String.format(
+                holder.mContext.getString(R.string.topic_header_subtitle),
+                getSubItemsCount()));
     }
 
     static class TopicHeaderItemViewHolder extends ExpandableViewHolder {
+        Context mContext;
         TextView mTopicTitle;
         TextView mTopicSubtitle;
 
         public TopicHeaderItemViewHolder(View view, FlexibleAdapter adapter) {
             super(view, adapter, true); // sticky
+            mContext = view.getContext();
             mTopicTitle = (TextView) view.findViewById(R.id.header_title_text);
             mTopicSubtitle = (TextView) view.findViewById(R.id.header_subtitle_text);
         }

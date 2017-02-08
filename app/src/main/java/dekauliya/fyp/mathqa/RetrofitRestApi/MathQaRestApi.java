@@ -63,7 +63,7 @@ public interface MathQaRestApi {
     Call<Question> getQuestion(@Path ("id") Integer questionId);
 
     @GET("solutions/")
-    Call<List<Solution>> getSolutions();
+    Call<List<Solution>> getSolutions(@Query ("question") Integer questionId);
     @GET("solutions/{id}")
     Call<Solution> getSolution(@Path ("id") Integer solutionId);
 

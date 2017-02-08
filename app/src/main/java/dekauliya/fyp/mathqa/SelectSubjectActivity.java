@@ -30,23 +30,23 @@ public class SelectSubjectActivity extends AppCompatActivity{
         Button btn = (Button) clickedView;
         switch(btn.getId()){
             case R.id.btn_subj_psle:
-                mathQaPrefs.subject_id().put(MathQaConstants.SUBJECT_PSLE);
+                mathQaPrefs.subject_id().put(MathQaInterface.SUBJECT_PSLE);
                 break;
             case R.id.btn_subj_elem:
-                mathQaPrefs.subject_id().put(MathQaConstants.SUBJECT_ELEMENTARY);
+                mathQaPrefs.subject_id().put(MathQaInterface.SUBJECT_ELEMENTARY);
                 break;
             case R.id.btn_subj_add:
-                mathQaPrefs.subject_id().put(MathQaConstants.SUBJECT_ADDITIONAL);
+                mathQaPrefs.subject_id().put(MathQaInterface.SUBJECT_ADDITIONAL);
                 break;
             case R.id.btn_subj_h2:
-                mathQaPrefs.subject_id().put(MathQaConstants.SUBJECT_H2);
+                mathQaPrefs.subject_id().put(MathQaInterface.SUBJECT_H2);
                 break;
             default:
                 break;
         }
 
         Logger.d("BUTTON CLICKED + " + btn.getText());
-        RealMainActivity_.intent(getApplicationContext()).flags(FLAG_ACTIVITY_NEW_TASK).start();
+        TopicConceptActivity_.intent(getApplicationContext()).flags(FLAG_ACTIVITY_NEW_TASK).start();
     }
 
 }

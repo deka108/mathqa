@@ -60,12 +60,14 @@ public class ConceptSubItem extends AbstractSectionableItem<ConceptSubItem.Conce
     }
 
     @Override
-    public ConceptSubItemViewHolder createViewHolder(FlexibleAdapter adapter, LayoutInflater inflater, ViewGroup parent) {
+    public ConceptSubItemViewHolder createViewHolder(FlexibleAdapter adapter,
+                                                     LayoutInflater inflater, ViewGroup parent) {
         return new ConceptSubItemViewHolder(inflater.inflate(getLayoutRes(), parent, false), adapter);
     }
 
     @Override
-    public void bindViewHolder(FlexibleAdapter adapter, ConceptSubItemViewHolder holder, int position, List payloads) {
+    public void bindViewHolder(FlexibleAdapter adapter, ConceptSubItemViewHolder holder,
+                               int position, List payloads) {
         holder.mConceptTitle.setText(concept.getName());
     }
 

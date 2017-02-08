@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.vlonjatg.progressactivity.ProgressActivity;
+
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
@@ -45,6 +47,15 @@ public class QuestionDetailFragment extends Fragment {
     @ViewById(R.id.qd_question_latex)
     MathView questionContent;
 
+    @ViewById(R.id.qd_question_latex_alt)
+    TextView questionContentAlt;
+
+    @ViewById(R.id.qd_question_source)
+    TextView questionSource;
+
+    @ViewById(R.id.progress_activity)
+    ProgressActivity progressActivity;
+
     @AfterViews
     void setContent(){
         questionTitle.setText("Question #" + questionArg.getId());
@@ -57,13 +68,23 @@ public class QuestionDetailFragment extends Fragment {
         }else{
             questionConcept.setVisibility(VISIBLE);
             if (subconceptArg != null){
-                questionConcept.setText(subconceptArg.getName());
-            } else if (conceptArg != null){
-                questionConcept.setText(conceptArg.getName());
+                if (conceptArg != null){
+                    questionConcept.setText(String.format(
+                            getString(R.string.qd_concept_subconcept), conceptArg.getName(),
+                            subconceptArg.getName()));
+                } else {
+                    questionConcept.setText(String.format(
+                            getString(R.string.qd_concept), subconceptArg.getName()));
+                }
+            } else {
+                questionConcept.setText(String.format(
+                        getString(R.string.qd_concept), conceptArg.getName()));
             }
         }
 
-        questionContent.setText(ViewUtils.convertLatex(questionArg.getContent()));
+//        questionContent.setText(ViewUtils.convertLatex(questionArg.getContent()));
+        ViewUtils.displayLatex(questionContent, questionContentAlt, questionArg.getContent());
+        questionSource.setText(String.format(getString(R.string.qd_source), questionArg.getSource()));
     }
 
     @Override

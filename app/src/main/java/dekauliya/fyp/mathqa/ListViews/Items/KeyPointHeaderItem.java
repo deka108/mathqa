@@ -1,5 +1,6 @@
 package dekauliya.fyp.mathqa.ListViews.Items;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import java.util.List;
 import dekauliya.fyp.mathqa.Models.KeyPoint;
 import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.Utils.GraphicUtils;
+import dekauliya.fyp.mathqa.Utils.ViewUtils;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.viewholders.ExpandableViewHolder;
 
@@ -67,15 +69,17 @@ public class KeyPointHeaderItem extends ExpandableHeaderItem<KeyPointHeaderItem
         if (payloads.size() > 0) {
             Logger.d("ExpandableHeaderItem Payload " + payloads);
         } else {
-            holder.mKeyPointTitle.setText(keypoint.getName().replaceAll("_", " "));
+            holder.mKeyPointTitle.setText(ViewUtils.getKeyPointTitle(keypoint.getName()));
         }
     }
 
     static class KeypointHeaderViewHolder extends ExpandableViewHolder{
+        Context mContext;
         TextView mKeyPointTitle;
 
         KeypointHeaderViewHolder(View view, FlexibleAdapter adapter){
             super(view, adapter, true);
+            mContext = view.getContext();
             mKeyPointTitle = (TextView) view.findViewById(R.id.header_title_text);
         }
 

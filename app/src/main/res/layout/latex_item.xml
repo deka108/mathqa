@@ -5,7 +5,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/material_content_edge_margin_horizontal"
-                android:background="?attr/selectableItemBackground">
+                >
 
     <io.github.kexanie.library.MathView
         android:id="@+id/latex_item_latex"
@@ -19,5 +19,21 @@
         android:focusableInTouchMode="false"
         tools:text="Content"
         auto:engine="KaTeX"/>
+
+    <TextView
+        android:id="@+id/latex_item_latex_alt"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:visibility="gone"
+        android:text="@string/question_content"
+        />
+
+    <TextView
+        android:layout_marginTop="@dimen/appbar_padding_top"
+        android:id="@+id/sd_solution_latex_alt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

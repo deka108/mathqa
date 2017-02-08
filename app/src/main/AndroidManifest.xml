@@ -74,30 +74,15 @@
                 android:value=".CameraOcr.CameraCaptureActivity_"/>
         </activity>
         <activity
-            android:name=".MainActivity_"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
             android:name=".DetailViews.ConceptDetailActivity_"
-            android:label="@string/title_activity_concept"
-            android:parentActivityName=".MainActivity_"
+            android:label="@string/title_activity_concept_detail"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="dekauliya.fyp.mathqa.MainActivity_"/>
+                android:value="dekauliya.fyp.mathqa.TopicConceptActivity_"/>
         </activity>
         <activity
-            android:name=".TestRecyclerMathView_"
-            android:label="@string/title_activity_test_recycler_math_view"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".BlankActivityForTesting_">
-        </activity>
-        <activity android:name=".Blank2ActivityTesting_">
-        </activity>
-        <activity
-            android:name=".RealMainActivity_"
+            android:name=".TopicConceptActivity_"
             android:label="@string/title_activity_real_main"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>

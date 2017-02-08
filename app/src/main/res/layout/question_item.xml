@@ -8,7 +8,7 @@
                 android:paddingBottom="2dp"
                 android:background="?attr/selectableItemBackground">
         <LinearLayout
-            android:id="@+id/text_item_container"
+            android:id="@+id/question_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/material_content_edge_margin_horizontal"
@@ -26,10 +26,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/material_color_amber_500"
+                    android:textColor="@color/colorAccent"
                     android:textStyle="bold"
                     android:layout_weight="1"
-                    android:text="Question Title"/>
+                    android:text="@string/qd_question_title"/>
                 <RatingBar
                     android:id="@+id/question_ratingbar"
                     android:layout_width="wrap_content"
@@ -46,8 +46,15 @@
                 android:layout_height="70dp"
                 android:scrollbars="none"
                 android:clickable="false"
-                tools:text="Question content"
+                tools:text="@string/question_content"
                 auto:engine="KaTeX"/>
+            <TextView
+                android:id="@+id/question_latex_alt"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:visibility="gone"
+                android:text="@string/question_content"
+                />
             <TextView
                 android:id="@+id/question_concept"
                 android:layout_width="wrap_content"
@@ -56,8 +63,8 @@
                 android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textStyle="italic"
-                android:textColor="@color/material_color_amber_500"
-                tools:text="Question content"
+                android:textColor="@color/colorAccent"
+                tools:text="@string/qd_concept_tv"
                 android:layout_gravity="right"/>
         </LinearLayout>
 

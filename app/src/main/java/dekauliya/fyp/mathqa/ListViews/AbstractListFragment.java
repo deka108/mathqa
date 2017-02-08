@@ -74,5 +74,4 @@ public abstract class AbstractListFragment extends Fragment implements IDataList
     public FlexibleAdapter getmAdapter() {
         return mAdapter;
     }
-
 }
