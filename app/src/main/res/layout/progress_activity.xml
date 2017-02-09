@@ -9,6 +9,7 @@
     progressActivity:errorBackgroundColor="@color/material_color_white"
     progressActivity:errorTitleTextColor="@color/colorAccent"
     progressActivity:errorContentTextColor="@color/colorAccent"
+    progressActivity:errorButtonTextColor="@color/material_color_white"
     progressActivity:emptyBackgroundColor="@color/material_color_white"
     progressActivity:emptyTitleTextColor="@color/colorAccent"
     progressActivity:loadingProgressBarHeight="@dimen/material_icon_size_product"

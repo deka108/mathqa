@@ -73,5 +73,6 @@
     <string name="error_latex_rendering">LaTeX string format is unsupported by the rendering
         engine. \n %1$s</string>
     <string name="sd_solution_title">Solution to Q.%s</string>
+    <string name="low_storage_error">Error: Low storage, unable to perform OCR</string>
 
 </resources>
