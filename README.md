@@ -1,5 +1,5 @@
 # MathQA
-- [X] ListViews (Expendable View)
+- [X] ListViews (Expandable View)
 - [X] DetailViews
 - [X] RestAPI
 - [X] Image Capture + Cropping
