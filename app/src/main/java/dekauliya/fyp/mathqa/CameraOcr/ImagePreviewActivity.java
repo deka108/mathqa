@@ -40,7 +40,6 @@ public class ImagePreviewActivity extends AppCompatActivity implements IOnOcrPro
 
     @Bean
     ImagePreprocessorBase mImagePreprocessor;
-    @Bean
     TextRecogniserAbstract mTextRecogniser;
 
     int ocrOption;
@@ -61,10 +60,7 @@ public class ImagePreviewActivity extends AppCompatActivity implements IOnOcrPro
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         try{
-            if (uri != null){
-                if (mImagePreprocessor.context == null){
-                    Logger.d("NULL CONTEXT");
-                }
+            if (uri != null && mImagePreprocessor != null){
                 mImagePreprocessor.getBitmapFromUri(uri);
             }
         }catch(Exception e){
@@ -127,7 +123,7 @@ public class ImagePreviewActivity extends AppCompatActivity implements IOnOcrPro
     public void onBitmapReady(Bitmap bitmap) {
         // Display progress dialog
         if (mProgressDialog != null && !mProgressDialog.isShowing()) {
-            mProgressDialog.setMessage("Processing...");
+            mProgressDialog.setMessage(getString(R.string.ocr_preprocessing));
             mProgressDialog.show();
         }
 

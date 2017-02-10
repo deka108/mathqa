@@ -17,7 +17,6 @@
 
 
         <!-- For selection -->
-        <item name="selectableItemBackground">@drawable/selector_item_light</item>
         <!--<item name="primaryTextSelector">@drawable/primary_text_selector_light</item>-->
 
         <!-- Spinner -->
@@ -67,7 +66,6 @@
     </style>
 
     <style name="SpinnerItem" parent="Widget.AppCompat.TextView.SpinnerItem">
-        <item name="android:background">@drawable/selector_item_light</item>
         <item name="android:textAppearance">@style/TextAppearanceSpinnerItem</item>
     </style>
 
