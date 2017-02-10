@@ -8,4 +8,4 @@
 - [ ] Text input query
 - [ ] LaTeX input query
 - [ ] SearchViews
-- [ ] DetailViews
+- [ ] SearchResults
