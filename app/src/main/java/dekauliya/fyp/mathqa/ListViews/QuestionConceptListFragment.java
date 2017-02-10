@@ -5,7 +5,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 
 import com.orhanobut.logger.Logger;
-import com.vlonjatg.progressactivity.ProgressActivity;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -23,7 +22,6 @@ import dekauliya.fyp.mathqa.ListViews.Items.SubConceptHeaderItem;
 import dekauliya.fyp.mathqa.Models.Concept;
 import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.Utils.GraphicUtils;
-import dekauliya.fyp.mathqa.Utils.ViewUtils;
 import eu.davidea.fastscroller.FastScroller;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.SelectableAdapter;
@@ -53,9 +51,6 @@ public class QuestionConceptListFragment extends AbstractListFragment {
 
     @FragmentArg("conceptArg")
     Concept conceptArg;
-
-    @ViewById(R.id.progress_activity)
-    ProgressActivity progressActivity;
 
     DataType dataType = DataType.QUESTION_CONCEPT;
 
@@ -88,8 +83,7 @@ public class QuestionConceptListFragment extends AbstractListFragment {
     public void onDataRetrieved() {
         mAdapter.updateDataSet(dataServiceRx.getData(dataType));
         if (dataServiceRx.isDataEmpty(dataType)){
-            ViewUtils.showEmptyPage(progressActivity, getActivity(),
-                    getString(R.string.empty_question_for_concept));
+            showEmptyPage(getString(R.string.empty_question_for_concept));
         }else{
             progressActivity.showContent();
         }
@@ -97,7 +91,7 @@ public class QuestionConceptListFragment extends AbstractListFragment {
 
     @Override
     public void onError() {
-        ViewUtils.showErrorPage(progressActivity, getActivity());
+        showErrorPage();
     }
 
     @Override

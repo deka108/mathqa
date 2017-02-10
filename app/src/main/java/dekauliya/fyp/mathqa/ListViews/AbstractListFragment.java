@@ -3,12 +3,12 @@ package dekauliya.fyp.mathqa.ListViews;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
+import dekauliya.fyp.mathqa.BaseFragment;
 import dekauliya.fyp.mathqa.DataServices.IDataListener;
 import dekauliya.fyp.mathqa.MathQaPrefs_;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
@@ -18,7 +18,7 @@ import eu.davidea.flexibleadapter.common.SmoothScrollLinearLayoutManager;
  * Created by dekauliya on 5/2/17.
  */
 @EBean
-public abstract class AbstractListFragment extends Fragment implements IDataListener,
+public abstract class AbstractListFragment extends BaseFragment implements IDataListener,
         FlexibleAdapter.OnItemClickListener {
     protected OnListFragmentInteractionListener mListener;
 

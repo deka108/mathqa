@@ -12,8 +12,8 @@ import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 import com.orhanobut.logger.Logger;
 
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
-import org.androidannotations.annotations.RootContext;
 
 import dekauliya.fyp.mathqa.R;
 
@@ -22,11 +22,20 @@ import dekauliya.fyp.mathqa.R;
  */
 
 @EBean
-public class RecogniseTextApi {
-    @RootContext
-    Context context;
+public class TextRecogniserTextApi extends TextRecogniserAbstract {
 
-    public String recogniseText(Bitmap bitmap){
+    public TextRecogniserTextApi(Context context) {
+        super(context);
+    }
+
+    @Override
+    public void preprocessImage(Bitmap bitmap) {
+        mListener.onImagePreprocessed(bitmap);
+    }
+
+    @Background(serial = "ocr")
+    @Override
+    public void recogniseText(Bitmap bitmap) {
         TextRecognizer detector = new TextRecognizer.Builder(context).build();
         String result = null;
 
@@ -59,6 +68,6 @@ public class RecogniseTextApi {
             }
             result = stringBuffer.toString();
         }
-        return result;
+        mListener.onOcrProcessed(result);
     }
 }

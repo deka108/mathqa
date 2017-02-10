@@ -4,8 +4,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 
-import com.vlonjatg.progressactivity.ProgressActivity;
-
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -19,7 +17,6 @@ import dekauliya.fyp.mathqa.ListViews.Items.ConceptSubItem;
 import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.TopicConceptActivity_;
 import dekauliya.fyp.mathqa.Utils.GraphicUtils;
-import dekauliya.fyp.mathqa.Utils.ViewUtils;
 import eu.davidea.fastscroller.FastScroller;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.SelectableAdapter;
@@ -45,9 +42,6 @@ public class TopicConceptListFragment extends AbstractListFragment{
 
     @ViewById(R.id.fragment_swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
-
-    @ViewById(R.id.progress_activity)
-    ProgressActivity progressActivity;
 
     DataType dataType = DataType.TOPIC_CONCEPT;
 
@@ -81,8 +75,7 @@ public class TopicConceptListFragment extends AbstractListFragment{
     public void onDataRetrieved() {
         mAdapter.updateDataSet(dataServiceRx.getData(dataType));
         if (dataServiceRx.isDataEmpty(dataType)){
-            ViewUtils.showEmptyPage(progressActivity, getActivity(),
-                    getString(R.string.empty_topic_for_subject));
+            showEmptyPage(getString(R.string.empty_topic_for_subject));
         }else {
             progressActivity.showContent();
         }
@@ -90,7 +83,7 @@ public class TopicConceptListFragment extends AbstractListFragment{
 
     @Override
     public void onError() {
-        ViewUtils.showErrorPage(progressActivity, getActivity());
+        showErrorPage();
     }
 
     @Override

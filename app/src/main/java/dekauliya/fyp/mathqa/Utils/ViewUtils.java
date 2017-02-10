@@ -2,11 +2,10 @@ package dekauliya.fyp.mathqa.Utils;
 
 import android.app.Activity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
-import com.vlonjatg.progressactivity.ProgressActivity;
 
 import dekauliya.fyp.mathqa.R;
 import io.github.kexanie.library.MathView;
@@ -46,23 +45,8 @@ public class ViewUtils {
         return title.replaceAll("_", " ");
     }
 
-    public static void showErrorPage(ProgressActivity progressActivity, final Activity activity) {
-        progressActivity.showError(
-                DrawableUtils.getDrawable(DrawableType.NO_WIFI, activity,  R.color.colorAccent),
-                activity.getString(R.string.no_internet), activity.getString(R.string
-                        .no_internet_desc),
-                activity.getString(R.string.error_try_again), new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(activity, "Try again button clicked", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
 
-    public static void showEmptyPage(ProgressActivity progressActivity, Activity activity, String
-            emptyTitle){
-        progressActivity.showEmpty(
-                DrawableUtils.getDrawable(DrawableType.NO_DATA, activity, R.color.colorAccent),
-                emptyTitle, "");
+    public static ViewGroup getRootView(Activity activity){
+        return (ViewGroup) ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
     }
 }

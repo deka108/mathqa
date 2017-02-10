@@ -74,5 +74,8 @@
         engine. \n %1$s</string>
     <string name="sd_solution_title">Solution to Q.%s</string>
     <string name="low_storage_error">Error: Low storage, unable to perform OCR</string>
+    <string name="camera_storage_access">Both camera and storage access are required for optical character recognition.</string>
+    <string name="unable_to_crop">Unable to crop the image.</string>
+    <string name="unable_capture_image">Unable to capture or read image from device. Please check if your application permissions are correct.</string>
 
 </resources>

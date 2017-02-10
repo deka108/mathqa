@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -22,13 +21,12 @@ import org.androidannotations.annotations.EActivity;
 import dekauliya.fyp.mathqa.ListViews.OnListFragmentInteractionListener;
 import dekauliya.fyp.mathqa.ListViews.QuestionTopicListFragment_;
 import dekauliya.fyp.mathqa.ListViews.TopicConceptListFragment_;
-import dekauliya.fyp.mathqa.Utils.FabUtils;
 import eu.davidea.fastscroller.FastScroller;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
 
 @EActivity
-public class TopicConceptActivity extends AppCompatActivity implements
+public class TopicConceptActivity extends BaseActivity implements
         FastScroller.OnScrollStateChangeListener,
         FlexibleAdapter.OnUpdateListener,
         OnListFragmentInteractionListener {
@@ -87,7 +85,7 @@ public class TopicConceptActivity extends AppCompatActivity implements
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        FabUtils.setUpFab(this);
+        setUpFab();
     }
 
 

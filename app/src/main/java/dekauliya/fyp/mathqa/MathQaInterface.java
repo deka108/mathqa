@@ -5,10 +5,21 @@ package dekauliya.fyp.mathqa;
  */
 
 public interface MathQaInterface {
-    public final int SUBJECT_ADDITIONAL = 1;
-    public final int SUBJECT_ELEMENTARY = 2;
-    public final int SUBJECT_H2 = 3;
-    public final int SUBJECT_PSLE = 4;
+    int SUBJECT_ADDITIONAL = 1;
+    int SUBJECT_ELEMENTARY = 2;
+    int SUBJECT_H2 = 3;
+    int SUBJECT_PSLE = 4;
 
-    public final String BASE_URL = "http://192.168.1.233:8000/apiv2/";
+    String BASE_URL = "http://172.26.104.156:8000/apiv2/";
+
+    int MAX_RESCALED_SIZE = 640;
+
+    int PROCESSOR_LEPTONICA = 1;
+    int PROCESSOR_CATALANO = 2;
+
+    String CAPTURED_IMAGE_URI = "capturedImageUri";
+    String OCR_OPTION = "ocrOption";
+
+    int OCR_TESSERACT = 1;
+    int OCR_GOOGLE_API = 2;
 }

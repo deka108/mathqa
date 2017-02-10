@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:progressActivity="http://schemas.android.com/apk/res-auto"
     >
 
-    <include layout="@layout/progress_activity" />
+    <!--<include layout="@layout/progress_activity" />-->
 
     <android.support.v4.widget.SwipeRefreshLayout
     android:id="@+id/fragment_swipeRefreshLayout"
@@ -17,9 +18,22 @@
          layout will help to receive the inflated layout at runtime and to display the
          Refresh circle AND the FastScroll on the top of sticky_header_layout.
          If you need to drag items, SwipeRefreshLayout must be disabled! -->
-    <FrameLayout
+    <com.vlonjatg.progressactivity.ProgressFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/progress_activity"
+        progressActivity:loadingBackgroundColor="@color/material_color_white"
+        progressActivity:loadingProgressBarColor="@color/colorAccent"
+        progressActivity:loadingProgressBarHeight="@dimen/material_button_height_minimum"
+        progressActivity:loadingProgressBarWidth="@dimen/material_button_height_minimum"
+        progressActivity:errorBackgroundColor="@color/material_color_white"
+        progressActivity:errorTitleTextColor="@color/colorAccent"
+        progressActivity:errorContentTextColor="@color/colorAccent"
+        progressActivity:errorButtonTextColor="@color/material_color_white"
+        progressActivity:errorButtonBackgroundColor="@color/colorAccent"
+        progressActivity:emptyBackgroundColor="@color/material_color_white"
+        progressActivity:emptyTitleTextColor="@color/colorAccent"
+        >
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/fragment_rv"
@@ -31,7 +45,7 @@
              sticky headers are enabled. So you can safely remove it. -->
         <!--<include layout="@layout/sticky_header_layout"/>-->
 
-    </FrameLayout>
+    </com.vlonjatg.progressactivity.ProgressFrameLayout>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

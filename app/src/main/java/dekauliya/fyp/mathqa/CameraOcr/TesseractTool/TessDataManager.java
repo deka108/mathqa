@@ -33,10 +33,6 @@ public class TessDataManager {
     static TessDataManager instance;
 
 
-    TessDataManager(){
-
-    }
-
     public static TessDataManager getInstance(Context context){
         if (instance == null){
             instance = new TessDataManager();
