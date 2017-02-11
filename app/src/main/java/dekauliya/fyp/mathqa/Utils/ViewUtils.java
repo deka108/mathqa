@@ -49,4 +49,8 @@ public class ViewUtils {
     public static ViewGroup getRootView(Activity activity){
         return (ViewGroup) ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
     }
+
+    public static String getLatex(String originalStr){
+        return "$$" + originalStr + "$$";
+    }
 }

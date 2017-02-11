@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="dekauliya.fyp.mathqa">
 
     <meta-data
@@ -11,6 +12,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-sdk tools:overrideLibrary="gr.escsoft.michaelprimez.searchablespinner"/>
 
     <uses-feature
         android:name="android.hardware.camera2"
@@ -33,18 +36,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EnterTextActivity"
+            android:name=".SearchViews.SearchTextActivity"
             android:label="@string/title_activity_enter_text"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".InsertFormulaActivity"
+            android:name=".SearchViews.SearchFormulaActivity"
             android:label="@string/tf_insert_formula"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"/>
         <activity
-            android:name=".CameraOcr.ImagePreviewActivity_"
+            android:name=".SearchViews.SearchImageActivity_"
             android:label="@string/title_activity_image_preview"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

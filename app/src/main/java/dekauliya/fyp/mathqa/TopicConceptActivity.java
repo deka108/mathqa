@@ -84,8 +84,6 @@ public class TopicConceptActivity extends BaseActivity implements
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-        setUpFab();
     }
 
 

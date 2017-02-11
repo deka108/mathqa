@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:auto="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/fonts_caption"
+        android:textColor="@color/colorAccent"
+        android:text="Latex preview:"
+        />
+    <TextView
+        android:id="@+id/fs_preview_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/material_baseline_grid_2x"
+        android:text="LaTeX Preview"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/material_card_media_area_framed_size_small"
+        />
+    <io.github.kexanie.library.MathView
+        android:id="@+id/fs_latex_preview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        auto:engine="KaTeX"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/fonts_caption"
+        android:text="Input:"/>
+    <EditText
+        android:id="@+id/fs_latex_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="5"
+        />
+</LinearLayout>

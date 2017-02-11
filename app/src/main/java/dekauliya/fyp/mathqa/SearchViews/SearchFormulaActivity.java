@@ -1,10 +1,12 @@
-package dekauliya.fyp.mathqa;
+package dekauliya.fyp.mathqa.SearchViews;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-public class InsertFormulaActivity extends AppCompatActivity {
+import dekauliya.fyp.mathqa.R;
+
+public class SearchFormulaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -12,6 +14,7 @@ public class InsertFormulaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_insert_formula);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
     }
 
 }

@@ -33,7 +33,7 @@ public class ImagePreprocessorBase {
     }
 
     @Background(serial="ocr")
-    protected void getBitmapFromUri(Uri imageUri) {
+    public void getBitmapFromUri(Uri imageUri) {
         BitmapFactory.Options opts = new BitmapFactory.Options();
 
         try {

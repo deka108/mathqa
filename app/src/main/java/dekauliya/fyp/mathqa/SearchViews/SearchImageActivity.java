@@ -1,4 +1,4 @@
-package dekauliya.fyp.mathqa.CameraOcr;
+package dekauliya.fyp.mathqa.SearchViews;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -20,6 +20,13 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
+import dekauliya.fyp.mathqa.CameraOcr.IOnOcrProcessingListener;
+import dekauliya.fyp.mathqa.CameraOcr.ImagePreprocessorBase;
+import dekauliya.fyp.mathqa.CameraOcr.ImagePreprocessorCatalano;
+import dekauliya.fyp.mathqa.CameraOcr.ImagePreprocessorLeptonica;
+import dekauliya.fyp.mathqa.CameraOcr.TextRecogniserAbstract;
+import dekauliya.fyp.mathqa.CameraOcr.TextRecogniserTesseract;
+import dekauliya.fyp.mathqa.CameraOcr.TextRecogniserTextApi;
 import dekauliya.fyp.mathqa.R;
 
 import static dekauliya.fyp.mathqa.MathQaInterface.CAPTURED_IMAGE_URI;
@@ -31,7 +38,7 @@ import static dekauliya.fyp.mathqa.MathQaInterface.PROCESSOR_LEPTONICA;
 
 
 @EActivity(R.layout.activity_image_preview)
-public class ImagePreviewActivity extends AppCompatActivity implements IOnOcrProcessingListener {
+public class SearchImageActivity extends AppCompatActivity implements IOnOcrProcessingListener {
 
     @ViewById(R.id.toolbar) Toolbar toolbar;
     @ViewById(R.id.ip_image_preview) ImageView mImageView;

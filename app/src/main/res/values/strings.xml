@@ -78,5 +78,5 @@
     <string name="unable_to_crop">Unable to crop the image.</string>
     <string name="unable_capture_image">Unable to capture or read image from device. Please check if your application permissions are correct.</string>
     <string name="ocr_preprocessing">Processing...</string>
-
+    <string name=""></string>
 </resources>
