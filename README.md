@@ -1,1 +1,11 @@
-# mathqa
+# MathQA for Android
+- [X] ListViews (Expandable View)
+- [X] DetailViews
+- [X] RestAPI
+- [X] Image Capture + Cropping
+- [X] OCR with Tesseract (no preprocessing)
+- [X] OCR with Google Text API
+- [X] Text input query
+- [X] LaTeX input query
+- [ ] SearchResults
+- [ ] Realm.io (Optional)
