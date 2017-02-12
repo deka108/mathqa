@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 
@@ -18,6 +19,7 @@ import dekauliya.fyp.mathqa.Models.Concept;
 import dekauliya.fyp.mathqa.Models.Question;
 import dekauliya.fyp.mathqa.Models.SubConcept;
 import dekauliya.fyp.mathqa.R;
+import dekauliya.fyp.mathqa.Utils.FabUtils;
 
 @EActivity
 public class QuestionDetailActivity extends BaseActivity implements
@@ -47,6 +49,9 @@ public class QuestionDetailActivity extends BaseActivity implements
     @Extra("subconceptExtra")
     SubConcept subconceptExtra;
 
+    @Bean
+    FabUtils fabUtils;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +71,7 @@ public class QuestionDetailActivity extends BaseActivity implements
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        setUpFab();
+        fabUtils.setUpFab();
     }
 
 

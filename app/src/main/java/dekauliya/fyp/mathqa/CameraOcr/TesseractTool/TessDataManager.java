@@ -1,10 +1,10 @@
 package dekauliya.fyp.mathqa.CameraOcr.TesseractTool;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Environment;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.orhanobut.logger.Logger;
 import com.sromku.simple.storage.SimpleStorage;
 import com.sromku.simple.storage.Storage;
@@ -114,12 +114,15 @@ public class TessDataManager {
      * @param message The error message to be displayed
      */
     static void showErrorMessage(Context context, String title, String message) {
-        new AlertDialog.Builder(context)
-                .setTitle(title)
-                .setMessage(message)
-                .setOnCancelListener(new FinishListener((Activity) context))
-                .setPositiveButton( "Done", new FinishListener((Activity) context))
-                .show();
+        new MaterialDialog.Builder(context)
+                .title(title)
+                .content(message)
+                .cancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+
+                    }
+                }).show();
     }
 
     /** Finds the proper location on the SD card where we can save files. */

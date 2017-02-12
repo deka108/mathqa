@@ -13,7 +13,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="dekauliya.fyp.mathqa.ImagePreviewActivity_"
+    tools:context="dekauliya.fyp.mathqa.CameraOcr.ImageOcrActivity_"
     tools:showIn="@layout/activity_image_preview">
     <ImageView
         android:id="@+id/ip_image_preview"

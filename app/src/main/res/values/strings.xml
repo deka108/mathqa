@@ -78,5 +78,17 @@
     <string name="unable_to_crop">Unable to crop the image.</string>
     <string name="unable_capture_image">Unable to capture or read image from device. Please check if your application permissions are correct.</string>
     <string name="ocr_preprocessing">Processing...</string>
-    <string name=""></string>
+    <string name="sd_text_hint">Binomial expansion</string>
+    <string name="sd_text_prefill"></string>
+    <string name="sd_search_text_title">Search Text</string>
+    <string name="sd_formula_search_title">Formula Search</string>
+    <string name="sd_insert_formula">Insert Formula</string>
+    <string name="search_action">Search</string>
+    <string name="cancel_action">Cancel</string>
+    <string name="sd_select_formula_category">Select Formula Category</string>
+    <string name="sd_select_formula">Select Formula</string>
+    <string name="fi_latex_preview">Latex preview:</string>
+    <string name="str_latex_alt_preview">LaTeX Preview</string>
+    <string name="fi_latex_input">Input:</string>
+    <string name="fs_edit_latex_hint">Edit your latex text here</string>
 </resources>

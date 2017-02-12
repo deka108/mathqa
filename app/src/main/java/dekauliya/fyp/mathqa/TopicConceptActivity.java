@@ -16,11 +16,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 
 import dekauliya.fyp.mathqa.ListViews.OnListFragmentInteractionListener;
 import dekauliya.fyp.mathqa.ListViews.QuestionTopicListFragment_;
 import dekauliya.fyp.mathqa.ListViews.TopicConceptListFragment_;
+import dekauliya.fyp.mathqa.Utils.FabUtils;
 import eu.davidea.fastscroller.FastScroller;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
@@ -43,6 +45,9 @@ public class TopicConceptActivity extends BaseActivity implements
     private RecyclerView mRecyclerView;
     private FlexibleAdapter<AbstractFlexibleItem> mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
+
+    @Bean
+    FabUtils fabUtils;
 
     private final Handler mRefreshHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
         public boolean handleMessage(Message message) {
@@ -84,6 +89,7 @@ public class TopicConceptActivity extends BaseActivity implements
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        fabUtils.setUpFab();
     }
 
 
@@ -126,9 +132,6 @@ public class TopicConceptActivity extends BaseActivity implements
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-//            return PlaceholderFragment.newInstance(position + 1);
             switch(position){
                 case 0:
                     return TopicConceptListFragment_.builder().build();
@@ -185,7 +188,7 @@ public class TopicConceptActivity extends BaseActivity implements
         mRecyclerView = recyclerView;
         mAdapter = (FlexibleAdapter) recyclerView.getAdapter();
         mSwipeRefreshLayout = swipeRefreshLayout;
-        initializeSwipeToRefresh();
+//        initializeSwipeToRefresh();
     }
 
     private void initializeSwipeToRefresh() {

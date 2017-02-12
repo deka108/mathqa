@@ -11,12 +11,6 @@ import dekauliya.fyp.mathqa.R;
  * Created by dekauliya on 11/2/17.
  */
 public class FormulaHelper {
-    public static ArrayList<String> getCategoryStrArray(Context context){
-        ArrayList<String> formulas = new ArrayList<>();
-        Collections.addAll(formulas,
-                context.getResources().getStringArray(R.array.formula_title));
-        return formulas;
-    }
 
     public static ArrayList<String> getFormulaStrArray(FormulaType formulaType, Context context){
         ArrayList<String> formulas = new ArrayList<>();
@@ -102,11 +96,12 @@ public class FormulaHelper {
                         .formula_trigonometry));
                 break;
             case EXPONENTIAL:
-                Collections.addAll(formulas, context.getResources().getStringArray(
-                        R.array.formula_trigonometry));
+                Collections.addAll(formulas, context.getResources().getStringArray(R.array
+                        .formula_exponential));
                 break;
-            default: break;
         }
         return formulas;
     }
+
+
 }

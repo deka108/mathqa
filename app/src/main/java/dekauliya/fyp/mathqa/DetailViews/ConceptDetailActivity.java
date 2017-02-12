@@ -2,7 +2,6 @@ package dekauliya.fyp.mathqa.DetailViews;
 
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,7 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
@@ -26,6 +25,7 @@ import dekauliya.fyp.mathqa.ListViews.OnListFragmentInteractionListener;
 import dekauliya.fyp.mathqa.ListViews.QuestionConceptListFragment_;
 import dekauliya.fyp.mathqa.Models.Concept;
 import dekauliya.fyp.mathqa.R;
+import dekauliya.fyp.mathqa.Utils.FabUtils;
 import eu.davidea.fastscroller.FastScroller;
 import eu.davidea.flexibleadapter.SelectableAdapter;
 
@@ -56,6 +56,10 @@ public class ConceptDetailActivity extends BaseActivity implements
     @ViewById(R.id.concept_detail_container)
     CoordinatorLayout container;
 
+    @Bean
+    FabUtils fabUtils;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +79,7 @@ public class ConceptDetailActivity extends BaseActivity implements
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        setUpFab();
+        fabUtils.setUpFab();
     }
 
 
@@ -84,11 +88,6 @@ public class ConceptDetailActivity extends BaseActivity implements
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_concept, menu);
         return true;
-    }
-
-    @AfterViews
-    void receivedExtra(){
-        Snackbar.make(container, conceptExtra.getName(), Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

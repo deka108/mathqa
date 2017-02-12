@@ -264,7 +264,7 @@
     <string name="formula_eps">e^{x}</string>
     <string name="formula_sub">x_{2}</string>
     <string name="formula_log">\\log x</string>
-    <string name="formula_logbase">\\log x</string>
+    <string name="formula_logbase">\\log_b(x)</string>
     <string name="formula_ln">\\ln x</string>
 
     <string-array name="formula_exponential">
@@ -284,7 +284,7 @@
     <string name="str_exp_root">Root</string>
     <string name="str_exp_eps">Exponent</string>
     <string name="str_exp_sub">Sub</string>
-    <string name="str_exp_log">Log10</string>
+    <string name="str_exp_log">Log</string>
     <string name="str_exp_log_base">Log Base</string>
     <string name="str_exp_ln">Log Natural</string>
 

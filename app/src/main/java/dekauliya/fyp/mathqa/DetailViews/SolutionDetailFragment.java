@@ -18,7 +18,7 @@ import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.Utils.ViewUtils;
 import io.github.kexanie.library.MathView;
 
-@EFragment(R.layout.solution_detail)
+@EFragment(R.layout.fragment_solution_detail)
 public class SolutionDetailFragment extends BaseFragment implements IDataListener{
     private OnDetailFragmentInteractionListener mListener;
 
@@ -66,7 +66,7 @@ public class SolutionDetailFragment extends BaseFragment implements IDataListene
                 questionArg.getId()));
         Solution solution = dataServiceRx.getSolution();
         if (solution != null) {
-            ViewUtils.displayLatex(solutionContent, solutionContentAlt, solution.getContent());
+            ViewUtils.displayLatex(solutionContent, solutionContentAlt, solution.getContent(), false);
             progressActivity.showContent();
 
         }else{

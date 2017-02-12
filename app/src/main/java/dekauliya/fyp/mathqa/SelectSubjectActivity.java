@@ -5,11 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.orhanobut.logger.Logger;
-
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.sharedpreferences.Pref;
+
+import dekauliya.fyp.mathqa.Utils.ViewUtils;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
@@ -23,6 +23,7 @@ public class SelectSubjectActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_subject);
+        ViewUtils.convertLatex("HELLO DEKA");
     }
 
     @Click({R.id.btn_subj_psle, R.id.btn_subj_elem, R.id.btn_subj_add, R.id.btn_subj_h2})
@@ -45,7 +46,6 @@ public class SelectSubjectActivity extends AppCompatActivity{
                 break;
         }
 
-        Logger.d("BUTTON CLICKED + " + btn.getText());
         TopicConceptActivity_.intent(getApplicationContext()).flags(FLAG_ACTIVITY_NEW_TASK).start();
     }
 

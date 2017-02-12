@@ -27,7 +27,6 @@ import org.androidannotations.annotations.EActivity;
 import java.util.List;
 
 import dekauliya.fyp.mathqa.R;
-import dekauliya.fyp.mathqa.SearchViews.SearchImageActivity_;
 
 import static dekauliya.fyp.mathqa.MathQaInterface.CAPTURED_IMAGE_URI;
 
@@ -112,7 +111,7 @@ public class SelectOrCaptureImage extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 CropImage.ActivityResult result = CropImage.getActivityResult(data);
                 Uri resultUri = result.getUri();
-                Intent intent = new Intent(this, SearchImageActivity_.class);
+                Intent intent = new Intent(this, ImageOcrActivity_.class);
                 intent.putExtra(CAPTURED_IMAGE_URI, resultUri);
                 startActivity(intent);
 

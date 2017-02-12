@@ -27,51 +27,20 @@ import dekauliya.fyp.mathqa.R;
  */
 @EBean
 public class ImagePickerUtils {
-    public static PermissionRequestErrorListener mErrorListener = new PermissionRequestErrorListener() {
-        @Override public void onError(DexterError error) {
-            Logger.e("Dexter. There was an error: " + error.toString());
-        }
-    };
+    Activity mActivity;
 
-    public static void pickImage(Activity activity){
-        checkCameraStorageAccess(activity);
-    }
+    // Permission Related
+    private MultiplePermissionsListener mMultiplePermissionsListener;
+    private MultiplePermissionsListener mSnackbarOnDeniedMultiplePermissionsListener;
+    private CompositeMultiplePermissionsListener mAllListeners;
+    private PermissionRequestErrorListener mErrorListener;
 
-    public static CompositeMultiplePermissionsListener getPermissionListeners(final Activity
-                                                                                    activity){
-        MultiplePermissionsListener mMultiplePermissionsListener = new
-                MultiplePermissionsListener() {
-            @Override
-            public void onPermissionsChecked(MultiplePermissionsReport report) {
-                if (report.areAllPermissionsGranted()){
-                    CropImage.startPickImageActivity(activity);
-                }
-            }
-
-            @Override
-            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions,
-                                                           PermissionToken token) {
-                token.continuePermissionRequest();
-            }
-        };
-
-        MultiplePermissionsListener mSnackbarOnDeniedMultiplePermissionsListener =
-                SnackbarOnAnyDeniedMultiplePermissionsListener.Builder
-                        .with(ViewUtils.getRootView(activity),
-                                activity.getString(R.string.camera_storage_access))
-                        .withOpenSettingsButton(R.string.settings_str)
-                        .build();
-
-        CompositeMultiplePermissionsListener mAllListeners = new
-                CompositeMultiplePermissionsListener(mMultiplePermissionsListener,
-                mSnackbarOnDeniedMultiplePermissionsListener);
-
-        return mAllListeners;
-    }
-
-    public static void checkCameraStorageAccess(Activity activity){
+    public void pickImage(Activity activity){
         if (Build.VERSION.SDK_INT > 22){
-            CompositeMultiplePermissionsListener mAllListeners = getPermissionListeners(activity);
+            this.mActivity = activity;
+            if (mAllListeners == null){
+                initPermissionListeners();
+            }
 
             Dexter.withActivity(activity)
                     .withPermissions(
@@ -85,5 +54,40 @@ public class ImagePickerUtils {
             // no need to check for permission for SDK < 22
             CropImage.startPickImageActivity(activity);
         }
+    }
+
+    public void initPermissionListeners(){
+        mMultiplePermissionsListener = new
+                MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if (report.areAllPermissionsGranted()){
+                            CropImage.startPickImageActivity(mActivity);
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions,
+                                                                   PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                };
+
+        mSnackbarOnDeniedMultiplePermissionsListener =
+                SnackbarOnAnyDeniedMultiplePermissionsListener.Builder
+                        .with(ViewUtils.getRootView(mActivity),
+                                mActivity.getString(R.string.camera_storage_access))
+                        .withOpenSettingsButton(R.string.settings_str)
+                        .build();
+
+        mErrorListener = new PermissionRequestErrorListener() {
+            @Override public void onError(DexterError error) {
+                Logger.e("Dexter. There was an error: " + error.toString());
+            }
+        };
+
+        mAllListeners = new
+                CompositeMultiplePermissionsListener(mMultiplePermissionsListener,
+                mSnackbarOnDeniedMultiplePermissionsListener);
     }
 }

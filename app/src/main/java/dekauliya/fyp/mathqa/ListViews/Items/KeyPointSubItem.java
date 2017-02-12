@@ -64,7 +64,8 @@ public class KeyPointSubItem extends AbstractSectionableItem<KeyPointSubItem
         if (header != null && header instanceof KeyPointHeaderItem) {
             KeyPoint keypoint = ((KeyPointHeaderItem) getHeader()).getKeyPoint();
 //            holder.mMathView.setText(ViewUtils.convertLatex(keypoint.getContent()));
-            ViewUtils.displayLatex(holder.mMathView, holder.mMathViewAlt, keypoint.getContent());
+            ViewUtils.displayLatex(holder.mMathView, holder.mMathViewAlt, keypoint.getContent(),
+                    false);
         }
     }
 

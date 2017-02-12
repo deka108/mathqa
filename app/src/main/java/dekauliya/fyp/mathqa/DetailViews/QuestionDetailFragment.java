@@ -20,7 +20,7 @@ import io.github.kexanie.library.MathView;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-@EFragment(R.layout.question_detail)
+@EFragment(R.layout.fragment_question_detail)
 public class QuestionDetailFragment extends BaseFragment {
     private OnDetailFragmentInteractionListener mListener;
 
@@ -76,7 +76,7 @@ public class QuestionDetailFragment extends BaseFragment {
                         getString(R.string.qd_concept), conceptArg.getName()));
             }
         }
-        ViewUtils.displayLatex(questionContent, questionContentAlt, questionArg.getContent());
+        ViewUtils.displayLatex(questionContent, questionContentAlt, questionArg.getContent(), false);
         questionSource.setText(String.format(getString(R.string.qd_source), questionArg.getSource()));
     }
 

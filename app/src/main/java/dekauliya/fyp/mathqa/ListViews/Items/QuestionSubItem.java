@@ -80,7 +80,7 @@ public class QuestionSubItem extends AbstractSectionableItem<
         }
 //            holder.mQuestionContent.setText(ViewUtils.convertLatex(question.getContent()));
         ViewUtils.displayLatex(holder.mQuestionContent, holder.mQuestionContentAlt, question
-                    .getContent());
+                    .getContent(), false);
 
         IHeader header = getHeader();
         if (header != null){
