@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 
 import dekauliya.fyp.mathqa.R;
 
-public class SearchFormulaActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
