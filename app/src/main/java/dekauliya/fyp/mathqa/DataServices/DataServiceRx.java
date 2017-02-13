@@ -45,6 +45,7 @@ public class DataServiceRx {
     List<AbstractFlexibleItem> mConceptKeypointItems = new ArrayList<AbstractFlexibleItem>();
     List<AbstractFlexibleItem> mConceptFormulaItems = new ArrayList<AbstractFlexibleItem>();
     List<AbstractFlexibleItem> mQuestionConceptItems = new ArrayList<AbstractFlexibleItem>();
+    List<AbstractFlexibleItem> mQuestionResultItems = new ArrayList<>();
     private Solution mSolution;
 
     HashMap<Integer, Topic> mTopics = new HashMap<>();
@@ -112,7 +113,6 @@ public class DataServiceRx {
     public void getQuestionTopicData(int subjectId, final IDataListener mListener){
         final DataType dataType = DataType.QUESTION_TOPIC;
         clearItems(dataType);
-
         mConcepts.clear();
 
         client.getTopics(subjectId)
@@ -198,12 +198,14 @@ public class DataServiceRx {
 
                     @Override
                     public void onNext(List<KeyPoint> value) {
-                        for(KeyPoint keyPoint: value){
-                            KeyPointHeaderItem keyPointHeaderItem = new KeyPointHeaderItem
-                                    (keyPoint);
-                            KeyPointSubItem keyPointSubItem = new KeyPointSubItem(keyPointHeaderItem);
-                            keyPointHeaderItem.addSubItem(keyPointSubItem);
-                            addItem(keyPointHeaderItem, dataType, mComparator);
+                        if (value != null && value.size() > 0) {
+                            for (KeyPoint keyPoint : value) {
+                                KeyPointHeaderItem keyPointHeaderItem = new KeyPointHeaderItem
+                                        (keyPoint);
+                                KeyPointSubItem keyPointSubItem = new KeyPointSubItem(keyPointHeaderItem);
+                                keyPointHeaderItem.addSubItem(keyPointSubItem);
+                                addItem(keyPointHeaderItem, dataType, mComparator);
+                            }
                         }
                     }
 
@@ -224,8 +226,6 @@ public class DataServiceRx {
         final DataType dataType = DataType.KEYPOINT_FORMULA;
         clearItems(dataType);
 
-        mSubConcepts.clear();
-
         client.getKeypointFormulas(conceptId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -237,12 +237,14 @@ public class DataServiceRx {
 
                     @Override
                     public void onNext(List<KeyPoint> value) {
-                        for(KeyPoint keyPoint: value){
-                            KeyPointHeaderItem keyPointHeaderItem = new KeyPointHeaderItem
-                                    (keyPoint);
-                            KeyPointSubItem keyPointSubItem = new KeyPointSubItem(keyPointHeaderItem);
-                            keyPointHeaderItem.addSubItem(keyPointSubItem);
-                            addItem(keyPointHeaderItem, dataType, mComparator);
+                        if (value != null && value.size() > 0) {
+                            for (KeyPoint keyPoint : value) {
+                                KeyPointHeaderItem keyPointHeaderItem = new KeyPointHeaderItem
+                                        (keyPoint);
+                                KeyPointSubItem keyPointSubItem = new KeyPointSubItem(keyPointHeaderItem);
+                                keyPointHeaderItem.addSubItem(keyPointSubItem);
+                                addItem(keyPointHeaderItem, dataType, mComparator);
+                            }
                         }
                     }
 
@@ -262,7 +264,6 @@ public class DataServiceRx {
     public void getQuestionConceptData(int conceptid, final IDataListener mListener){
         final DataType dataType = DataType.QUESTION_CONCEPT;
         clearItems(dataType);
-
         mSubConcepts.clear();
 
         client.getSubConcepts(conceptid)
@@ -349,6 +350,80 @@ public class DataServiceRx {
                 });
     }
 
+    public void searchQuestions(String textQuery, final IDataListener mListener){
+        mQuestionResultItems.clear();
+        Logger.d("TEXT QUERY: " + textQuery);
+        client.searchDatabase(textQuery)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<Question>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<Question> value) {
+                        if (value != null && value.size() > 0) {
+                            for(Question question: value){
+                                QuestionSubItem questionSubItem = new QuestionSubItem
+                                        (null, question);
+                                mQuestionResultItems.add(questionSubItem);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mListener.onError();
+                        Logger.e(e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        mListener.onDataRetrieved();
+                    }
+                });
+
+    }
+
+    public void searchFormula(String formulaQuery, final IDataListener mListener){
+        mQuestionResultItems.clear();
+        Logger.d("FORMULA QUERY: " + formulaQuery);
+        client.searchFormula(formulaQuery)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<Question>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<Question> value) {
+                        if (value != null && value.size() > 0) {
+                            for(Question question: value){
+                                QuestionSubItem questionSubItem = new QuestionSubItem
+                                        (null, question);
+                                mQuestionResultItems.add(questionSubItem);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mListener.onError();
+                        Logger.e(e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        mListener.onDataRetrieved();
+                    }
+                });
+
+    }
+
     public List<AbstractFlexibleItem> getData(DataType dataType){
         return new ArrayList<> (getDataByType(dataType));
     }
@@ -379,6 +454,7 @@ public class DataServiceRx {
             case KEYPOINT_CONCEPT: return mConceptKeypointItems;
             case KEYPOINT_FORMULA: return mConceptFormulaItems;
             case QUESTION_CONCEPT:  return mQuestionConceptItems;
+            case QUESTION_RESULT: return mQuestionResultItems;
             default: return null;
         }
     }
@@ -416,8 +492,4 @@ public class DataServiceRx {
     public Solution getSolution(){
         return this.mSolution;
     }
-
-//    public interface ISolutionListener{
-//        void onSolutionRetrieved(Solution solution);
-//    }
 }

@@ -47,7 +47,7 @@
                 android:scrollbars="none"
                 android:clickable="false"
                 tools:text="@string/question_content"
-                auto:engine="KaTeX"/>
+                auto:engine="MathJax"/>
             <TextView
                 android:id="@+id/question_latex_alt"
                 android:layout_width="match_parent"

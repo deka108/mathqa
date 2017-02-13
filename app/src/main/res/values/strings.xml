@@ -91,4 +91,6 @@
     <string name="str_latex_alt_preview">LaTeX Preview</string>
     <string name="fi_latex_input">Input:</string>
     <string name="fs_edit_latex_hint">Edit your latex text here</string>
+    <string name="no_questions_result">No questions available for this query</string>
+    <string name="search_result_title">Search Result</string>
 </resources>

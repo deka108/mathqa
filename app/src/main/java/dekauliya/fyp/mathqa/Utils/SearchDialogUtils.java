@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.internal.MDButton;
+import com.orhanobut.logger.Logger;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.androidannotations.annotations.EBean;
@@ -23,6 +24,8 @@ import java.util.List;
 import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.SearchViews.FormulaHelper;
 import dekauliya.fyp.mathqa.SearchViews.FormulaType;
+import dekauliya.fyp.mathqa.SearchViews.SearchActivity_;
+import dekauliya.fyp.mathqa.SearchViews.SearchType;
 import io.github.kexanie.library.MathView;
 
 /**
@@ -40,23 +43,34 @@ public class SearchDialogUtils {
     private static FormulaType[] formulaTypes = FormulaType.values();
 
     LinearLayout fsLLDialogContainer;
-    RelativeLayout fsLLBtnContaienr;
+    RelativeLayout fsLLBtnContainer;
     MathView fsMathPreview;
     MaterialEditText fsEditText;
     TextView fsPreviewPlaceholder;
     MDButton fsResetBtn;
     MDButton fsInsertBtn;
 
+    String textQuery;
+    String formulaQuery;
+
     public void displaySearchDialog(){
         new MaterialDialog.Builder(activity)
                 .title(R.string.sd_search_text_title)
                 .titleColorRes(R.color.colorAccent)
+                .positiveText("Search")
+                .positiveColorRes(R.color.colorAccent)
+                .negativeText("Cancel")
+                .negativeColorRes(R.color.colorAccent)
                 .input(activity.getString(R.string.sd_text_hint),
                         activity.getString(R.string.sd_text_prefill), false,
                         new MaterialDialog.InputCallback() {
                             @Override
                             public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-
+                                textQuery = input.toString();
+                                SearchActivity_.intent(activity)
+                                        .searchTypeExtra(SearchType.TEXT)
+                                        .searchQuery(textQuery)
+                                        .start();
                             }
                         }).show();
     }
@@ -73,6 +87,11 @@ public class SearchDialogUtils {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         dialog.dismiss();
+                        Logger.d("Dialog, textQuery: " + formulaQuery);
+                        SearchActivity_.intent(activity)
+                                .searchTypeExtra(SearchType.FORMULA)
+                                .searchQuery(ViewUtils.getLatex(formulaQuery))
+                                .start();
                     }
                 })
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
@@ -95,7 +114,7 @@ public class SearchDialogUtils {
             }else if (childView.getId() == R.id.fs_preview_placeholder){
                 fsPreviewPlaceholder = (TextView) childView;
             }else if (childView.getId() == R.id.fs_btn_container){
-                fsLLBtnContaienr = (RelativeLayout) childView;
+                fsLLBtnContainer = (RelativeLayout) childView;
             }
         }
 
@@ -112,14 +131,14 @@ public class SearchDialogUtils {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                String etContent = editable.toString();
-                ViewUtils.displayLatex(fsMathPreview, fsPreviewPlaceholder, etContent, true);
+                formulaQuery = editable.toString();
+                ViewUtils.displayLatex(fsMathPreview, fsPreviewPlaceholder, formulaQuery, true);
             }
         });
 
         MDButton mdButton;
-        for(int i=0; i < fsLLBtnContaienr.getChildCount(); i++){
-            childView = fsLLBtnContaienr.getChildAt(i);
+        for(int i = 0; i < fsLLBtnContainer.getChildCount(); i++){
+            childView = fsLLBtnContainer.getChildAt(i);
             if (childView instanceof MDButton){
                 mdButton = (MDButton) childView;
                 mdButton.setAllCapsCompat(true);

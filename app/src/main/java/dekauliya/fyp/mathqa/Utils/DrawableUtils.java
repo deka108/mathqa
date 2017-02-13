@@ -34,7 +34,7 @@ public class DrawableUtils {
                 return new IconicsDrawable(activity).icon(GoogleMaterial.Icon.gmd_close)
                         .colorRes(colorRes).sizeDp(size);
             case NO_DATA:
-                return new IconicsDrawable(activity).icon(GoogleMaterial.Icon.gmd_cloud_off)
+                return new IconicsDrawable(activity).icon(GoogleMaterial.Icon.gmd_folder_open)
                         .colorRes(colorRes).sizeDp(size);
             case ERROR_OUTLINE:
                 return new IconicsDrawable(activity).icon(GoogleMaterial.Icon.gmd_error_outline)

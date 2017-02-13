@@ -21,11 +21,14 @@ import io.github.kexanie.library.MathView;
 public class ViewUtils {
 
     public static String convertLatex(String originalLatex){
-        String result = originalLatex.replaceAll(getRawString("\\["), getRawString("\\("));
-        result = result.replaceAll(getRawString("\\]"), getRawString("\\)"));
-        result = result.replace(";", " <br/><br/> ");
-        result = result.replaceAll(getRawString("\\begin{align}"), "");
-        result = result.replaceAll(getRawString("\\end{align}"), "");
+//        String result = originalLatex.replaceAll(getRawString("\\["), getRawString("\\("));
+//        result = result.replaceAll(getRawString("\\]"), getRawString("\\)"));
+//        result = result.replaceAll(getRawString("\\begin{align}"), "\\\\begin{aligned}");
+//        result = result.replaceAll(getRawString("\\end{align}"), "\\\\end{aligned}");
+
+        String result = originalLatex.replaceAll(" ; ", " <br/> ");;
+
+        Logger.d("Final result: " + result);
         return result;
     }
 

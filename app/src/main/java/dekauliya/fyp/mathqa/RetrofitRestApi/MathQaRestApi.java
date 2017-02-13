@@ -11,7 +11,6 @@ import dekauliya.fyp.mathqa.Models.SubConcept;
 import dekauliya.fyp.mathqa.Models.Subject;
 import dekauliya.fyp.mathqa.Models.Topic;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -67,9 +66,9 @@ public interface MathQaRestApi {
     @GET("solutions/{id}")
     Call<Solution> getSolution(@Path ("id") Integer solutionId);
 
-    @POST("dsearch/")
-    Call<String> searchDatabase(@Body String query);
-    @POST("fsearch/")
-    Call<String> searchFromula(@Body String formula);
+    @POST("questions/search/?type=d")
+    Call<List<Question>> searchDatabase(@Query("query") String query);
+    @POST("questions/search/?type=f")
+    Call<List<Question>> searchFormula(@Query("query") String formula);
 
 }

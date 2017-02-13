@@ -4,8 +4,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 
-import com.orhanobut.logger.Logger;
-
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -100,8 +98,6 @@ public class QuestionConceptListFragment extends AbstractListFragment {
         if (item instanceof QuestionSubItem){
             QuestionSubItem q = (QuestionSubItem) item;
             SubConceptHeaderItem s = (SubConceptHeaderItem) q.getHeader();
-            Logger.d("QUESTION-CONCEPT, CONCEPT ARG: " + conceptArg.getName());
-            Logger.d("QUESTION-CONCEPT, SUBCONCEPT HEADER: " + s.getSubConcept().getName());
             QuestionDetailActivity_.intent(getContext())
                     .questionExtra(q.getQuestion())
                     .conceptExtra(conceptArg)

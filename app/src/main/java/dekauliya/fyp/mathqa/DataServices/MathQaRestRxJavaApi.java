@@ -11,9 +11,7 @@ import dekauliya.fyp.mathqa.Models.SubConcept;
 import dekauliya.fyp.mathqa.Models.Subject;
 import dekauliya.fyp.mathqa.Models.Topic;
 import io.reactivex.Observable;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -65,8 +63,8 @@ public interface MathQaRestRxJavaApi {
     @GET("solutions/{id}")
     Observable<Solution> getSolution(@Path("id") Integer solutionId);
 
-    @POST("dsearch/")
-    Observable<String> searchDatabase(@Body String query);
-    @POST("fsearch/")
-    Observable<String> searchFromula(@Body String formula);
+    @GET("questions/search/?type=d")
+    Observable<List<Question>> searchDatabase(@Query(value = "query", encoded = true) String query);
+    @GET("questions/search/?type=f")
+    Observable<List<Question>> searchFormula(@Query(value = "query", encoded = true) String formula);
 }

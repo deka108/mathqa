@@ -9,8 +9,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
-import dekauliya.fyp.mathqa.Utils.ViewUtils;
-
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 @EActivity
@@ -23,7 +21,6 @@ public class SelectSubjectActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_subject);
-        ViewUtils.convertLatex("HELLO DEKA");
     }
 
     @Click({R.id.btn_subj_psle, R.id.btn_subj_elem, R.id.btn_subj_add, R.id.btn_subj_h2})
