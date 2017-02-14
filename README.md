@@ -7,5 +7,8 @@
 - [X] OCR with Google Text API
 - [X] Text input query
 - [X] LaTeX input query
-- [ ] SearchResults
+- [X] SearchResults
+- [ ] Swipe Refresh 
+- [ ] NLP OCR 
+- [ ] Tag based search
 - [ ] Realm.io (Optional)
