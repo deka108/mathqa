@@ -3,6 +3,8 @@ package dekauliya.fyp.mathqa.ListViews;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -14,10 +16,12 @@ import org.androidannotations.annotations.ViewById;
 import dekauliya.fyp.mathqa.DataServices.DataServiceRx;
 import dekauliya.fyp.mathqa.DataServices.DataType;
 import dekauliya.fyp.mathqa.DetailViews.QuestionDetailActivity_;
-import dekauliya.fyp.mathqa.ListViews.Items.QuestionSubItem;
+import dekauliya.fyp.mathqa.ListViews.Items.SearchResultSubItem;
 import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.SearchViews.SearchActivity;
 import dekauliya.fyp.mathqa.SearchViews.SearchType;
+import dekauliya.fyp.mathqa.Utils.DrawableType;
+import dekauliya.fyp.mathqa.Utils.DrawableUtils;
 import dekauliya.fyp.mathqa.Utils.GraphicUtils;
 import eu.davidea.fastscroller.FastScroller;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
@@ -28,7 +32,7 @@ import eu.davidea.flexibleadapter.items.IFlexible;
 /**
  * Created by dekauliya on 6/2/17.
  */
-@EFragment(R.layout.fragment_recyclerview_list)
+@EFragment(R.layout.fragment_search_result_recyclerview_list)
 public class QuestionSearchResultFragment extends AbstractListFragment{
     @ViewById(R.id.fragment_rv)
     RecyclerView mRecyclerView;
@@ -48,6 +52,12 @@ public class QuestionSearchResultFragment extends AbstractListFragment{
     @FragmentArg("queryArg")
     String queryArg;
 
+    @ViewById(R.id.edit_search)
+    EditText searchEditText;
+
+    @ViewById(R.id.btn_search)
+    ImageButton searchBtn;
+
     DataType dataType = DataType.QUESTION_RESULT;
 
     @AfterInject
@@ -59,11 +69,19 @@ public class QuestionSearchResultFragment extends AbstractListFragment{
             case FORMULA:
                 dataServiceRx.searchFormula(queryArg, this);
                 break;
+            case TEST_FORMULA:
+                dataServiceRx.searchTestFormula(queryArg, this);
+                break;
+            case TEST_TEXT:
+                dataServiceRx.searchTestQuestions(queryArg, this);
+                break;
         }
     }
 
     @AfterViews
     void setUpListview(){
+        searchBtn.setImageDrawable(DrawableUtils.getDrawable(DrawableType.SEARCH, getActivity(),
+                R.color.material_color_white));
         if (mAdapter == null) {
             progressActivity.showLoading();
         }
@@ -101,10 +119,10 @@ public class QuestionSearchResultFragment extends AbstractListFragment{
     @Override
     public boolean onItemClick(int position) {
         IFlexible item = mAdapter.getItem(position);
-        if (item instanceof QuestionSubItem){
-            QuestionSubItem q = (QuestionSubItem) item;
+        if (item instanceof SearchResultSubItem){
+            SearchResultSubItem sr = (SearchResultSubItem) item;
             QuestionDetailActivity_.intent(getContext())
-                    .questionExtra(q.getQuestion())
+                    .questionExtra(sr.getQuestion())
                     .start();
         }
         return false;

@@ -3,9 +3,11 @@ package dekauliya.fyp.mathqa.DataServices;
 import java.util.List;
 
 import dekauliya.fyp.mathqa.Models.Concept;
+import dekauliya.fyp.mathqa.Models.Formula;
 import dekauliya.fyp.mathqa.Models.KeyPoint;
 import dekauliya.fyp.mathqa.Models.Keyword;
 import dekauliya.fyp.mathqa.Models.Question;
+import dekauliya.fyp.mathqa.Models.SearchResult;
 import dekauliya.fyp.mathqa.Models.Solution;
 import dekauliya.fyp.mathqa.Models.SubConcept;
 import dekauliya.fyp.mathqa.Models.Subject;
@@ -63,8 +65,13 @@ public interface MathQaRestRxJavaApi {
     @GET("solutions/{id}")
     Observable<Solution> getSolution(@Path("id") Integer solutionId);
 
-    @GET("questions/search/?type=d")
-    Observable<List<Question>> searchDatabase(@Query(value = "query", encoded = true) String query);
-    @GET("questions/search/?type=f")
-    Observable<List<Question>> searchFormula(@Query(value = "query", encoded = true) String formula);
+    @GET("search/?type=d")
+    Observable<List<SearchResult>> searchDatabase(@Query(value = "query", encoded = true) String query);
+    @GET("search/?type=f")
+    Observable<List<SearchResult>> searchFormula(@Query(value = "query", encoded = true) String formula);
+
+    @GET("test_questions/search/?type=d")
+    Observable<List<Question>> searchTestDatabase(@Query(value = "query", encoded = true) String query);
+    @GET("search_test_formula/")
+    Observable<List<Formula>> searchTestFormula(@Query(value = "query", encoded = true) String formula);
 }

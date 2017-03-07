@@ -8,5 +8,7 @@ public enum SearchType {
     TEXT,
     TAG,
     IMAGE,
-    FORMULA
+    FORMULA,
+    TEST_TEXT,
+    TEST_FORMULA
 }

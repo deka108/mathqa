@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:progressActivity="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/edit_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <ImageButton
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/SelectSubjectButton"
+            >
+        </ImageButton>
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+    android:id="@+id/fragment_swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- This FrameLayout is still mandatory ONLY IF sticky header is enabled. This
+         layout will help to receive the inflated layout at runtime and to display the
+         Refresh circle AND the FastScroll on the top of sticky_header_layout.
+         If you need to drag items, SwipeRefreshLayout must be disabled! -->
+    <com.vlonjatg.progressactivity.ProgressFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/progress_activity"
+        progressActivity:loadingBackgroundColor="@color/material_color_white"
+        progressActivity:loadingProgressBarColor="@color/colorAccent"
+        progressActivity:loadingProgressBarHeight="@dimen/material_button_height_minimum"
+        progressActivity:loadingProgressBarWidth="@dimen/material_button_height_minimum"
+        progressActivity:errorBackgroundColor="@color/material_color_white"
+        progressActivity:errorTitleTextColor="@color/colorAccent"
+        progressActivity:errorContentTextColor="@color/colorAccent"
+        progressActivity:errorButtonTextColor="@color/material_color_white"
+        progressActivity:errorButtonBackgroundColor="@color/colorAccent"
+        progressActivity:emptyBackgroundColor="@color/material_color_white"
+        progressActivity:emptyTitleTextColor="@color/colorAccent"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/fragment_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/header_text_content"/>
+
+        <!-- NOT NEEDED ANYMORE!! This layout is generated at runtime when
+             sticky headers are enabled. So you can safely remove it. -->
+        <!--<include layout="@layout/sticky_header_layout"/>-->
+
+    </com.vlonjatg.progressactivity.ProgressFrameLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <!-- Custom EmptyView for RV when empty-->
+    <include layout="@layout/empty_view"/>
+
+    <!-- FastScroller Layout must be at the end of ViewHierarchy
+         in order to be displayed at the top of every views -->
+    <include layout="@layout/fast_scroller"/>
+
+</LinearLayout>

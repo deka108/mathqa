@@ -1,4 +1,4 @@
-package dekauliya.fyp.mathqa.RetrofitRestApi;
+package dekauliya.fyp.mathqa.DataServices.NoRx;
 
 import dekauliya.fyp.mathqa.MathQaInterface;
 import okhttp3.OkHttpClient;

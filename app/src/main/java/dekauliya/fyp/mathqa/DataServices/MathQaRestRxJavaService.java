@@ -36,6 +36,14 @@ public class MathQaRestRxJavaService {
 
         return retrofit.create(serviceClass);
     }
+
+    public static void changeApiBaseUrl(String newApiBaseUrl) {
+        BASE_URL = newApiBaseUrl;
+
+        builder = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(BASE_URL);
+    }
 //
 //    public static <S> S createService(Class<S> serviceClass, final AccessToken accessToken) {
 //        if (httpClient == null) {

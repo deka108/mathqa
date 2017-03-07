@@ -264,7 +264,7 @@
     <string name="formula_eps">e^{x}</string>
     <string name="formula_sub">x_{2}</string>
     <string name="formula_log">\\log x</string>
-    <string name="formula_logbase">\\log_b(x)</string>
+    <string name="formula_logbase">\\log_b x</string>
     <string name="formula_ln">\\ln x</string>
 
     <string-array name="formula_exponential">

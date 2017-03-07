@@ -10,13 +10,13 @@ import org.parceler.ParcelConstructor;
 public class Question {
     String id;
     String question_type;
-    String usedFor;
+    String used_for;
     int marks;
     String difficulty_level;
     String response_type;
     String source;
     String content;
-    Boolean is_sample;
+    boolean is_sample;
     int concept;
     int subconcept;
     String paper;
@@ -24,13 +24,12 @@ public class Question {
     int[] keywords;
 
     @ParcelConstructor
-    public Question(String id, String question_type, String usedFor, int marks,
-                    String difficulty_level, String response_type, String source,
-                    String content, Boolean is_sample, int concept, int subconcept, String paper,
-                    int[] keypoints, int[] keywords) {
+    public Question(String id, String content, int concept, boolean is_sample, int subconcept,
+                    String difficulty_level, int marks, int[] keypoints, int[] keywords, String paper,
+                    String source, String used_for, String response_type, String question_type) {
         this.id = id;
         this.question_type = question_type;
-        this.usedFor = usedFor;
+        this.used_for = used_for;
         this.marks = marks;
         this.difficulty_level = difficulty_level;
         this.response_type = response_type;
@@ -43,32 +42,32 @@ public class Question {
         this.keypoints = keypoints;
         this.keywords = keywords;
     }
-
-    public Question(String id, String question_type, String usedFor, int marks,
-                    String difficulty_level, String response_type, String source, String content,
-                    Boolean is_sample) {
-        this.id = id;
-        this.question_type = question_type;
-        this.usedFor = usedFor;
-        this.marks = marks;
-        this.difficulty_level = difficulty_level;
-        this.response_type = response_type;
-        this.source = source;
-        this.content = content;
-        this.is_sample = is_sample;
-    }
-
-    public Question(String question_type, String usedFor, int marks, String difficulty_level,
-                    String response_type, String source, String content, Boolean is_sample) {
-        this.question_type = question_type;
-        this.usedFor = usedFor;
-        this.marks = marks;
-        this.difficulty_level = difficulty_level;
-        this.response_type = response_type;
-        this.source = source;
-        this.content = content;
-        this.is_sample = is_sample;
-    }
+//
+//    public Question(String id, String question_type, String usedFor, int marks,
+//                    String difficulty_level, String response_type, String source, String content,
+//                    Boolean is_sample) {
+//        this.id = id;
+//        this.question_type = question_type;
+//        this.used_for = usedFor;
+//        this.marks = marks;
+//        this.difficulty_level = difficulty_level;
+//        this.response_type = response_type;
+//        this.source = source;
+//        this.content = content;
+//        this.is_sample = is_sample;
+//    }
+//
+//    public Question(String question_type, String usedFor, int marks, String difficulty_level,
+//                    String response_type, String source, String content, Boolean is_sample) {
+//        this.question_type = question_type;
+//        this.used_for = usedFor;
+//        this.marks = marks;
+//        this.difficulty_level = difficulty_level;
+//        this.response_type = response_type;
+//        this.source = source;
+//        this.content = content;
+//        this.is_sample = is_sample;
+//    }
 
     public String getId() {
         return id;
@@ -91,11 +90,11 @@ public class Question {
     }
 
     public String getUsedFor() {
-        return usedFor;
+        return used_for;
     }
 
     public void setUsedFor(String usedFor) {
-        this.usedFor = usedFor;
+        this.used_for = usedFor;
     }
 
     public int getMarks() {

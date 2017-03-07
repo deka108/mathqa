@@ -1,8 +1,9 @@
-package dekauliya.fyp.mathqa.RetrofitRestApi;
+package dekauliya.fyp.mathqa.DataServices.NoRx;
 
 import java.util.List;
 
 import dekauliya.fyp.mathqa.Models.Concept;
+import dekauliya.fyp.mathqa.Models.SearchResult;
 import dekauliya.fyp.mathqa.Models.KeyPoint;
 import dekauliya.fyp.mathqa.Models.Keyword;
 import dekauliya.fyp.mathqa.Models.Question;
@@ -68,7 +69,10 @@ public interface MathQaRestApi {
 
     @POST("questions/search/?type=d")
     Call<List<Question>> searchDatabase(@Query("query") String query);
-    @POST("questions/search/?type=f")
-    Call<List<Question>> searchFormula(@Query("query") String formula);
+//    @POST("questions/search/?type=f")
+//    Call<List<Question>> searchFormula(@Query("query") String formula);
+
+    @POST("search_formula/")
+    Call<List<SearchResult>> searchFormula(@Query("query") String query);
 
 }

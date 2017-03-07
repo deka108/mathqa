@@ -12,14 +12,17 @@ import java.util.List;
 
 import dekauliya.fyp.mathqa.ListViews.Items.ConceptHeaderItem;
 import dekauliya.fyp.mathqa.ListViews.Items.ConceptSubItem;
+import dekauliya.fyp.mathqa.ListViews.Items.SearchResultSubItem;
 import dekauliya.fyp.mathqa.ListViews.Items.KeyPointHeaderItem;
 import dekauliya.fyp.mathqa.ListViews.Items.KeyPointSubItem;
 import dekauliya.fyp.mathqa.ListViews.Items.QuestionSubItem;
 import dekauliya.fyp.mathqa.ListViews.Items.SubConceptHeaderItem;
 import dekauliya.fyp.mathqa.ListViews.Items.TopicHeaderItem;
 import dekauliya.fyp.mathqa.Models.Concept;
+import dekauliya.fyp.mathqa.Models.Formula;
 import dekauliya.fyp.mathqa.Models.KeyPoint;
 import dekauliya.fyp.mathqa.Models.Question;
+import dekauliya.fyp.mathqa.Models.SearchResult;
 import dekauliya.fyp.mathqa.Models.Solution;
 import dekauliya.fyp.mathqa.Models.SubConcept;
 import dekauliya.fyp.mathqa.Models.Topic;
@@ -356,19 +359,21 @@ public class DataServiceRx {
         client.searchDatabase(textQuery)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Question>>() {
+                .subscribe(new Observer<List<SearchResult>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(List<Question> value) {
+                    public void onNext(List<SearchResult> value) {
                         if (value != null && value.size() > 0) {
-                            for(Question question: value){
-                                QuestionSubItem questionSubItem = new QuestionSubItem
-                                        (null, question);
-                                mQuestionResultItems.add(questionSubItem);
+                            for(SearchResult result: value){
+                                int index = 1;
+                                SearchResultSubItem resultSubItem =
+                                        new SearchResultSubItem(null, index++, false,
+                                                null, result.getQuestion());
+                                mQuestionResultItems.add(resultSubItem);
                             }
                         }
                     }
@@ -384,13 +389,130 @@ public class DataServiceRx {
                         mListener.onDataRetrieved();
                     }
                 });
-
     }
 
     public void searchFormula(String formulaQuery, final IDataListener mListener){
         mQuestionResultItems.clear();
         Logger.d("FORMULA QUERY: " + formulaQuery);
         client.searchFormula(formulaQuery)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<SearchResult>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<SearchResult> value) {
+                        if (value != null && value.size() > 0){
+                            int index = 1;
+                            for(SearchResult fsr: value){
+                                Logger.d("Related formula: " + fsr.getRel_formula().getContent());
+                                if (fsr.getQuestion() != null) {
+                                    Logger.d("Question: " + fsr.getQuestion().getContent());
+                                }
+                                SearchResultSubItem searchResultSubItem =
+                                        new SearchResultSubItem(
+                                                null, index++, true, fsr.getRel_formula(),
+                                                fsr.getQuestion());
+                                mQuestionResultItems.add(searchResultSubItem);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mListener.onError();
+                        e.getStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        mListener.onDataRetrieved();
+                    }
+                });
+    }
+
+//        public void searchFormula(String formulaQuery, final IDataListener mListener){
+//        mQuestionResultItems.clear();
+//        Logger.d("FORMULA QUERY: " + formulaQuery);
+//        client.searchFormula(formulaQuery)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<List<Question>>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(List<Question> value) {
+//                        if (value != null && value.size() > 0) {
+//                            for(Question question: value){
+//                                QuestionSubItem questionSubItem = new QuestionSubItem
+//                                        (null, question);
+//                                mQuestionResultItems.add(questionSubItem);
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        mListener.onError();
+//                        Logger.e(e.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        mListener.onDataRetrieved();
+//                    }
+//                });
+//
+//    }
+
+
+//    public void searchQuestions(String textQuery, final IDataListener mListener){
+//        mQuestionResultItems.clear();
+//        Logger.d("TEXT QUERY: " + textQuery);
+//        client.searchDatabase(textQuery)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<List<Question>>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(List<Question> value) {
+//                        if (value != null && value.size() > 0) {
+//                            for(Question question: value){
+//                                QuestionSubItem questionSubItem = new QuestionSubItem
+//                                        (null, question);
+//                                mQuestionResultItems.add(questionSubItem);
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        mListener.onError();
+//                        Logger.e(e.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        mListener.onDataRetrieved();
+//                    }
+//                });
+//
+//    }
+
+    public void searchTestQuestions(String textQuery, final IDataListener mListener){
+        mQuestionResultItems.clear();
+        Logger.d("TEXT QUERY: " + textQuery);
+        client.searchTestDatabase(textQuery)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<Question>>() {
@@ -424,6 +546,74 @@ public class DataServiceRx {
 
     }
 
+    public void searchTestFormula(String formulaQuery, final IDataListener mListener){
+        mQuestionResultItems.clear();
+        Logger.d("FORMULA QUERY: " + formulaQuery);
+        client.searchTestFormula(formulaQuery)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<Formula>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<Formula> value) {
+                        Logger.d(value);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mListener.onError();
+                        Logger.e(e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        mListener.onDataRetrieved();
+                    }
+                });
+
+    }
+
+//    public void searchTestFormula(String formulaQuery, final IDataListener mListener){
+//        mQuestionResultItems.clear();
+//        Logger.d("FORMULA QUERY: " + formulaQuery);
+//        client.searchTestFormula(formulaQuery)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<List<Question>>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(List<Question> value) {
+//                        if (value != null && value.size() > 0) {
+//                            for(Question question: value){
+//                                QuestionSubItem questionSubItem = new QuestionSubItem
+//                                        (null, question);
+//                                mQuestionResultItems.add(questionSubItem);
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        mListener.onError();
+//                        Logger.e(e.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
+//
+//    }
+
     public List<AbstractFlexibleItem> getData(DataType dataType){
         return new ArrayList<> (getDataByType(dataType));
     }
@@ -445,6 +635,10 @@ public class DataServiceRx {
         List<AbstractFlexibleItem> mItems = getDataByType(type);
         mItems.add(item);
         Collections.sort(mItems, mComparator);
+    }
+
+    public Solution getSolution(){
+        return this.mSolution;
     }
 
     public List<AbstractFlexibleItem> getDataByType(DataType dataType){
@@ -488,8 +682,4 @@ public class DataServiceRx {
             return 0;
         }
     };
-
-    public Solution getSolution(){
-        return this.mSolution;
-    }
 }

@@ -45,9 +45,6 @@ public class KeypointConceptListFragment extends AbstractListFragment {
     @FragmentArg("conceptArg")
     Concept conceptArg;
 
-//    @ViewById(R.id.progress_activity)
-//    ProgressFrameLayout progressActivity;
-
     DataType dataType = DataType.KEYPOINT_CONCEPT;
 
     @AfterInject

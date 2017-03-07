@@ -93,4 +93,8 @@
     <string name="fs_edit_latex_hint">Edit your latex text here</string>
     <string name="no_questions_result">No questions available for this query</string>
     <string name="search_result_title">Search Result</string>
+    <string name="retrieved_formula">Retrieved Formula</string>
+    <string name="formula_unavailable">Formula unavailable.</string>
+    <string name="question_unavailable">Question unavailable.</string>
+    <string name="formula_result_title">Retrieved Formula #%d</string>
 </resources>

@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
@@ -59,6 +60,11 @@ public class ViewUtils {
             altView.setVisibility(View.VISIBLE);
             latexView.setVisibility(View.GONE);
         }
+    }
+
+    public static void toggleDisplay(LinearLayout visibleContainer, LinearLayout invisibleContainer){
+        visibleContainer.setVisibility(View.VISIBLE);
+        invisibleContainer.setVisibility(View.GONE);
     }
 
     public static float getDifficultyLevelFloat(String diffLevel){

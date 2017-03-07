@@ -67,6 +67,10 @@ public class SearchDialogUtils {
                             @Override
                             public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
                                 textQuery = input.toString();
+//                                SearchActivity_.intent(activity)
+//                                        .searchTypeExtra(SearchType.TEXT)
+//                                        .searchQuery(textQuery)
+//                                        .start();
                                 SearchActivity_.intent(activity)
                                         .searchTypeExtra(SearchType.TEXT)
                                         .searchQuery(textQuery)
@@ -88,6 +92,10 @@ public class SearchDialogUtils {
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         dialog.dismiss();
                         Logger.d("Dialog, textQuery: " + formulaQuery);
+//                        SearchActivity_.intent(activity)
+//                                .searchTypeExtra(SearchType.FORMULA)
+//                                .searchQuery(ViewUtils.getLatex(formulaQuery))
+//                                .start();
                         SearchActivity_.intent(activity)
                                 .searchTypeExtra(SearchType.FORMULA)
                                 .searchQuery(ViewUtils.getLatex(formulaQuery))
