@@ -3,8 +3,10 @@ package dekauliya.fyp.mathqa.ListViews;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
-import android.widget.EditText;
+import android.view.View;
 import android.widget.ImageButton;
+
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -53,7 +55,7 @@ public class QuestionSearchResultFragment extends AbstractListFragment{
     String queryArg;
 
     @ViewById(R.id.edit_search)
-    EditText searchEditText;
+    MaterialEditText searchEditText;
 
     @ViewById(R.id.btn_search)
     ImageButton searchBtn;
@@ -62,29 +64,44 @@ public class QuestionSearchResultFragment extends AbstractListFragment{
 
     @AfterInject
     void loadQuestionResults(){
+        performSearch(queryArg);
+    }
+
+    private void performSearch(String query) {
         switch(searchTypeArg) {
-            case TEXT:
-                dataServiceRx.searchQuestions(queryArg, this);
+            case TEXT_DB:
+                dataServiceRx.searchTextDb(query, this);
+                break;
+            case FULL_TEXT:
+                dataServiceRx.searchFullText(query, this);
                 break;
             case FORMULA:
-                dataServiceRx.searchFormula(queryArg, this);
+                dataServiceRx.searchFormula(query, this);
                 break;
             case TEST_FORMULA:
-                dataServiceRx.searchTestFormula(queryArg, this);
+                dataServiceRx.searchTestFormula(query, this);
                 break;
             case TEST_TEXT:
-                dataServiceRx.searchTestQuestions(queryArg, this);
+                dataServiceRx.searchTestQuestions(query, this);
                 break;
         }
     }
 
     @AfterViews
     void setUpListview(){
+        searchEditText.setText(queryArg);
         searchBtn.setImageDrawable(DrawableUtils.getDrawable(DrawableType.SEARCH, getActivity(),
                 R.color.material_color_white));
-        if (mAdapter == null) {
-            progressActivity.showLoading();
-        }
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String query = searchEditText.getText().toString();
+                performSearch(query);
+            }
+        });
+
+        progressActivity.showLoading();
         mAdapter = new FlexibleAdapter(dataServiceRx.getDataByType(dataType), this);
         mRecyclerView.setLayoutManager(createNewLinearLayoutManager());
         mRecyclerView.setAdapter(mAdapter);

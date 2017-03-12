@@ -1,5 +1,6 @@
 package dekauliya.fyp.mathqa.CameraOcr;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,10 +10,12 @@ import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.orhanobut.logger.Logger;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -21,6 +24,9 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import dekauliya.fyp.mathqa.R;
+import dekauliya.fyp.mathqa.SearchViews.SearchActivity_;
+import dekauliya.fyp.mathqa.SearchViews.SearchType;
+import dekauliya.fyp.mathqa.Utils.ImagePickerUtils;
 
 import static dekauliya.fyp.mathqa.MathQaInterface.CAPTURED_IMAGE_URI;
 import static dekauliya.fyp.mathqa.MathQaInterface.OCR_GOOGLE_API;
@@ -32,15 +38,20 @@ import static dekauliya.fyp.mathqa.MathQaInterface.PROCESSOR_LEPTONICA;
 
 @EActivity(R.layout.activity_image_preview)
 public class ImageOcrActivity extends AppCompatActivity implements IOnOcrProcessingListener {
-
+    Activity activity = this;
     @ViewById(R.id.toolbar) Toolbar toolbar;
     @ViewById(R.id.ip_image_preview) ImageView mImageView;
     @ViewById(R.id.ip_ocr_result)
-    EditText mOcrResult;
+    MaterialEditText mOcrResult;
+    @ViewById(R.id.btn_ocr_text_search)  Button searchBtn;
+    @ViewById(R.id.btn_ocr_img_capture) Button imgCaptureBtn;
 
     @Bean
     ImagePreprocessorBase mImagePreprocessor;
     TextRecogniserAbstract mTextRecogniser;
+
+    @Bean
+    ImagePickerUtils imagePicker;
 
     int ocrOption;
     int preprocessorOption = PROCESSOR_LEPTONICA;
@@ -49,6 +60,25 @@ public class ImageOcrActivity extends AppCompatActivity implements IOnOcrProcess
 
     @AfterViews
     void setUpViews(){
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String textQuery = mOcrResult.getText().toString();
+                SearchActivity_.intent(activity)
+                        .searchTypeExtra(SearchType.FULL_TEXT)
+                        .searchQuery(textQuery)
+                        .start();
+            }
+        });
+
+        imgCaptureBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imagePicker.pickImage(activity);
+            }
+        });
+
         mProgressDialog = new ProgressDialog(this);
 
         Intent intent = getIntent();

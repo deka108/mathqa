@@ -27,7 +27,7 @@ public class ViewUtils {
 //        result = result.replaceAll(getRawString("\\begin{align}"), "\\\\begin{aligned}");
 //        result = result.replaceAll(getRawString("\\end{align}"), "\\\\end{aligned}");
 
-        String result = originalLatex.replaceAll(" ; ", " <br/> ");;
+        String result = originalLatex.replaceAll(";", " <br/> ");;
 
         Logger.d("Final result: " + result);
         return result;

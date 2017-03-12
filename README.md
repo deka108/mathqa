@@ -8,7 +8,4 @@
 - [X] Text input query
 - [X] LaTeX input query
 - [X] SearchResults
-- [ ] Swipe Refresh 
-- [ ] NLP OCR 
 - [ ] Tag based search
-- [ ] Realm.io (Optional)

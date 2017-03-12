@@ -53,11 +53,11 @@
 
     </LinearLayout>
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tf_login_or_signup"
-            android:textSize="@dimen/material_typography_regular_subheading_text_size"
-            android:textColor="@color/colorPrimary"
-            />
+    <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/tf_login_or_signup"-->
+            <!--android:textSize="@dimen/material_typography_regular_subheading_text_size"-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--/>-->
 </LinearLayout>

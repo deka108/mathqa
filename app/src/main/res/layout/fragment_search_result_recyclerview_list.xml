@@ -10,8 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edit_search"
+            met_floatingLabelText="Enter your query..."
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>

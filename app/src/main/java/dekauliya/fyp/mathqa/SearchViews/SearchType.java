@@ -5,7 +5,8 @@ package dekauliya.fyp.mathqa.SearchViews;
  */
 
 public enum SearchType {
-    TEXT,
+    TEXT_DB,
+    FULL_TEXT,
     TAG,
     IMAGE,
     FORMULA,

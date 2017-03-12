@@ -97,4 +97,5 @@
     <string name="formula_unavailable">Formula unavailable.</string>
     <string name="question_unavailable">Question unavailable.</string>
     <string name="formula_result_title">Retrieved Formula #%d</string>
+    <string name="title_image_preview_activity">Preview an Image</string>
 </resources>

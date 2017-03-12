@@ -353,10 +353,48 @@ public class DataServiceRx {
                 });
     }
 
-    public void searchQuestions(String textQuery, final IDataListener mListener){
+    public void searchTextDb(String textQuery, final IDataListener mListener){
         mQuestionResultItems.clear();
         Logger.d("TEXT QUERY: " + textQuery);
         client.searchDatabase(textQuery)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<SearchResult>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<SearchResult> value) {
+                        if (value != null && value.size() > 0) {
+                            for(SearchResult result: value){
+                                int index = 1;
+                                SearchResultSubItem resultSubItem =
+                                        new SearchResultSubItem(null, index++, false,
+                                                null, result.getQuestion());
+                                mQuestionResultItems.add(resultSubItem);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mListener.onError();
+                        Logger.e(e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        mListener.onDataRetrieved();
+                    }
+                });
+    }
+
+    public void searchFullText(String textQuery, final IDataListener mListener){
+        mQuestionResultItems.clear();
+        Logger.d("TEXT QUERY: " + textQuery);
+        client.searchText(textQuery)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<SearchResult>>() {
@@ -472,7 +510,7 @@ public class DataServiceRx {
 //    }
 
 
-//    public void searchQuestions(String textQuery, final IDataListener mListener){
+//    public void searchTextDb(String textQuery, final IDataListener mListener){
 //        mQuestionResultItems.clear();
 //        Logger.d("TEXT QUERY: " + textQuery);
 //        client.searchDatabase(textQuery)

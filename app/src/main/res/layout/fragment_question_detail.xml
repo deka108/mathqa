@@ -73,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="@string/question_content"
-                auto:engine="KaTeX"/>
+                auto:engine="MathJax"/>
             <TextView
                 android:layout_marginTop="@dimen/material_card_title_block_large_subtitle_margin_top"
                 android:id="@+id/qd_question_latex_alt"

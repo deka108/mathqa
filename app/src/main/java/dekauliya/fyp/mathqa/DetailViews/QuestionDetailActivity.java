@@ -93,7 +93,7 @@ public class QuestionDetailActivity extends BaseActivity implements
         switch(id) {
             case R.id.action_settings: return true;
             case android.R.id.home:
-                onBackPressed();
+                this.onBackPressed();
                 return true;
         }
 

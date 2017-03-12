@@ -69,6 +69,15 @@ public class SearchActivity extends BaseActivity implements OnListFragmentIntera
     }
 
     @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() == 0) {
+            this.finish();
+        } else {
+            getFragmentManager().popBackStack();
+        }
+    }
+
+    @Override
     public void onFragmentChange(SwipeRefreshLayout swipeRefreshLayout, RecyclerView recyclerView,
                                  @SelectableAdapter.Mode int mode) {
 

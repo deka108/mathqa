@@ -69,6 +69,9 @@ public interface MathQaRestRxJavaApi {
     Observable<List<SearchResult>> searchDatabase(@Query(value = "query", encoded = true) String query);
     @GET("search/?type=f")
     Observable<List<SearchResult>> searchFormula(@Query(value = "query", encoded = true) String formula);
+    @GET("search/?type=t")
+    Observable<List<SearchResult>> searchText(@Query(value = "query", encoded = true) String text);
+
 
     @GET("test_questions/search/?type=d")
     Observable<List<Question>> searchTestDatabase(@Query(value = "query", encoded = true) String query);
