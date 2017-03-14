@@ -75,7 +75,7 @@ public class FabUtils {
             @Override
             public void onClick(View view) {
                 fabSearch.close(true);
-                searchUtils.displaySearchDialog();
+                searchUtils.displaySearchDialog("");
             }
         });
 
@@ -83,7 +83,7 @@ public class FabUtils {
             @Override
             public void onClick(View view) {
                 fabSearch.close(true);
-                searchUtils.displayFormulaInputPreview();
+                searchUtils.displayFormulaInputPreview("");
             }
         });
 

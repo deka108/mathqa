@@ -22,10 +22,10 @@ import org.androidannotations.annotations.RootContext;
 import java.util.List;
 
 import dekauliya.fyp.mathqa.R;
-import dekauliya.fyp.mathqa.SearchViews.FormulaHelper;
-import dekauliya.fyp.mathqa.SearchViews.FormulaType;
-import dekauliya.fyp.mathqa.SearchViews.SearchActivity_;
-import dekauliya.fyp.mathqa.SearchViews.SearchType;
+import dekauliya.fyp.mathqa.Views.SearchViews.FormulaHelper;
+import dekauliya.fyp.mathqa.Views.SearchViews.FormulaType;
+import dekauliya.fyp.mathqa.Views.SearchViews.SearchActivity_;
+import dekauliya.fyp.mathqa.Views.SearchViews.SearchType;
 import io.github.kexanie.library.MathView;
 
 /**
@@ -50,33 +50,45 @@ public class SearchDialogUtils {
     MDButton fsResetBtn;
     MDButton fsInsertBtn;
 
+    MaterialDialog formulaPreviewDialog;
+
+    boolean databaseSearch = false;
+
     String textQuery;
     String formulaQuery;
 
-    public void displaySearchDialog(){
+    public void displaySearchDialog(String query){
         new MaterialDialog.Builder(activity)
                 .title(R.string.sd_search_text_title)
                 .titleColorRes(R.color.colorAccent)
-                .positiveText("Search")
+                .positiveText("Text Search")
                 .positiveColorRes(R.color.colorAccent)
                 .negativeText("Cancel")
                 .negativeColorRes(R.color.colorAccent)
+                .checkBoxPrompt("Exact database search", false, null)
                 .input(activity.getString(R.string.sd_text_hint),
-                        activity.getString(R.string.sd_text_prefill), false,
+                        query, false,
                         new MaterialDialog.InputCallback() {
                             @Override
                             public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
                                 textQuery = input.toString();
-                                SearchActivity_.intent(activity)
-                                        .searchTypeExtra(SearchType.TEXT_DB)
-                                        .searchQuery(textQuery)
-                                        .start();
+                                if (dialog.isPromptCheckBoxChecked()) {
+                                    SearchActivity_.intent(activity)
+                                            .searchTypeExtra(SearchType.TEXT_DB)
+                                            .searchQuery(textQuery)
+                                            .start();
+                                }else{
+                                    SearchActivity_.intent(activity)
+                                            .searchTypeExtra(SearchType.FULL_TEXT)
+                                            .searchQuery(textQuery)
+                                            .start();
+                                }
                             }
                         }).show();
     }
 
-    public void displayFormulaInputPreview() {
-        MaterialDialog formulaPreviewDialog = new MaterialDialog.Builder(activity)
+    public void displayFormulaInputPreview(String query) {
+        formulaPreviewDialog = new MaterialDialog.Builder(activity)
                 .title(activity.getString(R.string.sd_formula_search_title))
                 .titleColorRes(R.color.colorAccent)
                 .customView(R.layout.dialog_formula_input_preview, true)
@@ -90,7 +102,7 @@ public class SearchDialogUtils {
                         Logger.d("Dialog, textQuery: " + formulaQuery);
                         SearchActivity_.intent(activity)
                                 .searchTypeExtra(SearchType.FORMULA)
-                                .searchQuery(ViewUtils.getLatex(formulaQuery))
+                                .searchQuery(formulaQuery)
                                 .start();
                     }
                 })
@@ -111,12 +123,15 @@ public class SearchDialogUtils {
                 fsMathPreview = (MathView) childView;
             }else if ( childView.getId() == R.id.fs_latex_input){
                 fsEditText = (MaterialEditText) childView;
+                fsEditText.setText(query);
             }else if (childView.getId() == R.id.fs_preview_placeholder){
                 fsPreviewPlaceholder = (TextView) childView;
             }else if (childView.getId() == R.id.fs_btn_container){
                 fsLLBtnContainer = (RelativeLayout) childView;
             }
         }
+
+        toggleActionButton(formulaPreviewDialog, fsEditText.getText().toString());
 
         fsEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -132,6 +147,7 @@ public class SearchDialogUtils {
             @Override
             public void afterTextChanged(Editable editable) {
                 formulaQuery = editable.toString();
+                toggleActionButton(formulaPreviewDialog, formulaQuery);
                 ViewUtils.displayLatex(fsMathPreview, fsPreviewPlaceholder, formulaQuery, true);
             }
         });
@@ -171,6 +187,14 @@ public class SearchDialogUtils {
         formulaStrs = FormulaHelper.getFormulaStrArray(FormulaType.ALL, activity);
         formulas = FormulaHelper.getFormulaArray(FormulaType.ALL, activity);
         formulaPreviewDialog.show();
+    }
+
+    private void toggleActionButton(MaterialDialog dialog, String input) {
+        if (input.length() > 0){
+            dialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
+        } else{
+            dialog.getActionButton(DialogAction.POSITIVE).setEnabled(false);
+        }
     }
 
     private void displayFormulaOptions() {

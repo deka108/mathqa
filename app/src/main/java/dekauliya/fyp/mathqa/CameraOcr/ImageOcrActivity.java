@@ -24,8 +24,8 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import dekauliya.fyp.mathqa.R;
-import dekauliya.fyp.mathqa.SearchViews.SearchActivity_;
-import dekauliya.fyp.mathqa.SearchViews.SearchType;
+import dekauliya.fyp.mathqa.Views.SearchViews.SearchActivity_;
+import dekauliya.fyp.mathqa.Views.SearchViews.SearchType;
 import dekauliya.fyp.mathqa.Utils.ImagePickerUtils;
 
 import static dekauliya.fyp.mathqa.MathQaInterface.CAPTURED_IMAGE_URI;

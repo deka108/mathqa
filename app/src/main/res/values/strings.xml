@@ -98,4 +98,8 @@
     <string name="question_unavailable">Question unavailable.</string>
     <string name="formula_result_title">Retrieved Formula #%d</string>
     <string name="title_image_preview_activity">Preview an Image</string>
+    <string name="latex_syntax_error">There is some errors with the LaTeX syntax</string>
+    <string name="latex_preview_title">Latex Preview:</string>
+    <string name="sr_latex_preview">Latex Preview:</string>
+    <string name="sr_search_query">Search Query:</string>
 </resources>

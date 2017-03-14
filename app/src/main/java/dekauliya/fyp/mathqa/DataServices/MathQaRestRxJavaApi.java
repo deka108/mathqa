@@ -13,7 +13,13 @@ import dekauliya.fyp.mathqa.Models.SubConcept;
 import dekauliya.fyp.mathqa.Models.Subject;
 import dekauliya.fyp.mathqa.Models.Topic;
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -71,6 +77,13 @@ public interface MathQaRestRxJavaApi {
     Observable<List<SearchResult>> searchFormula(@Query(value = "query", encoded = true) String formula);
     @GET("search/?type=t")
     Observable<List<SearchResult>> searchText(@Query(value = "query", encoded = true) String text);
+
+    @Multipart
+    @POST("upload/")
+    Observable<ResponseBody> uploadImage(
+            @Part("description") RequestBody description,
+            @Part MultipartBody.Part file
+    );
 
 
     @GET("test_questions/search/?type=d")

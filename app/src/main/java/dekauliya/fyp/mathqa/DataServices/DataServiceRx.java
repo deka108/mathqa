@@ -10,14 +10,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-import dekauliya.fyp.mathqa.ListViews.Items.ConceptHeaderItem;
-import dekauliya.fyp.mathqa.ListViews.Items.ConceptSubItem;
-import dekauliya.fyp.mathqa.ListViews.Items.SearchResultSubItem;
-import dekauliya.fyp.mathqa.ListViews.Items.KeyPointHeaderItem;
-import dekauliya.fyp.mathqa.ListViews.Items.KeyPointSubItem;
-import dekauliya.fyp.mathqa.ListViews.Items.QuestionSubItem;
-import dekauliya.fyp.mathqa.ListViews.Items.SubConceptHeaderItem;
-import dekauliya.fyp.mathqa.ListViews.Items.TopicHeaderItem;
 import dekauliya.fyp.mathqa.Models.Concept;
 import dekauliya.fyp.mathqa.Models.Formula;
 import dekauliya.fyp.mathqa.Models.KeyPoint;
@@ -26,6 +18,14 @@ import dekauliya.fyp.mathqa.Models.SearchResult;
 import dekauliya.fyp.mathqa.Models.Solution;
 import dekauliya.fyp.mathqa.Models.SubConcept;
 import dekauliya.fyp.mathqa.Models.Topic;
+import dekauliya.fyp.mathqa.Views.ListViews.Items.ConceptHeaderItem;
+import dekauliya.fyp.mathqa.Views.ListViews.Items.ConceptSubItem;
+import dekauliya.fyp.mathqa.Views.ListViews.Items.KeyPointHeaderItem;
+import dekauliya.fyp.mathqa.Views.ListViews.Items.KeyPointSubItem;
+import dekauliya.fyp.mathqa.Views.ListViews.Items.QuestionSubItem;
+import dekauliya.fyp.mathqa.Views.ListViews.Items.SearchResultSubItem;
+import dekauliya.fyp.mathqa.Views.ListViews.Items.SubConceptHeaderItem;
+import dekauliya.fyp.mathqa.Views.ListViews.Items.TopicHeaderItem;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -472,78 +472,52 @@ public class DataServiceRx {
                 });
     }
 
-//        public void searchFormula(String formulaQuery, final IDataListener mListener){
-//        mQuestionResultItems.clear();
-//        Logger.d("FORMULA QUERY: " + formulaQuery);
-//        client.searchFormula(formulaQuery)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<List<Question>>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
+//    private void uploadImage(Bitmap imgBitmap) {
+//        //
+//        MediaType MEDIA_TYPE_IMG = MediaType.parse("image/*");
 //
-//                    }
+//        // create RequestBody instance from file
+//        RequestBody requestFile =
+//                RequestBody.create(
+//                        MediaType.parse(getContentResolver().getType(fileUri)),
+//                        file
+//                );
 //
-//                    @Override
-//                    public void onNext(List<Question> value) {
-//                        if (value != null && value.size() > 0) {
-//                            for(Question question: value){
-//                                QuestionSubItem questionSubItem = new QuestionSubItem
-//                                        (null, question);
-//                                mQuestionResultItems.add(questionSubItem);
-//                            }
-//                        }
-//                    }
+//        // MultipartBody.Part is used to send also the actual file name
+//        MultipartBody.Part body =
+//                MultipartBody.Part.createFormData("picture", file.getName(), requestFile);
 //
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        mListener.onError();
-//                        Logger.e(e.getMessage());
-//                    }
+//        // add another part within the multipart request
+//        String descriptionString = "hello, this is description speaking";
+//        RequestBody description =
+//                RequestBody.create(
+//                        okhttp3.MultipartBody.FORM, descriptionString);
 //
-//                    @Override
-//                    public void onComplete() {
-//                        mListener.onDataRetrieved();
-//                    }
-//                });
+//        // Execute the request
+//        client.uploadImage(description, body)
+//        .subscribeOn(Schedulers.io())
+//        .observeOn(AndroidSchedulers.mainThread())
+//        .subscribe(new Observer<ResponseBody>() {
+//            @Override
+//            public void onSubscribe(Disposable d) {
 //
-//    }
-
-
-//    public void searchTextDb(String textQuery, final IDataListener mListener){
-//        mQuestionResultItems.clear();
-//        Logger.d("TEXT QUERY: " + textQuery);
-//        client.searchDatabase(textQuery)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<List<Question>>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
+//            }
 //
-//                    }
+//            @Override
+//            public void onNext(ResponseBody value) {
 //
-//                    @Override
-//                    public void onNext(List<Question> value) {
-//                        if (value != null && value.size() > 0) {
-//                            for(Question question: value){
-//                                QuestionSubItem questionSubItem = new QuestionSubItem
-//                                        (null, question);
-//                                mQuestionResultItems.add(questionSubItem);
-//                            }
-//                        }
-//                    }
+//            }
 //
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        mListener.onError();
-//                        Logger.e(e.getMessage());
-//                    }
+//            @Override
+//            public void onError(Throwable e) {
+//                Logger.e("Error uploading image");
+//            }
 //
-//                    @Override
-//                    public void onComplete() {
-//                        mListener.onDataRetrieved();
-//                    }
-//                });
+//            @Override
+//            public void onComplete() {
+//                Logger.d("Image has been successfully sent to the server");
+//            }
+//        });
 //
 //    }
 
@@ -615,42 +589,6 @@ public class DataServiceRx {
 
     }
 
-//    public void searchTestFormula(String formulaQuery, final IDataListener mListener){
-//        mQuestionResultItems.clear();
-//        Logger.d("FORMULA QUERY: " + formulaQuery);
-//        client.searchTestFormula(formulaQuery)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<List<Question>>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(List<Question> value) {
-//                        if (value != null && value.size() > 0) {
-//                            for(Question question: value){
-//                                QuestionSubItem questionSubItem = new QuestionSubItem
-//                                        (null, question);
-//                                mQuestionResultItems.add(questionSubItem);
-//                            }
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        mListener.onError();
-//                        Logger.e(e.getMessage());
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//
-//                    }
-//                });
-//
-//    }
 
     public List<AbstractFlexibleItem> getData(DataType dataType){
         return new ArrayList<> (getDataByType(dataType));

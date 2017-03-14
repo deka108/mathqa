@@ -44,30 +44,6 @@ public class MathQaRestRxJavaService {
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(BASE_URL);
     }
-//
-//    public static <S> S createService(Class<S> serviceClass, final AccessToken accessToken) {
-//        if (httpClient == null) {
-//            httpClient = new OkHttpClient.Builder();
-//        }
-//
-//        if (accessToken != null) {
-//            httpClient.addInterceptor(new Interceptor() {
-//                @Override
-//                public Response intercept(Chain chain) throws IOException {
-//                    Request original = chain.request();
-//
-//                    Request.Builder requestBuilder = original.newBuilder()
-//                            .header("Accept", "application/json")
-//                            .header("Authorization", accessToken.getTokenType() + " " +
-//                                    accessToken.getAccessToken())
-//                            .method(original.method(), original.body());
-//
-//                    Request newRequest = requestBuilder.build();
-//                    return chain.proceed(newRequest);
-//                }
-//            });
-//        }
-//        return retrofit.create(serviceClass);
-//    }
+
 
 }

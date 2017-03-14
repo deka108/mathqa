@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="dekauliya.fyp.mathqa.SelectSubjectActivity">
+    tools:context="dekauliya.fyp.mathqa.Views.SelectSubjectActivity">
 
     <include layout="@layout/content_select_subject"/>
 

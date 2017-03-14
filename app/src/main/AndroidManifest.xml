@@ -24,7 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SelectSubjectActivity_"
+            android:name=".Views.SelectSubjectActivity_"
             android:label="@string/title_activity_select_subject"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SearchViews.SearchActivity_"
+            android:name=".Views.SearchViews.SearchActivity_"
             android:label="@string/search_result_title"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
@@ -47,26 +47,26 @@
                 android:value=".CameraOcr.SelectOrCaptureImage_"/>
         </activity>
         <activity
-            android:name=".DetailViews.ConceptDetailActivity_"
+            android:name=".Views.DetailViews.ConceptDetailActivity_"
             android:label="@string/title_activity_concept_detail"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="dekauliya.fyp.mathqa.TopicConceptActivity_"/>
+                android:value=".Views.TopicConceptActivity_"/>
         </activity>
         <activity
-            android:name=".TopicConceptActivity_"
+            android:name=".Views.TopicConceptActivity_"
             android:label="@string/title_activity_real_main"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".DetailViews.QuestionDetailActivity_"
+            android:name=".Views.DetailViews.QuestionDetailActivity_"
             android:label="@string/title_activity_question_detail"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".CameraOcr.SelectOrCaptureImage_">
         </activity>
-        <activity android:name=".BaseActivity">
+        <activity android:name=".Views.BaseActivity">
         </activity>
     </application>
 
