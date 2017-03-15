@@ -1,17 +1,21 @@
 # MathQA for Android
 
 ## Best Practices:
-1. Android Annotation Tool: faster android development using annotations. Powerful dependency injection tools, multi-threading between background and UI threads.
-2. Observer pattern: Retrofit2 and RXJava for REST APIs with the MathQA server.
-3. Dependency Injection: Parceler, serialize-deserialize Java objects.
-4. Incorporate Material Design during UI Development. Here, I made use of the following libraries to develop material design views a better user experience.
+Below are Android libraries that I have used throughout the project.
+1. Dependency Injection
+  - [Android Annotation Tool](https://github.com/androidannotations): faster android development using annotations. It provides powerful dependency injection tools between views, activity and fragments; simplifies multi-threading between background and UI threads; communicates shared preferences and event listeners; and much more.
+  - [Parceler](https://github.com/johncarl81/parceler): serialize-deserialize Java objects.
+2. REST APIs: [Retrofit2](https://github.com/square/retrofit), a HTTP client library. This library is used because it has better performance and relatively simple to use compared to other HTTP libraries.
+2. Observer pattern: 
+  - Combines [Retrofit2](https://github.com/JakeWharton/retrofit2-rxjava2-adapter) with [RXJava2](https://github.com/ReactiveX/RxAndroid) for REST APIs.
+3. Incorporate Material Design during UI Development. Here, I made use of the following libraries to develop material design views a better user experience.
   - [Material Values](https://github.com/AoDevBlue/MaterialValues): Used for consistent color and sizes across Android UIs
   - [Flexible Adapters](https://github.com/davideas/FlexibleAdapter/): Used for developing expandable and list views.
   - [Floating Action Buttons](https://github.com/Clans/FloatingActionButton): Used for displaying different search input queries.
   - [Material Dialogs](https://github.com/afollestad/material-dialogs): Used for showing different search dialogs, and creating LaTeX input editor.
   - [Material Icons](https://github.com/mikepenz/Android-Iconics): Used for displaying icons representing certain user actions.
   - [Progress Activity](https://github.com/vlonjatg/progress-activity): Used for displaying progress to the user.
-5. Runtime Permission Handler: Android version Marshmallow or later require permissions before allowing the app to use sensitive system data and features. Some of these sensitive features include camera and file system access which is used by MathQA during OCR. [Dexter](https://github.com/Karumi/Dexter) library is incorporated.
+4. Runtime Permissions: Android version Marshmallow or later require permissions before allowing the app to use sensitive system data and features. Some of these sensitive features include camera and file system access which is used by MathQA during OCR. [Dexter](https://github.com/Karumi/Dexter) library is incorporated to handle these permissions.
 
 ## Features (screenshot will be added soon):
 - [X] ExpandableViews using Flexible Adapters: header items + content preview subitems
