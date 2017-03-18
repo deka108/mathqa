@@ -1,9 +1,12 @@
 package dekauliya.fyp.mathqa.DataServices;
 
+import android.graphics.Bitmap;
+
 import com.orhanobut.logger.Logger;
 
 import org.androidannotations.annotations.EBean;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,7 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import dekauliya.fyp.mathqa.Models.Concept;
-import dekauliya.fyp.mathqa.Models.Formula;
 import dekauliya.fyp.mathqa.Models.KeyPoint;
 import dekauliya.fyp.mathqa.Models.Question;
 import dekauliya.fyp.mathqa.Models.SearchResult;
@@ -34,13 +36,17 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 /**
  * Created by dekauliya on 4/2/17.
  */
 @EBean(scope = EBean.Scope.Singleton)
-public class DataServiceRx {
-    MathQaRestRxJavaApi client = MathQaRestRxJavaService.createService(MathQaRestRxJavaApi
+public class DataService {
+    private static MathQaInterface client = MathQaServiceGenerator.createService(MathQaInterface
             .class);
 
     List<AbstractFlexibleItem> mTopicConceptItems = new ArrayList<AbstractFlexibleItem>();
@@ -324,7 +330,7 @@ public class DataServiceRx {
     }
 
     public void getSolution(String questionId, final IDataListener mListener){
-        client.getSolutions(questionId)
+        client.getSolutionsByQuestion(questionId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<Solution>>() {
@@ -354,6 +360,8 @@ public class DataServiceRx {
     }
 
     public void searchTextDb(String textQuery, final IDataListener mListener){
+        final DataType dataType = DataType.QUESTION_RESULT;
+        clearItems(dataType);
         mQuestionResultItems.clear();
         Logger.d("TEXT QUERY: " + textQuery);
         client.searchDatabase(textQuery)
@@ -392,6 +400,8 @@ public class DataServiceRx {
     }
 
     public void searchFullText(String textQuery, final IDataListener mListener){
+        final DataType dataType = DataType.QUESTION_RESULT;
+        clearItems(dataType);
         mQuestionResultItems.clear();
         Logger.d("TEXT QUERY: " + textQuery);
         client.searchText(textQuery)
@@ -430,6 +440,8 @@ public class DataServiceRx {
     }
 
     public void searchFormula(String formulaQuery, final IDataListener mListener){
+        final DataType  dataType = DataType.QUESTION_RESULT;
+        clearItems(dataType);
         mQuestionResultItems.clear();
         Logger.d("FORMULA QUERY: " + formulaQuery);
         client.searchFormula(formulaQuery)
@@ -472,130 +484,8 @@ public class DataServiceRx {
                 });
     }
 
-//    private void uploadImage(Bitmap imgBitmap) {
-//        //
-//        MediaType MEDIA_TYPE_IMG = MediaType.parse("image/*");
-//
-//        // create RequestBody instance from file
-//        RequestBody requestFile =
-//                RequestBody.create(
-//                        MediaType.parse(getContentResolver().getType(fileUri)),
-//                        file
-//                );
-//
-//        // MultipartBody.Part is used to send also the actual file name
-//        MultipartBody.Part body =
-//                MultipartBody.Part.createFormData("picture", file.getName(), requestFile);
-//
-//        // add another part within the multipart request
-//        String descriptionString = "hello, this is description speaking";
-//        RequestBody description =
-//                RequestBody.create(
-//                        okhttp3.MultipartBody.FORM, descriptionString);
-//
-//        // Execute the request
-//        client.uploadImage(description, body)
-//        .subscribeOn(Schedulers.io())
-//        .observeOn(AndroidSchedulers.mainThread())
-//        .subscribe(new Observer<ResponseBody>() {
-//            @Override
-//            public void onSubscribe(Disposable d) {
-//
-//            }
-//
-//            @Override
-//            public void onNext(ResponseBody value) {
-//
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                Logger.e("Error uploading image");
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                Logger.d("Image has been successfully sent to the server");
-//            }
-//        });
-//
-//    }
-
-    public void searchTestQuestions(String textQuery, final IDataListener mListener){
-        mQuestionResultItems.clear();
-        Logger.d("TEXT QUERY: " + textQuery);
-        client.searchTestDatabase(textQuery)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Question>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(List<Question> value) {
-                        if (value != null && value.size() > 0) {
-                            for(Question question: value){
-                                QuestionSubItem questionSubItem = new QuestionSubItem
-                                        (null, question);
-                                mQuestionResultItems.add(questionSubItem);
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        mListener.onError();
-                        Logger.e(e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        mListener.onDataRetrieved();
-                    }
-                });
-
-    }
-
-    public void searchTestFormula(String formulaQuery, final IDataListener mListener){
-        mQuestionResultItems.clear();
-        Logger.d("FORMULA QUERY: " + formulaQuery);
-        client.searchTestFormula(formulaQuery)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Formula>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(List<Formula> value) {
-                        Logger.d(value);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        mListener.onError();
-                        Logger.e(e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        mListener.onDataRetrieved();
-                    }
-                });
-
-    }
-
-
     public List<AbstractFlexibleItem> getData(DataType dataType){
         return new ArrayList<> (getDataByType(dataType));
-    }
-
-    public int getDataSize(DataType dataType){
-        return getDataByType(dataType).size();
     }
 
     public boolean isDataEmpty(DataType dataType){
@@ -658,4 +548,44 @@ public class DataServiceRx {
             return 0;
         }
     };
+
+    public void uploadImage(Bitmap bmp){
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+
+        MediaType MEDIA_TYPE_IMG = MediaType.parse("image/*");
+
+        RequestBody requestBody = RequestBody.create(MEDIA_TYPE_IMG, byteArray);
+        MultipartBody.Part body = MultipartBody.Part.create(requestBody);
+
+        client.uploadImage(body)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Observer<ResponseBody>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(ResponseBody value) {
+                Logger.d(value);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Logger.e(e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+                Logger.d("File uploaded!");
+            }
+        });
+    }
+
+    public static void updateClient(MathQaInterface newService){
+        client = newService;
+    }
 }

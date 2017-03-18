@@ -1,17 +1,11 @@
 package dekauliya.fyp.mathqa.Views;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,18 +15,11 @@ import org.androidannotations.annotations.EActivity;
 
 import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.Utils.FabUtils;
-import dekauliya.fyp.mathqa.Views.ListViews.OnListFragmentInteractionListener;
 import dekauliya.fyp.mathqa.Views.ListViews.QuestionTopicListFragment_;
 import dekauliya.fyp.mathqa.Views.ListViews.TopicConceptListFragment_;
-import eu.davidea.fastscroller.FastScroller;
-import eu.davidea.flexibleadapter.FlexibleAdapter;
-import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
 
 @EActivity
-public class TopicConceptActivity extends BaseActivity implements
-        FastScroller.OnScrollStateChangeListener,
-        FlexibleAdapter.OnUpdateListener,
-        OnListFragmentInteractionListener {
+public class TopicConceptActivity extends BaseListActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -43,30 +30,10 @@ public class TopicConceptActivity extends BaseActivity implements
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    private RecyclerView mRecyclerView;
-    private FlexibleAdapter<AbstractFlexibleItem> mAdapter;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Bean
     FabUtils fabUtils;
 
-    private final Handler mRefreshHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
-        public boolean handleMessage(Message message) {
-            switch (message.what) {
-                case 0: // Stop
-                    mSwipeRefreshLayout.setRefreshing(false);
-                    return true;
-                case 1: // Start
-                    mSwipeRefreshLayout.setRefreshing(true);
-                    return true;
-                case 2: // Show empty view
-                    ViewCompat.animate(findViewById(R.id.empty_view)).alpha(1);
-                    return true;
-                default:
-                    return false;
-            }
-        }
-    });
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -76,7 +43,7 @@ public class TopicConceptActivity extends BaseActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_real_main);
+        setContentView(R.layout.activity_topic_concept);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -113,11 +80,6 @@ public class TopicConceptActivity extends BaseActivity implements
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onFastScrollerStateChange(boolean scrolling) {
-
     }
 
     /**
@@ -158,53 +120,5 @@ public class TopicConceptActivity extends BaseActivity implements
             }
             return null;
         }
-    }
-
-    /**
-     * Handling RecyclerView when empty.
-     * <p><b>Note:</b> The order, how the 3 Views (RecyclerView, EmptyView, FastScroller)
-     * are placed in the Layout, is important!</p>
-     */
-    @Override
-    public void onUpdateEmptyView(int size) {
-//        FastScroller fastScroller = (FastScroller) findViewById(R.id.fast_scroller);
-//        View emptyView = findViewById(R.id.empty_view);
-//        TextView emptyText = (TextView) findViewById(R.id.empty_text);
-//        if (emptyText != null)
-//            emptyText.setText(getString(R.string.no_items));
-//        if (size > 0) {
-//            fastScroller.setVisibility(View.VISIBLE);
-//            mRefreshHandler.removeMessages(2);
-//            emptyView.setAlpha(0);
-//        } else {
-//            emptyView.setAlpha(0);
-//            mRefreshHandler.sendEmptyMessage(2);
-//            fastScroller.setVisibility(View.GONE);
-//        }
-    }
-
-    @Override
-    public void onFragmentChange(SwipeRefreshLayout swipeRefreshLayout, RecyclerView recyclerView,
-                                 int mode) {
-        mRecyclerView = recyclerView;
-        mAdapter = (FlexibleAdapter) recyclerView.getAdapter();
-        mSwipeRefreshLayout = swipeRefreshLayout;
-//        initializeSwipeToRefresh();
-    }
-
-    private void initializeSwipeToRefresh() {
-        // Swipe down to force synchronize
-//        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-        mSwipeRefreshLayout.setDistanceToTriggerSync(390);
-        mSwipeRefreshLayout.setEnabled(true); //Controlled by fragments!
-        mSwipeRefreshLayout.setColorSchemeResources(
-                android.R.color.holo_purple, android.R.color.holo_blue_light,
-                android.R.color.holo_green_light, android.R.color.holo_orange_light);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mSwipeRefreshLayout.setRefreshing(true);
-            }
-        });
     }
 }

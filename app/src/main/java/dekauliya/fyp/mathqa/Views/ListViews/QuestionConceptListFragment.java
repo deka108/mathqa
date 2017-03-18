@@ -11,15 +11,15 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
 
-import dekauliya.fyp.mathqa.DataServices.DataServiceRx;
+import dekauliya.fyp.mathqa.DataServices.DataService;
 import dekauliya.fyp.mathqa.DataServices.DataType;
-import dekauliya.fyp.mathqa.Views.ListViews.Items.QuestionSubItem;
-import dekauliya.fyp.mathqa.Views.ListViews.Items.SubConceptHeaderItem;
 import dekauliya.fyp.mathqa.Models.Concept;
 import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.Utils.GraphicUtils;
 import dekauliya.fyp.mathqa.Views.DetailViews.ConceptDetailActivity_;
 import dekauliya.fyp.mathqa.Views.DetailViews.QuestionDetailActivity_;
+import dekauliya.fyp.mathqa.Views.ListViews.Items.QuestionSubItem;
+import dekauliya.fyp.mathqa.Views.ListViews.Items.SubConceptHeaderItem;
 import eu.davidea.fastscroller.FastScroller;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.SelectableAdapter;
@@ -34,7 +34,6 @@ import eu.davidea.flexibleadapter.items.IFlexible;
  */
 @EFragment(R.layout.fragment_recyclerview_list)
 public class QuestionConceptListFragment extends AbstractListFragment {
-
     @ViewById(R.id.fragment_rv)
     RecyclerView mRecyclerView;
 
@@ -45,7 +44,7 @@ public class QuestionConceptListFragment extends AbstractListFragment {
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Bean
-    DataServiceRx dataServiceRx;
+    DataService dataService;
 
     @FragmentArg("conceptArg")
     Concept conceptArg;
@@ -54,7 +53,7 @@ public class QuestionConceptListFragment extends AbstractListFragment {
 
     @AfterInject
     void loadKeypointConcepts(){
-        dataServiceRx.getQuestionConceptData(conceptArg.getId(), this);
+        dataService.getQuestionConceptData(conceptArg.getId(), this);
     }
 
     @AfterViews
@@ -62,7 +61,7 @@ public class QuestionConceptListFragment extends AbstractListFragment {
         if (mAdapter == null) {
             progressActivity.showLoading();
         }
-        mAdapter = new FlexibleAdapter(dataServiceRx.getDataByType(dataType), this);
+        mAdapter = new FlexibleAdapter(dataService.getDataByType(dataType), this);
         mRecyclerView.setLayoutManager(createNewLinearLayoutManager());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
@@ -72,15 +71,24 @@ public class QuestionConceptListFragment extends AbstractListFragment {
 
         mAdapter.setFastScroller(mFastScroller, GraphicUtils.getColorAccent(getActivity()),
                 (ConceptDetailActivity_) getActivity());
-        mSwipeRefreshLayout.setEnabled(false);
+        mSwipeRefreshLayout.setEnabled(true);
+
+//        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                dataService.getQuestionConceptData(conceptArg.getId(), (IDataListener) getActivity());
+//                mSwipeRefreshLayout.setEnabled(true);
+//                progressActivity.showLoading();
+//            }
+//        });
 
         mListener.onFragmentChange(mSwipeRefreshLayout, mRecyclerView, SelectableAdapter.MODE_IDLE);
     }
 
     @Override
     public void onDataRetrieved() {
-        mAdapter.updateDataSet(dataServiceRx.getData(dataType));
-        if (dataServiceRx.isDataEmpty(dataType)){
+        mAdapter.updateDataSet(dataService.getData(dataType));
+        if (dataService.isDataEmpty(dataType)){
             showEmptyPage(getString(R.string.empty_question_for_concept));
         }else{
             progressActivity.showContent();

@@ -14,7 +14,6 @@ import dekauliya.fyp.mathqa.Models.Subject;
 import dekauliya.fyp.mathqa.Models.Topic;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
@@ -27,7 +26,7 @@ import retrofit2.http.Query;
  * Created by dekauliya on 29/1/17.
  */
 
-public interface MathQaRestRxJavaApi {
+public interface MathQaInterface {
     @GET("subjects/")
     Observable<List<Subject>> getSubjects();
     @GET("subjects/{id}")
@@ -67,7 +66,7 @@ public interface MathQaRestRxJavaApi {
     Observable<Question> getQuestion(@Path("id") String questionId);
 
     @GET("solutions/")
-    Observable<List<Solution>> getSolutions(@Query("question") String questionId);
+    Observable<List<Solution>> getSolutionsByQuestion(@Query("question") String questionId);
     @GET("solutions/{id}")
     Observable<Solution> getSolution(@Path("id") Integer solutionId);
 
@@ -80,10 +79,7 @@ public interface MathQaRestRxJavaApi {
 
     @Multipart
     @POST("upload/")
-    Observable<ResponseBody> uploadImage(
-            @Part("description") RequestBody description,
-            @Part MultipartBody.Part file
-    );
+    Observable<ResponseBody> uploadImage(@Part MultipartBody.Part file);
 
 
     @GET("test_questions/search/?type=d")

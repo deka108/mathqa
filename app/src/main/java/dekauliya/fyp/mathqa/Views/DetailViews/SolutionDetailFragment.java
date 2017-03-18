@@ -10,7 +10,7 @@ import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
 
 import dekauliya.fyp.mathqa.Views.BaseFragment;
-import dekauliya.fyp.mathqa.DataServices.DataServiceRx;
+import dekauliya.fyp.mathqa.DataServices.DataService;
 import dekauliya.fyp.mathqa.DataServices.IDataListener;
 import dekauliya.fyp.mathqa.Models.Question;
 import dekauliya.fyp.mathqa.Models.Solution;
@@ -26,7 +26,7 @@ public class SolutionDetailFragment extends BaseFragment implements IDataListene
     Question questionArg;
 
     @Bean
-    DataServiceRx dataServiceRx;
+    DataService dataService;
 
     @ViewById(R.id.sd_solution_title)
     TextView solutionTitle;
@@ -40,7 +40,7 @@ public class SolutionDetailFragment extends BaseFragment implements IDataListene
     @AfterViews
     void loadSolution(){
         progressActivity.showLoading();
-        dataServiceRx.getSolution(questionArg.getId(), this);
+        dataService.getSolution(questionArg.getId(), this);
     }
 
     @Override
@@ -64,11 +64,10 @@ public class SolutionDetailFragment extends BaseFragment implements IDataListene
     public void onDataRetrieved() {
         solutionTitle.setText(String.format(getString(R.string.sd_solution_title),
                 questionArg.getId()));
-        Solution solution = dataServiceRx.getSolution();
+        Solution solution = dataService.getSolution();
         if (solution != null) {
             ViewUtils.displayLatex(solutionContent, solutionContentAlt, solution.getContent(), false);
             progressActivity.showContent();
-
         }else{
             showEmptyPage(getString(R.string.empty_solution_for_question));
         }

@@ -39,6 +39,7 @@ public class TessEngine {
         return instance;
     }
 
+    @Background
     public void initOcrEngine(){
         TessDataManager tdm = TessDataManager.getInstance(mContext);
         tdm.initTessTrainedData();

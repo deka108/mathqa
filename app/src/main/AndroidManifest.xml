@@ -42,9 +42,6 @@
             android:name=".CameraOcr.ImageOcrActivity_"
             android:label="@string/title_image_preview_activity"
             android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CameraOcr.SelectOrCaptureImage_"/>
         </activity>
         <activity
             android:name=".Views.DetailViews.ConceptDetailActivity_"
@@ -64,9 +61,7 @@
             android:label="@string/title_activity_question_detail"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".CameraOcr.SelectOrCaptureImage_">
-        </activity>
-        <activity android:name=".Views.BaseActivity">
+        <activity android:name=".Views.BaseActivity_">
         </activity>
     </application>
 

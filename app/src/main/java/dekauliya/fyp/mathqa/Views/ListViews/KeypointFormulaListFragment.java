@@ -11,7 +11,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
 
-import dekauliya.fyp.mathqa.DataServices.DataServiceRx;
+import dekauliya.fyp.mathqa.DataServices.DataService;
 import dekauliya.fyp.mathqa.DataServices.DataType;
 import dekauliya.fyp.mathqa.Models.Concept;
 import dekauliya.fyp.mathqa.R;
@@ -40,7 +40,7 @@ public class KeypointFormulaListFragment extends AbstractListFragment {
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Bean
-    DataServiceRx dataServiceRx;
+    DataService dataService;
 
     @FragmentArg("conceptArg")
     Concept conceptArg;
@@ -49,7 +49,7 @@ public class KeypointFormulaListFragment extends AbstractListFragment {
 
     @AfterInject
     void loadKeypointFormulas(){
-        dataServiceRx.getConceptFormulaData(conceptArg.getId(), this);
+        dataService.getConceptFormulaData(conceptArg.getId(), this);
     }
 
     @AfterViews
@@ -57,7 +57,7 @@ public class KeypointFormulaListFragment extends AbstractListFragment {
         if (mAdapter == null) {
             progressActivity.showLoading();
         }
-        mAdapter = new FlexibleAdapter(dataServiceRx.getDataByType(dataType), this);
+        mAdapter = new FlexibleAdapter(dataService.getDataByType(dataType), this);
         mRecyclerView.setLayoutManager(createNewLinearLayoutManager());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -73,8 +73,8 @@ public class KeypointFormulaListFragment extends AbstractListFragment {
 
     @Override
     public void onDataRetrieved() {
-        mAdapter.updateDataSet(dataServiceRx.getData(dataType));
-        if (dataServiceRx.isDataEmpty(dataType)){
+        mAdapter.updateDataSet(dataService.getData(dataType));
+        if (dataService.isDataEmpty(dataType)){
             showEmptyPage(getString(R.string.empty_formula_for_concept));
         }else{
             progressActivity.showContent();

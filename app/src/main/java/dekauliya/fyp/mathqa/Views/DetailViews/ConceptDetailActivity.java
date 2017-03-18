@@ -18,22 +18,20 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
 
-import dekauliya.fyp.mathqa.Views.BaseActivity;
-import dekauliya.fyp.mathqa.Views.ListViews.KeypointConceptListFragment_;
-import dekauliya.fyp.mathqa.Views.ListViews.KeypointFormulaListFragment_;
-import dekauliya.fyp.mathqa.Views.ListViews.OnListFragmentInteractionListener;
-import dekauliya.fyp.mathqa.Views.ListViews.QuestionConceptListFragment_;
 import dekauliya.fyp.mathqa.Models.Concept;
 import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.Utils.FabUtils;
+import dekauliya.fyp.mathqa.Views.BaseListActivity;
+import dekauliya.fyp.mathqa.Views.ListViews.KeypointConceptListFragment_;
+import dekauliya.fyp.mathqa.Views.ListViews.KeypointFormulaListFragment_;
+import dekauliya.fyp.mathqa.Views.ListViews.QuestionConceptListFragment_;
 import eu.davidea.fastscroller.FastScroller;
 import eu.davidea.flexibleadapter.SelectableAdapter;
 
 
 @EActivity
-public class ConceptDetailActivity extends BaseActivity implements
-        OnListFragmentInteractionListener,
-        OnDetailFragmentInteractionListener, FastScroller.OnScrollStateChangeListener{
+public class ConceptDetailActivity extends BaseListActivity implements
+        FastScroller.OnScrollStateChangeListener, OnDetailFragmentInteractionListener{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -98,8 +96,11 @@ public class ConceptDetailActivity extends BaseActivity implements
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch(id) {
+            case R.id.action_settings: return true;
+            case android.R.id.home:
+                this.finish();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -111,13 +112,13 @@ public class ConceptDetailActivity extends BaseActivity implements
     }
 
     @Override
-    public void onFragmentInteraction() {
+    public void onFragmentChange(SwipeRefreshLayout swipeRefreshLayout, RecyclerView recyclerView,
+                                 @SelectableAdapter.Mode int mode) {
 
     }
 
     @Override
-    public void onFragmentChange(SwipeRefreshLayout swipeRefreshLayout, RecyclerView recyclerView,
-                                 @SelectableAdapter.Mode int mode) {
+    public void onFragmentInteraction() {
 
     }
 
@@ -165,5 +166,7 @@ public class ConceptDetailActivity extends BaseActivity implements
             }
             return null;
         }
+
+
     }
 }

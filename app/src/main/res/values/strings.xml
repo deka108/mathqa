@@ -102,4 +102,7 @@
     <string name="latex_preview_title">Latex Preview:</string>
     <string name="sr_latex_preview">Latex Preview:</string>
     <string name="sr_search_query">Search Query:</string>
+    <string name="btn_ocr_edit_image">Re-crop / rotate image</string>
+    <string name="btn_ocr_img_capture">Capture a new Image</string>
+    <string name="perform_ocr">Perform OCR</string>
 </resources>

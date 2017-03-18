@@ -24,11 +24,8 @@ public class ViewUtils {
     public static String convertLatex(String originalLatex){
 //        String result = originalLatex.replaceAll(getRawString("\\["), getRawString("\\("));
 //        result = result.replaceAll(getRawString("\\]"), getRawString("\\)"));
-//        result = result.replaceAll(getRawString("\\begin{align}"), "\\\\begin{aligned}");
-//        result = result.replaceAll(getRawString("\\end{align}"), "\\\\end{aligned}");
-
-        String result = originalLatex.replaceAll(";", " <br/> ");;
-
+//        result = result.replaceAll(";", " <br/> ");
+        String result = originalLatex;
         Logger.d("Final result: " + result);
         return result;
     }

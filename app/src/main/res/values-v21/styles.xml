@@ -17,7 +17,7 @@
     </style>
 
 
-    <style name="SelectSubjectButton" parent="Widget.AppCompat.Button.Colored">
+    <style name="MathQaButtonStyle" parent="Widget.AppCompat.Button.Colored">
         <item name="android:colorButtonNormal">@color/material_color_amber_500</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:radius">@dimen/material_button_corner_radius</item>

@@ -59,8 +59,7 @@ public class TessDataManager {
         if (!tessDataDir.exists()) {
             if (!tessDataDir.mkdirs()) {
                 Logger.e(TAG + "ERROR: Creation of directory " + tessDataDir + " failed, check " +
-                        "does " +
-                        "Android Manifest have permission to write to external storage.");
+                        "does Android Manifest have permission to write to external storage.");
                 return null;
             }else{
                 Logger.i(TAG + "Created directory " + tessDataDir);

@@ -120,6 +120,8 @@
     <!-- Symbols -->
     <string name="formula_comma">,</string>
     <string name="formula_semicolon">;</string>
+    <string name="formula_dollar">\\$</string>
+    <string name="formula_pound">\\pounds</string>
     <string name="formula_infinity">\\infty</string>
     <string name="formula_forall">\\forall</string>
     <string name="formula_exist">\\exists</string>
@@ -132,6 +134,8 @@
     <string-array name="formula_symbols">
         <item>@string/formula_comma</item>
         <item>@string/formula_semicolon</item>
+        <item>@string/formula_dollar</item>
+        <item>@string/formula_pound</item>
         <item>@string/formula_infinity</item>
         <item>@string/formula_forall</item>
         <item>@string/formula_exist</item>
@@ -145,6 +149,8 @@
     <string name="str_symbol_title">Symbols</string>
     <string name="str_symbol_comma">Comma</string>
     <string name="str_symbol_semicolon">Semicolon</string>
+    <string name="str_symbol_dollar">Dollars</string>
+    <string name="str_symbol_pound">Pounds</string>
     <string name="str_symbol_infinity">Infinity</string>
     <string name="str_symbol_forall">For All</string>
     <string name="str_symbol_exist">Exist</string>
@@ -157,6 +163,8 @@
     <string-array name="str_symbols">
         <item>@string/str_symbol_comma</item>
         <item>@string/str_symbol_semicolon</item>
+        <item>@string/str_symbol_dollar</item>
+        <item>@string/str_symbol_pound</item>
         <item>@string/str_symbol_infinity</item>
         <item>@string/str_symbol_forall</item>
         <item>@string/str_symbol_exist</item>
@@ -188,9 +196,9 @@
     <string name="str_arrow_left_arrow">Left Arrow</string>
     <string name="str_arrow_left_doublearrow">Double Left Arrow</string>
     <string name="str_arrow_right_arrow">Right Arrow</string>
-    <string name="str_arrow_right_doublearrow">Double Right Arrow</string>
+    <string name="str_arrow_right_doublearrow">If, Implies, Double Right Arrow</string>
     <string name="str_arrow_leftright_arrow">Left Right Arrow</string>
-    <string name="str_arrow_leftright_doublearrow">Double Left Right Arrow</string>
+    <string name="str_arrow_leftright_doublearrow">Iff, Double Left Right Arrow</string>
 
     <string-array name="str_arrows">
         <item>@string/str_arrow_left_arrow</item>
@@ -259,6 +267,7 @@
 
     <!--Exponential-->
     <string name="formula_square">x^{2}</string>
+    <string name="formula_power">a^{b}</string>
     <string name="formula_sqrt">\\sqrt{x}</string>
     <string name="formula_cubicroot">\\sqrt[b]{a}</string>
     <string name="formula_eps">e^{x}</string>
@@ -269,6 +278,7 @@
 
     <string-array name="formula_exponential">
         <item>@string/formula_square</item>
+        <item>@string/formula_power</item>
         <item>@string/formula_sqrt</item>
         <item>@string/formula_cubicroot</item>
         <item>@string/formula_eps</item>
@@ -280,6 +290,7 @@
 
     <string name="str_exp_title">Exponential (Power, Root, Log)</string>
     <string name="str_exp_square">Square</string>
+    <string name="str_exp_power">Power</string>
     <string name="str_exp_sqrt">Square Root</string>
     <string name="str_exp_root">Root</string>
     <string name="str_exp_eps">Exponent</string>
@@ -290,6 +301,7 @@
 
     <string-array name="str_exponential">
         <item>@string/str_exp_square</item>
+        <item>@string/str_exp_power</item>
         <item>@string/str_exp_sqrt</item>
         <item>@string/str_exp_root</item>
         <item>@string/str_exp_eps</item>

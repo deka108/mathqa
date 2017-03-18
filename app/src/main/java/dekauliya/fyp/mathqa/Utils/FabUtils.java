@@ -69,6 +69,7 @@ public class FabUtils {
         fabFormula.setImageDrawable(formulaIcon);
 
         animateSearchFabIcon();
+        fabSearch.close(true);
         fabSearch.setClosedOnTouchOutside(true);
 
         fabText.setOnClickListener(new View.OnClickListener() {

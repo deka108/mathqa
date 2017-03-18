@@ -10,7 +10,7 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-import dekauliya.fyp.mathqa.DataServices.DataServiceRx;
+import dekauliya.fyp.mathqa.DataServices.DataService;
 import dekauliya.fyp.mathqa.DataServices.DataType;
 import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.Utils.GraphicUtils;
@@ -42,13 +42,13 @@ public class QuestionTopicListFragment extends AbstractListFragment {
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Bean
-    DataServiceRx dataServiceRx;
+    DataService dataService;
 
     DataType dataType = DataType.QUESTION_TOPIC;
 
     @AfterInject
     void loadQuestionsBySubject(){
-        dataServiceRx.getQuestionTopicData(getSubjectId(), this);
+        dataService.getQuestionTopicData(getSubjectId(), this);
     }
 
     @AfterViews
@@ -56,7 +56,7 @@ public class QuestionTopicListFragment extends AbstractListFragment {
         if (mAdapter == null) {
             progressActivity.showLoading();
         }
-        mAdapter = new FlexibleAdapter(dataServiceRx.getDataByType(dataType), this);
+        mAdapter = new FlexibleAdapter(dataService.getDataByType(dataType), this);
         mRecyclerView.setLayoutManager(createNewLinearLayoutManager());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
@@ -73,8 +73,8 @@ public class QuestionTopicListFragment extends AbstractListFragment {
 
     @Override
     public void onDataRetrieved() {
-        mAdapter.updateDataSet(dataServiceRx.getData(dataType));
-        if (dataServiceRx.isDataEmpty(dataType)) {
+        mAdapter.updateDataSet(dataService.getData(dataType));
+        if (dataService.isDataEmpty(dataType)) {
             showEmptyPage(getString(R.string.empty_question_for_topic));
         }else{
             progressActivity.showContent();

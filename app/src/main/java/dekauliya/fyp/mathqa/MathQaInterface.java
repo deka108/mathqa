@@ -16,10 +16,14 @@ public interface MathQaInterface {
 
     int PROCESSOR_LEPTONICA = 1;
     int PROCESSOR_CATALANO = 2;
+    int PROCESSOR_NOP = 3;
 
     String CAPTURED_IMAGE_URI = "capturedImageUri";
     String OCR_OPTION = "ocrOption";
 
     int OCR_TESSERACT = 1;
     int OCR_GOOGLE_API = 2;
+    int OCR_MATHPIX_API = 3;
+
+
 }

@@ -9,6 +9,8 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.net.Uri;
 
+import com.orhanobut.logger.Logger;
+
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
 
@@ -34,6 +36,7 @@ public class ImagePreprocessorBase {
 
     @Background(serial="ocr")
     public void getBitmapFromUri(Uri imageUri) {
+        Logger.d("Getting resized bitmaps...");
         BitmapFactory.Options opts = new BitmapFactory.Options();
 
         try {

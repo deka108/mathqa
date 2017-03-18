@@ -24,7 +24,7 @@
         <item name="android:spinnerItemStyle">@style/SpinnerItem</item>
     </style>
 
-    <style name="SelectSubjectButton" parent="Base.Widget.AppCompat.Button.Colored">
+    <style name="MathQaButtonStyle" parent="Base.Widget.AppCompat.Button.Colored">
         <item name="colorButtonNormal">@color/material_color_amber_500</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:radius">@dimen/material_button_corner_radius</item>

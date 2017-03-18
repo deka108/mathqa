@@ -1,6 +1,7 @@
 package dekauliya.fyp.mathqa.Utils;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
@@ -76,11 +77,13 @@ public class SearchDialogUtils {
                                     SearchActivity_.intent(activity)
                                             .searchTypeExtra(SearchType.TEXT_DB)
                                             .searchQuery(textQuery)
+                                            .flags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                                             .start();
                                 }else{
                                     SearchActivity_.intent(activity)
                                             .searchTypeExtra(SearchType.FULL_TEXT)
                                             .searchQuery(textQuery)
+                                            .flags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                                             .start();
                                 }
                             }
@@ -102,6 +105,7 @@ public class SearchDialogUtils {
                         Logger.d("Dialog, textQuery: " + formulaQuery);
                         SearchActivity_.intent(activity)
                                 .searchTypeExtra(SearchType.FORMULA)
+                                .flags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                                 .searchQuery(formulaQuery)
                                 .start();
                     }

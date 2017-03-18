@@ -7,7 +7,6 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
 
 import Catalano.Imaging.FastBitmap;
-import Catalano.Imaging.Tools.DocumentSkewChecker;
 
 /**
  * Created by dekauliya on 21/1/17.
@@ -31,13 +30,13 @@ public class ImagePreprocessorCatalano extends ImagePreprocessorBase{
 //        blt.applyInPlace(fBmp);
 //        DifferenceEdgeDetector ded = new DifferenceEdgeDetector();
 //        ConservativeSmoothing cs = new ConservativeSmoothing();
-        DocumentSkewChecker dsc = new DocumentSkewChecker();
+//        DocumentSkewChecker dsc = new DocumentSkewChecker();
 //        ot.applyInPlace(fBmp);
 //        cs.applyInPlace(fBmp);
 //        ded.applyInPlace(fBmp);
-        double angle = dsc.getSkewAngle(fBmp);
-        Catalano.Imaging.Filters.Rotate r = new Catalano.Imaging.Filters.Rotate(angle, true);
-        r.applyInPlace(fBmp);
+//        double angle = dsc.getSkewAngle(fBmp);
+//        Catalano.Imaging.Filters.Rotate r = new Catalano.Imaging.Filters.Rotate(angle, true);
+//        r.applyInPlace(fBmp);
 
         mListener.onImagePreprocessed(fBmp.toBitmap());
     }

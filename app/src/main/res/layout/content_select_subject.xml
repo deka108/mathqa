@@ -25,7 +25,7 @@
             android:text="@string/btn_psle"
             android:paddingLeft="@dimen/material_button_padding_horizontal"
             android:paddingRight="@dimen/material_button_padding_horizontal"
-            style="@style/SelectSubjectButton"/>
+            style="@style/MathQaButtonStyle"/>
         <Button
             android:id="@+id/btn_subj_elem"
             android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             android:text="@string/btn_elementary"
             android:paddingLeft="@dimen/material_button_padding_horizontal"
             android:paddingRight="@dimen/material_button_padding_horizontal"
-            style="@style/SelectSubjectButton"/>
+            style="@style/MathQaButtonStyle"/>
         <Button
             android:id="@+id/btn_subj_add"
             android:layout_width="match_parent"
@@ -41,7 +41,7 @@
             android:text="@string/btn_advanced"
             android:paddingLeft="@dimen/material_button_padding_horizontal"
             android:paddingRight="@dimen/material_button_padding_horizontal"
-            style="@style/SelectSubjectButton"/>
+            style="@style/MathQaButtonStyle"/>
         <Button
             android:id="@+id/btn_subj_h2"
             android:layout_width="match_parent"
@@ -49,7 +49,7 @@
             android:text="@string/btn_h2"
             android:paddingLeft="@dimen/material_button_padding_horizontal"
             android:paddingRight="@dimen/material_button_padding_horizontal"
-            style="@style/SelectSubjectButton"/>
+            style="@style/MathQaButtonStyle"/>
 
     </LinearLayout>
 

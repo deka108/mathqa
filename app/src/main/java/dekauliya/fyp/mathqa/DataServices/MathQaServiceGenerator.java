@@ -2,7 +2,8 @@ package dekauliya.fyp.mathqa.DataServices;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
-import dekauliya.fyp.mathqa.MathQaInterface;
+import org.androidannotations.annotations.EBean;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -11,9 +12,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by dekauliya on 29/1/17.
  */
-
-public class MathQaRestRxJavaService {
-    public static String BASE_URL = MathQaInterface.BASE_URL;
+@EBean(scope = EBean.Scope.Singleton)
+public class MathQaServiceGenerator  {
+    public static String BASE_URL = dekauliya.fyp.mathqa.MathQaInterface.BASE_URL;
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
     private static HttpLoggingInterceptor logging = new HttpLoggingInterceptor().setLevel
@@ -41,9 +42,9 @@ public class MathQaRestRxJavaService {
         BASE_URL = newApiBaseUrl;
 
         builder = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(BASE_URL);
+                .baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
+
+        DataService.updateClient(createService(MathQaInterface.class));
     }
-
-
 }

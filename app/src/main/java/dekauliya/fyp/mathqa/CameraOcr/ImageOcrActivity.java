@@ -1,13 +1,11 @@
 package dekauliya.fyp.mathqa.CameraOcr;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,24 +18,25 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import dekauliya.fyp.mathqa.R;
-import dekauliya.fyp.mathqa.Views.SearchViews.SearchActivity_;
-import dekauliya.fyp.mathqa.Views.SearchViews.SearchType;
 import dekauliya.fyp.mathqa.Utils.ImagePickerUtils;
+import dekauliya.fyp.mathqa.Utils.OcrUtils;
+import dekauliya.fyp.mathqa.Utils.SearchDialogUtils;
+import dekauliya.fyp.mathqa.Views.BaseActivity;
 
-import static dekauliya.fyp.mathqa.MathQaInterface.CAPTURED_IMAGE_URI;
 import static dekauliya.fyp.mathqa.MathQaInterface.OCR_GOOGLE_API;
-import static dekauliya.fyp.mathqa.MathQaInterface.OCR_OPTION;
 import static dekauliya.fyp.mathqa.MathQaInterface.OCR_TESSERACT;
 import static dekauliya.fyp.mathqa.MathQaInterface.PROCESSOR_CATALANO;
 import static dekauliya.fyp.mathqa.MathQaInterface.PROCESSOR_LEPTONICA;
+import static dekauliya.fyp.mathqa.MathQaInterface.PROCESSOR_NOP;
 
 
 @EActivity(R.layout.activity_image_preview)
-public class ImageOcrActivity extends AppCompatActivity implements IOnOcrProcessingListener {
+public class ImageOcrActivity extends BaseActivity implements IOnOcrProcessingListener {
     Activity activity = this;
     @ViewById(R.id.toolbar) Toolbar toolbar;
     @ViewById(R.id.ip_image_preview) ImageView mImageView;
@@ -45,18 +44,36 @@ public class ImageOcrActivity extends AppCompatActivity implements IOnOcrProcess
     MaterialEditText mOcrResult;
     @ViewById(R.id.btn_ocr_text_search)  Button searchBtn;
     @ViewById(R.id.btn_ocr_img_capture) Button imgCaptureBtn;
+    @ViewById(R.id.btn_ocr_run_ocr)  Button ocrBtn;
+    @ViewById(R.id.btn_ocr_img_edit) Button imgEditBtn;
 
     @Bean
     ImagePreprocessorBase mImagePreprocessor;
     TextRecogniserAbstract mTextRecogniser;
 
+    @Extra("ocrOptionExtra")
+    int ocrOption;
+
+    @Extra("preprocessorOptionExtra")
+    int preprocessorOption;
+
+    @Extra("croppedImgUriExtra")
+    Uri croppedImgUri;
+
+    @Extra("originalImgUriExtra")
+    Uri originalImgUri;
+
     @Bean
     ImagePickerUtils imagePicker;
 
-    int ocrOption;
-    int preprocessorOption = PROCESSOR_LEPTONICA;
+    @Bean
+    OcrUtils ocrUtils;
 
-    ProgressDialog mProgressDialog;
+    @Bean
+    SearchDialogUtils searchDialogUtils;
+
+    long startOcrTime;
+    long endOcrTime;
 
     @AfterViews
     void setUpViews(){
@@ -65,10 +82,7 @@ public class ImageOcrActivity extends AppCompatActivity implements IOnOcrProcess
             @Override
             public void onClick(View view) {
                 String textQuery = mOcrResult.getText().toString();
-                SearchActivity_.intent(activity)
-                        .searchTypeExtra(SearchType.FULL_TEXT)
-                        .searchQuery(textQuery)
-                        .start();
+                searchDialogUtils.displaySearchDialog(textQuery);
             }
         });
 
@@ -79,21 +93,41 @@ public class ImageOcrActivity extends AppCompatActivity implements IOnOcrProcess
             }
         });
 
-        mProgressDialog = new ProgressDialog(this);
+        imgEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startCropActivity(originalImgUri);
+            }
+        });
 
-        Intent intent = getIntent();
-        Uri uri = intent.getParcelableExtra(CAPTURED_IMAGE_URI);
-        ocrOption = intent.getIntExtra(OCR_OPTION, OCR_TESSERACT);
+        ocrBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                runOcr();
+            }
+        });
 
-        initOptions();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        updateViews();
+    }
 
+    public void updateViews(){
+        mImageView.setImageURI(croppedImgUri);
+        initOptions();
+    }
+
+
+    @UiThread
+    public void runOcr() {
         try{
-            if (uri != null && mImagePreprocessor != null){
-                mImagePreprocessor.getBitmapFromUri(uri);
+            ocrUtils.showDialog("OCR Processing");
+            startOcrTime = System.nanoTime();
+            if (croppedImgUri != null && mImagePreprocessor != null){
+                mImagePreprocessor.getBitmapFromUri(croppedImgUri);
             }
         }catch(Exception e){
+            ocrUtils.dismissDialog();
             Logger.e(e.getMessage());
             if(mImagePreprocessor instanceof ImagePreprocessorCatalano){
                 Logger.d("Preprocessor instance of catalano");
@@ -103,6 +137,13 @@ public class ImageOcrActivity extends AppCompatActivity implements IOnOcrProcess
         }
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        updateViews();
+    }
+
     private void initOptions() {
         switch(preprocessorOption){
             case PROCESSOR_CATALANO:
@@ -110,6 +151,9 @@ public class ImageOcrActivity extends AppCompatActivity implements IOnOcrProcess
                 break;
             case PROCESSOR_LEPTONICA:
                 mImagePreprocessor = new ImagePreprocessorLeptonica(this);
+                break;
+            case PROCESSOR_NOP:
+                mImagePreprocessor = new ImagePreprocessorNop(this);
                 break;
         }
 
@@ -121,8 +165,9 @@ public class ImageOcrActivity extends AppCompatActivity implements IOnOcrProcess
                 mTextRecogniser = new TextRecogniserTextApi(this);
                 break;
         }
-
-        mTextRecogniser.setmImagePreprocessor(mImagePreprocessor);
+        if (mImagePreprocessor != null) {
+            mTextRecogniser.setmImagePreprocessor(mImagePreprocessor);
+        }
     }
 
     @Override
@@ -151,12 +196,6 @@ public class ImageOcrActivity extends AppCompatActivity implements IOnOcrProcess
     @UiThread
     @Override
     public void onBitmapReady(Bitmap bitmap) {
-        // Display progress dialog
-        if (mProgressDialog != null && !mProgressDialog.isShowing()) {
-            mProgressDialog.setMessage(getString(R.string.ocr_preprocessing));
-            mProgressDialog.show();
-        }
-
         // Preprocess Bitmap
         mTextRecogniser.preprocessImage(bitmap);
     }
@@ -177,12 +216,12 @@ public class ImageOcrActivity extends AppCompatActivity implements IOnOcrProcess
 
     @UiThread
     void updateOcrResult(String textResult) {
+        endOcrTime = System.nanoTime();
+        Logger.d("Time consumed: " + ((endOcrTime-startOcrTime)/1000000000.0));
         Logger.d("OCR Result: " + textResult);
 
         mOcrResult.setText(textResult);
+        ocrUtils.dismissDialog();
 
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
-        }
     }
 }

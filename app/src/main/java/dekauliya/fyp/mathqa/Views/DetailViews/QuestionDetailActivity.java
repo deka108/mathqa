@@ -14,16 +14,15 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 
-import dekauliya.fyp.mathqa.Views.BaseActivity;
 import dekauliya.fyp.mathqa.Models.Concept;
 import dekauliya.fyp.mathqa.Models.Question;
 import dekauliya.fyp.mathqa.Models.SubConcept;
 import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.Utils.FabUtils;
+import dekauliya.fyp.mathqa.Views.BaseListActivity;
 
 @EActivity
-public class QuestionDetailActivity extends BaseActivity implements
-        OnDetailFragmentInteractionListener{
+public class QuestionDetailActivity extends BaseListActivity implements OnDetailFragmentInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -93,7 +92,7 @@ public class QuestionDetailActivity extends BaseActivity implements
         switch(id) {
             case R.id.action_settings: return true;
             case android.R.id.home:
-                this.onBackPressed();
+                this.finish();
                 return true;
         }
 
@@ -102,7 +101,7 @@ public class QuestionDetailActivity extends BaseActivity implements
 
     @Override
     public void onFragmentInteraction() {
-
+        
     }
 
     /**

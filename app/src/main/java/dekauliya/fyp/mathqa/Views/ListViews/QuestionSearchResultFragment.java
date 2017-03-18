@@ -3,6 +3,7 @@ package dekauliya.fyp.mathqa.Views.ListViews;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -15,7 +16,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
 
-import dekauliya.fyp.mathqa.DataServices.DataServiceRx;
+import dekauliya.fyp.mathqa.DataServices.DataService;
 import dekauliya.fyp.mathqa.DataServices.DataType;
 import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.Utils.DrawableType;
@@ -49,7 +50,7 @@ public class QuestionSearchResultFragment extends AbstractListFragment {
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Bean
-    DataServiceRx dataServiceRx;
+    DataService dataService;
 
     @Bean
     SearchDialogUtils searchUtils;
@@ -85,13 +86,13 @@ public class QuestionSearchResultFragment extends AbstractListFragment {
     private void performSearch(String query) {
         switch(searchTypeArg) {
             case TEXT_DB:
-                dataServiceRx.searchTextDb(query, this);
+                dataService.searchTextDb(query, this);
                 break;
             case FULL_TEXT:
-                dataServiceRx.searchFullText(query, this);
+                dataService.searchFullText(query, this);
                 break;
             case FORMULA:
-                dataServiceRx.searchFormula(query, this);
+                dataService.searchFormula(query, this);
                 break;
         }
     }
@@ -111,6 +112,7 @@ public class QuestionSearchResultFragment extends AbstractListFragment {
     void setUpListview(){
         toggleLatexQuery();
         searchQuery.setText(queryArg);
+        searchQuery.setMovementMethod(new ScrollingMovementMethod());
         searchBtn.setImageDrawable(DrawableUtils.getDrawable(DrawableType.SEARCH, getActivity(),
                 R.color.material_color_white));
 
@@ -122,7 +124,7 @@ public class QuestionSearchResultFragment extends AbstractListFragment {
         });
 
         progressActivity.showLoading();
-        mAdapter = new FlexibleAdapter(dataServiceRx.getDataByType(dataType), this);
+        mAdapter = new FlexibleAdapter(dataService.getDataByType(dataType), this);
         mRecyclerView.setLayoutManager(createNewLinearLayoutManager());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
@@ -147,8 +149,8 @@ public class QuestionSearchResultFragment extends AbstractListFragment {
 
     @Override
     public void onDataRetrieved() {
-        mAdapter.updateDataSet(dataServiceRx.getData(dataType));
-        if (dataServiceRx.isDataEmpty(dataType)){
+        mAdapter.updateDataSet(dataService.getData(dataType));
+        if (dataService.isDataEmpty(dataType)){
             showEmptyPage(getString(R.string.no_questions_result));
         }else{
             progressActivity.showContent();

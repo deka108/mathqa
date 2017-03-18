@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 
-import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
 import dekauliya.fyp.mathqa.DataServices.IDataListener;
@@ -17,7 +17,7 @@ import eu.davidea.flexibleadapter.common.SmoothScrollLinearLayoutManager;
 /**
  * Created by dekauliya on 5/2/17.
  */
-@EBean
+@EFragment
 public abstract class AbstractListFragment extends BaseFragment implements IDataListener,
         FlexibleAdapter.OnItemClickListener {
     protected OnListFragmentInteractionListener mListener;
@@ -44,12 +44,6 @@ public abstract class AbstractListFragment extends BaseFragment implements IData
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
 

@@ -10,8 +10,9 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-import dekauliya.fyp.mathqa.DataServices.DataServiceRx;
+import dekauliya.fyp.mathqa.DataServices.DataService;
 import dekauliya.fyp.mathqa.DataServices.DataType;
+import dekauliya.fyp.mathqa.DataServices.IDataListener;
 import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.Utils.GraphicUtils;
 import dekauliya.fyp.mathqa.Views.DetailViews.ConceptDetailActivity_;
@@ -38,7 +39,7 @@ public class TopicConceptListFragment extends AbstractListFragment {
     FastScroller mFastScroller;
 
     @Bean
-    DataServiceRx dataServiceRx;
+    DataService dataService;
 
     @ViewById(R.id.fragment_swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -48,7 +49,7 @@ public class TopicConceptListFragment extends AbstractListFragment {
     @AfterInject
     void loadTopics(){
         int subjectId = getSubjectId();
-        dataServiceRx.getTopicConceptData(subjectId, this);
+        dataService.getTopicConceptData(subjectId, this);
     }
 
     @AfterViews
@@ -56,7 +57,7 @@ public class TopicConceptListFragment extends AbstractListFragment {
         if (mAdapter == null) {
             progressActivity.showLoading();
         }
-        mAdapter = new FlexibleAdapter(dataServiceRx.getDataByType(dataType), this);
+        mAdapter = new FlexibleAdapter(dataService.getDataByType(dataType), this);
         mRecyclerView.setLayoutManager(createNewLinearLayoutManager());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
@@ -66,15 +67,24 @@ public class TopicConceptListFragment extends AbstractListFragment {
 
         mAdapter.setFastScroller(mFastScroller, GraphicUtils.getColorAccent(getActivity()),
                 (TopicConceptActivity_) getActivity());
-        mSwipeRefreshLayout.setEnabled(false);
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                dataService.getTopicConceptData(getSubjectId(), (IDataListener) getActivity());
+                mSwipeRefreshLayout.setEnabled(true);
+//                progressActivity.showLoading();
+            }
+        });
 
         mListener.onFragmentChange(mSwipeRefreshLayout, mRecyclerView, SelectableAdapter.MODE_IDLE);
     }
 
     @Override
     public void onDataRetrieved() {
-        mAdapter.updateDataSet(dataServiceRx.getData(dataType));
-        if (dataServiceRx.isDataEmpty(dataType)){
+        mAdapter.updateDataSet(dataService.getData(dataType));
+
+        if (dataService.isDataEmpty(dataType)){
             showEmptyPage(getString(R.string.empty_topic_for_subject));
         }else {
             progressActivity.showContent();

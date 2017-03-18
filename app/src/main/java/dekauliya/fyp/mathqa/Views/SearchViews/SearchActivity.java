@@ -1,5 +1,6 @@
 package dekauliya.fyp.mathqa.Views.SearchViews;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,11 +15,11 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 
+import dekauliya.fyp.mathqa.R;
+import dekauliya.fyp.mathqa.Utils.FabUtils;
 import dekauliya.fyp.mathqa.Views.BaseActivity;
 import dekauliya.fyp.mathqa.Views.ListViews.OnListFragmentInteractionListener;
 import dekauliya.fyp.mathqa.Views.ListViews.QuestionSearchResultFragment_;
-import dekauliya.fyp.mathqa.R;
-import dekauliya.fyp.mathqa.Utils.FabUtils;
 import eu.davidea.fastscroller.FastScroller;
 import eu.davidea.flexibleadapter.SelectableAdapter;
 
@@ -54,10 +55,11 @@ public class SearchActivity extends BaseActivity implements OnListFragmentIntera
             case FULL_TEXT:
                 return "Full Text Search Results";
             case TEXT_DB:
-                return "Full Text Search Results";
+                return "Database Search Results";
         }
         return "Search Results";
     }
+
 
     @AfterViews
     void performSearch(){
@@ -99,5 +101,12 @@ public class SearchActivity extends BaseActivity implements OnListFragmentIntera
     @Override
     public void onFastScrollerStateChange(boolean scrolling) {
 
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        performSearch();
     }
 }

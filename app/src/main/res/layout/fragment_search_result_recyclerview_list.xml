@@ -10,63 +10,76 @@
         android:id="@+id/sr_text_query"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/md_content_padding_top"
+        android:layout_marginTop="@dimen/material_list_text_first_position_margin_start"
+        android:layout_marginBottom="@dimen/material_list_text_last_position_margin_end"
         android:layout_marginLeft="@dimen/material_list_text_first_position_margin_start"
         android:layout_marginRight="@dimen/material_list_text_last_position_margin_end"
         android:orientation="vertical"
         >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/sr_search_query"
-            android:layout_weight="1"/>
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/search_query"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-            <ImageButton
-                android:id="@+id/btn_search"
-                android:layout_width="wrap_content"
+                android:textColor="@color/colorAccent"
+                style="@style/MaterialTypography.Regular.Subheading"
+                android:text="@string/sr_search_query"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/SelectSubjectButton"
-                >
-            </ImageButton>
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/search_query"
+                    android:scrollbars="vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Search query"
+                    android:maxLines="3"
+                />
+                <ImageButton
+                    android:id="@+id/btn_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/MathQaButtonStyle"
+                    >
+                </ImageButton>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/sr_latex_query_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                style="@style/MaterialTypography.Regular.Subheading"
+                android:text="@string/sr_latex_preview"
+                />
+            <io.github.kexanie.library.MathView
+                android:id="@+id/sr_latex_query"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                tools:text="Solution content"
+                auto:engine="KaTeX"/>
+            <TextView
+                android:id="@+id/sr_latex_alt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                />
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/sr_latex_query_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/md_content_padding_top"
-        android:layout_marginLeft="@dimen/material_list_text_first_position_margin_start"
-        android:layout_marginRight="@dimen/material_list_text_last_position_margin_end"
-        android:orientation="vertical"
-        android:visibility="gone"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/sr_latex_preview"
-            />
-        <io.github.kexanie.library.MathView
-            android:id="@+id/sr_latex_query"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none"
-            tools:text="Solution content"
-            auto:engine="KaTeX"/>
-        <TextView
-            android:id="@+id/sr_latex_alt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            />
-    </LinearLayout>
+
 
     <android.support.v4.widget.SwipeRefreshLayout
     android:id="@+id/fragment_swipeRefreshLayout"
