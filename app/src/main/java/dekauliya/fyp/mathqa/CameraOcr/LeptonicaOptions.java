@@ -4,12 +4,15 @@ package dekauliya.fyp.mathqa.CameraOcr;
  * Created by dekauliya on 18/3/17.
  */
 
-public class LeptonicaOptions extends PreprocessingOptions{
-    String[] leptonicaOptions;
+public class LeptonicaOptions extends PreprocessingOptions {
 
-    public LeptonicaOptions(String[] options) {
+    String[] leptonicaOptions = new String[]{CONVERT, DESKEW,
+            BRIGHTNESS_NORM, CONTRAST_NORM,
+            EDGE_SOBEL,  INVERT,  SHARPEN, BINARIZE_SAUVOLA, BINARIZE_OTSU,
+            BACKGROUND_NORM, CONTRAST_NORM, TOPHAT_BLACK, TOPHAT_WHITE};
+
+    public LeptonicaOptions(){
         super();
-        leptonicaOptions = options;
         super.initOptions(leptonicaOptions);
     }
 }

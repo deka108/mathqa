@@ -104,6 +104,10 @@ public class ImagePreprocessorBase {
     }
 
     public void preprocess(Bitmap bitmap){
-        throw new UnsupportedOperationException("Must be implemented");
+
+    }
+
+    public  void customPreprocess(Bitmap bitmap, PreprocessingOptions props){
+
     }
 }

@@ -103,7 +103,7 @@ public class SearchResultSubItem extends AbstractSectionableItem<
                 ViewUtils.displayLatex(holder.mFormulaLatex, holder.mFormulaLatexAlt,
                         rel_formula.getContent(), true);
             } else{
-                ViewUtils.toggleDisplay(holder.mFormulaResultUnavailable, holder.mFormulaResultAvailable);
+                ViewUtils.toggleLayout(holder.mFormulaResultUnavailable, holder.mFormulaResultAvailable);
             }
         }else{
             holder.mFormulaResultContainer.setVisibility(View.GONE);
@@ -131,7 +131,7 @@ public class SearchResultSubItem extends AbstractSectionableItem<
                 }
             }
         }else{
-            ViewUtils.toggleDisplay(holder.mQuestionResultUnavailable, holder.mQuestionResultAvailable);
+            ViewUtils.toggleLayout(holder.mQuestionResultUnavailable, holder.mQuestionResultAvailable);
         }
     }
 

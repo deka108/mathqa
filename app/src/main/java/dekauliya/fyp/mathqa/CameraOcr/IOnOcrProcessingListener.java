@@ -7,7 +7,7 @@ import android.graphics.Bitmap;
  */
 
 public interface IOnOcrProcessingListener {
-    void onImagePreprocessed(Bitmap bitmap);
+    void onBitmapPreprocessed(Bitmap bitmap);
     void onOcrProcessed(String result);
     void onBitmapReady(Bitmap bitmap);
 }

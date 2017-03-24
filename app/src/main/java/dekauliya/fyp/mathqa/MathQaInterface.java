@@ -10,7 +10,7 @@ public interface MathQaInterface {
     int SUBJECT_H2 = 3;
     int SUBJECT_PSLE = 4;
 
-    String BASE_URL = "http://192.168.1.233:8000/apiv2/";
+    String BASE_URL = "http://10.27.138.241:8000/apiv2/";
 
     int MAX_RESCALED_SIZE = 640;
 
@@ -24,6 +24,5 @@ public interface MathQaInterface {
     int OCR_TESSERACT = 1;
     int OCR_GOOGLE_API = 2;
     int OCR_MATHPIX_API = 3;
-
 
 }

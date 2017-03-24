@@ -22,15 +22,15 @@ import dekauliya.fyp.mathqa.R;
  */
 
 @EBean
-public class TextRecogniserTextApi extends TextRecogniserAbstract {
+public class TextRecogniserTextApi extends TextRecogniserBase {
 
     public TextRecogniserTextApi(Context context) {
         super(context);
     }
 
     @Override
-    public void preprocessImage(Bitmap bitmap) {
-        mListener.onImagePreprocessed(bitmap);
+    public void preprocessBitmap(Bitmap bitmap) {
+        mImagePreprocessor.preprocess(bitmap);
     }
 
     @Background(serial = "ocr")
@@ -63,7 +63,7 @@ public class TextRecogniserTextApi extends TextRecogniserAbstract {
                 TextBlock item = results.valueAt(i);
                 if (item != null && item.getValue() != null){
                     Logger.d("Text detected: " + item.getValue());
-                    stringBuffer.append(item.getValue());
+                    stringBuffer.append(" " + item.getValue());
                 }
             }
             result = stringBuffer.toString();

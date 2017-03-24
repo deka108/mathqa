@@ -8,6 +8,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * Created by dekauliya on 29/1/17.
@@ -22,7 +23,9 @@ public class MathQaServiceGenerator  {
 
     private static Retrofit retrofit;
     private static Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
 
     public static <S> S createService(Class<S> serviceClass) {
@@ -42,7 +45,9 @@ public class MathQaServiceGenerator  {
         BASE_URL = newApiBaseUrl;
 
         builder = new Retrofit.Builder()
-                .baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(BASE_URL)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
 
         DataService.updateClient(createService(MathQaInterface.class));

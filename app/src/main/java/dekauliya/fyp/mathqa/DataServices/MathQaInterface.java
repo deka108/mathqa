@@ -15,6 +15,8 @@ import dekauliya.fyp.mathqa.Models.Topic;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -71,19 +73,23 @@ public interface MathQaInterface {
     Observable<Solution> getSolution(@Path("id") Integer solutionId);
 
     @GET("search/?type=d")
-    Observable<List<SearchResult>> searchDatabase(@Query(value = "query", encoded = true) String query);
+    Observable<List<SearchResult>> searchDatabase(@Query(value = "query") String query);
     @GET("search/?type=f")
-    Observable<List<SearchResult>> searchFormula(@Query(value = "query", encoded = true) String formula);
+    Observable<List<SearchResult>> searchFormula(@Query(value = "query") String formula);
     @GET("search/?type=t")
-    Observable<List<SearchResult>> searchText(@Query(value = "query", encoded = true) String text);
+    Observable<List<SearchResult>> searchText(@Query(value = "query") String text);
 
     @Multipart
     @POST("upload/")
     Observable<ResponseBody> uploadImage(@Part MultipartBody.Part file);
 
+    @FormUrlEncoded
+    @POST("post_text/")
+    Observable<ResponseBody> postText(@Field("text") String text);
+
 
     @GET("test_questions/search/?type=d")
-    Observable<List<Question>> searchTestDatabase(@Query(value = "query", encoded = true) String query);
+    Observable<List<Question>> searchTestDatabase(@Query(value = "query") String query);
     @GET("search_test_formula/")
-    Observable<List<Formula>> searchTestFormula(@Query(value = "query", encoded = true) String formula);
+    Observable<List<Formula>> searchTestFormula(@Query(value = "query") String formula);
 }

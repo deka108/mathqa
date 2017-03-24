@@ -9,12 +9,12 @@ import org.androidannotations.annotations.EBean;
  * Created by dekauliya on 10/2/17.
  */
 @EBean
-public abstract class TextRecogniserAbstract {
+public abstract class TextRecogniserBase {
     Context context;
     IOnOcrProcessingListener mListener;
     ImagePreprocessorBase mImagePreprocessor;
 
-    public TextRecogniserAbstract(Context context){
+    public TextRecogniserBase(Context context){
         this.context = context;
         this.mListener = (IOnOcrProcessingListener) context;
     }
@@ -24,6 +24,6 @@ public abstract class TextRecogniserAbstract {
     }
 
     public abstract void recogniseText(Bitmap bitmap);
-    public abstract void preprocessImage(Bitmap bitmap);
+    public abstract void preprocessBitmap(Bitmap bitmap);
 }
 

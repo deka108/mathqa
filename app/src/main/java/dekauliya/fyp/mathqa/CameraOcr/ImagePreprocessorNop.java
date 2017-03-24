@@ -14,6 +14,11 @@ public class ImagePreprocessorNop extends ImagePreprocessorBase {
 
     @Override
     public void preprocess(Bitmap bitmap) {
-        mListener.onImagePreprocessed(bitmap);
+        mListener.onBitmapPreprocessed(bitmap);
+    }
+
+    @Override
+    public void customPreprocess(Bitmap bitmap, PreprocessingOptions props) {
+
     }
 }

@@ -15,90 +15,138 @@
     android:orientation="vertical"
     tools:context="dekauliya.fyp.mathqa.CameraOcr.ImageOcrActivity_"
     tools:showIn="@layout/activity_image_preview">
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
-        style="@style/MaterialTypography.Regular.Subheading"
-        android:text="Pre-processed Image Preview"/>
-    <ImageView
-        android:id="@+id/ip_image_preview"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:src="@drawable/ic_menu_camera"/>
-
-    <LinearLayout
+        android:layout_height="match_parent">
+        <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_height="match_parent"
         android:orientation="vertical">
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_height="0dp"
             android:layout_weight="1">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorAccent"
+                android:textStyle="bold"
                 style="@style/MaterialTypography.Regular.Subheading"
-                android:text="OCR Results:"/>
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/ip_ocr_result"
+                android:text="Pre-processed Image Preview"
+                />
+            <TextView
+                android:id="@+id/ip_alt_textview"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                ></com.rengwuxian.materialedittext.MaterialEditText>
+                android:gravity="center"
+                android:text="Image Preview">
+            </TextView>
+            <ImageView
+                android:id="@+id/ip_image_preview"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
-            <Button
-                android:id="@+id/btn_ocr_run_ocr"
-                android:text="@string/perform_ocr"
-                android:layout_height="@dimen/material_button_touch_target_height_minimum"
+            android:layout_weight="3"
+            android:orientation="vertical">
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:paddingLeft="@dimen/material_button_padding_horizontal"
-                android:paddingRight="@dimen/material_button_padding_horizontal"
-                android:layout_gravity="center_vertical"
-                style="@style/MathQaButtonStyle">
-            </Button>
-            <Button
-                android:id="@+id/btn_ocr_img_edit"
-                android:text="@string/btn_ocr_edit_image"
-                android:layout_height="@dimen/material_button_touch_target_height_minimum"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"
+                    style="@style/MaterialTypography.Regular.Subheading"
+                    android:text="OCR Results:"/>
+                <EditText
+                    android:id="@+id/ip_ocr_result"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    ></EditText>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:paddingLeft="@dimen/material_button_padding_horizontal"
-                android:paddingRight="@dimen/material_button_padding_horizontal"
-                android:layout_gravity="center_vertical"
-                style="@style/MathQaButtonStyle">
-            </Button>
-            <Button
-                android:id="@+id/btn_ocr_img_capture"
-                android:text="@string/btn_ocr_img_capture"
-                android:layout_height="@dimen/material_button_touch_target_height_minimum"
-                android:layout_width="match_parent"
-                android:paddingLeft="@dimen/material_button_padding_horizontal"
-                android:paddingRight="@dimen/material_button_padding_horizontal"
-                android:layout_gravity="center_vertical"
-                style="@style/MathQaButtonStyle">
-            </Button>
-            <Button
-                android:id="@+id/btn_ocr_text_search"
-                android:text="Search Text"
-                android:layout_height="@dimen/material_button_touch_target_height_minimum"
-                android:layout_width="match_parent"
-                android:paddingLeft="@dimen/material_button_padding_horizontal"
-                android:paddingRight="@dimen/material_button_padding_horizontal"
-                android:layout_gravity="center_vertical"
-                style="@style/MathQaButtonStyle">
-            </Button>
+
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+                <Button
+                    android:id="@+id/btn_ocr_run_ocr"
+                    android:text="@string/perform_ocr"
+                    android:layout_height="@dimen/material_button_touch_target_height_minimum"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="@dimen/material_button_padding_horizontal"
+                    android:paddingRight="@dimen/material_button_padding_horizontal"
+                    android:layout_gravity="center_vertical"
+                    style="@style/MathQaButtonStyle">
+                </Button>
+                <Button
+                    android:id="@+id/btn_ocr_run_preprocessing"
+                    android:text="Perform preprocessing"
+                    android:layout_height="@dimen/material_button_touch_target_height_minimum"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="@dimen/material_button_padding_horizontal"
+                    android:paddingRight="@dimen/material_button_padding_horizontal"
+                    android:layout_gravity="center_vertical"
+                    style="@style/MathQaButtonStyle">
+                </Button>
+                <Button
+                    android:id="@+id/btn_ocr_img_edit"
+                    android:text="@string/btn_ocr_edit_image"
+                    android:layout_height="@dimen/material_button_touch_target_height_minimum"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="@dimen/material_button_padding_horizontal"
+                    android:paddingRight="@dimen/material_button_padding_horizontal"
+                    android:layout_gravity="center_vertical"
+                    style="@style/MathQaButtonStyle">
+                </Button>
+                <Button
+                    android:id="@+id/btn_ocr_img_capture"
+                    android:text="@string/btn_ocr_img_capture"
+                    android:layout_height="@dimen/material_button_touch_target_height_minimum"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="@dimen/material_button_padding_horizontal"
+                    android:paddingRight="@dimen/material_button_padding_horizontal"
+                    android:layout_gravity="center_vertical"
+                    style="@style/MathQaButtonStyle">
+                </Button>
+                <Button
+                    android:id="@+id/btn_ocr_text_search"
+                    android:text="Search Text"
+                    android:layout_height="@dimen/material_button_touch_target_height_minimum"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="@dimen/material_button_padding_horizontal"
+                    android:paddingRight="@dimen/material_button_padding_horizontal"
+                    android:layout_gravity="center_vertical"
+                    style="@style/MathQaButtonStyle">
+                </Button>
+                <Button
+                    android:id="@+id/btn_ocr_text_post"
+                    android:text="Post Text"
+                    android:layout_height="@dimen/material_button_touch_target_height_minimum"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="@dimen/material_button_padding_horizontal"
+                    android:paddingRight="@dimen/material_button_padding_horizontal"
+                    android:layout_gravity="center_vertical"
+                    style="@style/MathQaButtonStyle">
+                </Button>
+
+            </LinearLayout>
+        </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>
-
+    </ScrollView>
 </LinearLayout>

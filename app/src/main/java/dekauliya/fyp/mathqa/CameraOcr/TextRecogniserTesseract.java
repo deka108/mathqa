@@ -13,7 +13,7 @@ import dekauliya.fyp.mathqa.CameraOcr.TesseractTool.TessEngine;
  */
 
 @EBean
-public class TextRecogniserTesseract extends TextRecogniserAbstract {
+public class TextRecogniserTesseract extends TextRecogniserBase {
     TessEngine mTessEngine;
 
     public TextRecogniserTesseract(Context context) {
@@ -35,7 +35,7 @@ public class TextRecogniserTesseract extends TextRecogniserAbstract {
     }
 
     @Override
-    public void preprocessImage(Bitmap bitmap) {
+    public void preprocessBitmap(Bitmap bitmap) {
         mImagePreprocessor.preprocess(bitmap);
     }
 }

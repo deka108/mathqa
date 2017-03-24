@@ -1,12 +1,14 @@
 package dekauliya.fyp.mathqa.DataServices;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 import com.orhanobut.logger.Logger;
 
 import org.androidannotations.annotations.EBean;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -376,8 +378,8 @@ public class DataService {
                     @Override
                     public void onNext(List<SearchResult> value) {
                         if (value != null && value.size() > 0) {
+                            int index = 1;
                             for(SearchResult result: value){
-                                int index = 1;
                                 SearchResultSubItem resultSubItem =
                                         new SearchResultSubItem(null, index++, false,
                                                 null, result.getQuestion());
@@ -416,8 +418,8 @@ public class DataService {
                     @Override
                     public void onNext(List<SearchResult> value) {
                         if (value != null && value.size() > 0) {
+                            int index = 1;
                             for(SearchResult result: value){
-                                int index = 1;
                                 SearchResultSubItem resultSubItem =
                                         new SearchResultSubItem(null, index++, false,
                                                 null, result.getQuestion());
@@ -549,6 +551,42 @@ public class DataService {
         }
     };
 
+    public void uploadImage(Uri uri){
+        File file = new File(uri.getPath());
+
+        MediaType MEDIA_TYPE_IMG = MediaType.parse("image/*");
+
+        RequestBody requestBody = RequestBody.create(MEDIA_TYPE_IMG, file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(),
+                requestBody);
+
+        client.uploadImage(body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody value) {
+                        Logger.d(value);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Logger.e(e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Logger.d("Image uploaded!");
+                    }
+                });
+    }
+
+
     public void uploadImage(Bitmap bmp){
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -580,7 +618,34 @@ public class DataService {
 
             @Override
             public void onComplete() {
-                Logger.d("File uploaded!");
+                Logger.d("Image uploaded!");
+            }
+        });
+    }
+
+    public void postText(String text){
+        client.postText(text)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Observer<ResponseBody>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(ResponseBody value) {
+                Logger.d(value);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Logger.e(e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+                Logger.d("File successfully uploaded");
             }
         });
     }

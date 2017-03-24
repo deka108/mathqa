@@ -15,6 +15,8 @@ import java.util.regex.Pattern;
 import dekauliya.fyp.mathqa.R;
 import io.github.kexanie.library.MathView;
 
+import static android.view.View.GONE;
+
 /**
  * Created by dekauliya on 6/2/17.
  */
@@ -44,24 +46,28 @@ public class ViewUtils {
                     latexView.setText(convertLatex(latexStr));
                 }
                 latexView.setVisibility(View.VISIBLE);
-                altView.setVisibility(View.GONE);
+                altView.setVisibility(GONE);
             }else{
                 altView.setText(altView.getContext().getString(R.string.str_latex_alt_preview));
                 altView.setVisibility(View.VISIBLE);
-                latexView.setVisibility(View.GONE);
+                latexView.setVisibility(GONE);
             }
         }catch(Exception e){
             Logger.e(e.getMessage());
             altView.setText(String.format(
                     altView.getContext().getString(R.string.error_latex_rendering), latexStr));
             altView.setVisibility(View.VISIBLE);
-            latexView.setVisibility(View.GONE);
+            latexView.setVisibility(GONE);
         }
     }
 
-    public static void toggleDisplay(LinearLayout visibleContainer, LinearLayout invisibleContainer){
+    public static void toggleLayout(LinearLayout visibleContainer, LinearLayout invisibleContainer){
         visibleContainer.setVisibility(View.VISIBLE);
-        invisibleContainer.setVisibility(View.GONE);
+        invisibleContainer.setVisibility(GONE);
+    }
+
+    public static void hideView(View view){
+        view.setVisibility(GONE);
     }
 
     public static float getDifficultyLevelFloat(String diffLevel){
