@@ -25,7 +25,6 @@ public class BaseFragment extends Fragment {
     private View.OnClickListener errorClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            Toast.makeText(getContext(), "Try again button clicked", Toast.LENGTH_LONG).show();
             networkUtils.showIpDialog();
         }
     };

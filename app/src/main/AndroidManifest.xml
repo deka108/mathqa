@@ -25,8 +25,12 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Views.SelectSubjectActivity_"
-            android:label="@string/title_activity_select_subject"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".Views.SearchViews.SearchActivity_"
@@ -38,10 +42,6 @@
             android:name=".CameraOcr.ImageOcrActivity_"
             android:label="@string/title_image_preview_activity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".Views.DetailViews.ConceptDetailActivity_"

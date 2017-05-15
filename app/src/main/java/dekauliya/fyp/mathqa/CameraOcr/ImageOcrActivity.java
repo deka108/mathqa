@@ -52,7 +52,7 @@ public class ImageOcrActivity extends BaseActivity implements IOnOcrProcessingLi
     @ViewById(R.id.btn_ocr_run_ocr)  Button ocrBtn;
     @ViewById(R.id.btn_ocr_img_edit) Button imgEditBtn;
     @ViewById(R.id.btn_ocr_run_preprocessing) Button preprocessBtn;
-    @ViewById(R.id.btn_ocr_text_post) Button postBtn;
+//    @ViewById(R.id.btn_ocr_text_post) Button postBtn;
 
     @Bean
     ImagePreprocessorBase mImagePreprocessor;
@@ -131,12 +131,12 @@ public class ImageOcrActivity extends BaseActivity implements IOnOcrProcessingLi
             }
         });
 
-        postBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dataService.postText(mOcrResult.getText().toString());
-            }
-        });
+//        postBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dataService.postText(mOcrResult.getText().toString());
+//            }
+//        });
 
         preprocessBtn.setOnClickListener(new View.OnClickListener() {
             @Override
