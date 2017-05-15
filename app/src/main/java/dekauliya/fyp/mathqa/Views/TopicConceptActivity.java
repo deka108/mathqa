@@ -18,6 +18,12 @@ import dekauliya.fyp.mathqa.Utils.FabUtils;
 import dekauliya.fyp.mathqa.Views.ListViews.QuestionTopicListFragment_;
 import dekauliya.fyp.mathqa.Views.ListViews.TopicConceptListFragment_;
 
+/**
+ * Provides activities for viewing list of concepts and questions for the selected subject level.
+ *
+ * Consists of TopicListFragment which lists the available concepts under a topic and list of
+ * questions grouped by concept.
+ */
 @EActivity
 public class TopicConceptActivity extends BaseListActivity {
 

@@ -11,8 +11,9 @@ import dekauliya.fyp.mathqa.R;
 
 /**
  * Created by dekauliya on 7/2/17.
+ *
+ * Utilities for displaying icon drawables in MathQA.
  */
-
 public class DrawableUtils {
 
     public static Drawable getDrawable(DrawableType type, Activity activity, int size, @ColorRes

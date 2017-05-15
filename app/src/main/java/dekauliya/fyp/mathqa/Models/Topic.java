@@ -5,6 +5,8 @@ import org.parceler.ParcelConstructor;
 
 /**
  * Created by dekauliya on 29/1/17.
+ * 
+ * Topic Java object model equivalent with Topic table in MathQA database.
  */
 @Parcel
 public class Topic {

@@ -7,6 +7,8 @@ import org.androidannotations.annotations.EBean;
 
 /**
  * Created by dekauliya on 10/2/17.
+ *
+ * Common features and methods of an OCR processor.
  */
 @EBean
 public abstract class TextRecogniserBase {

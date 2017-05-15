@@ -45,10 +45,13 @@ import okhttp3.ResponseBody;
 
 /**
  * Created by dekauliya on 4/2/17.
+ *
+ * Provides the implementation of MathQA REST API client which requests or sends data from / to
+ * MathQA server.
  */
 @EBean(scope = EBean.Scope.Singleton)
 public class DataService {
-    private static MathQaInterface client = MathQaServiceGenerator.createService(MathQaInterface
+    private static MathQaRestApiInterface client = MathQaServiceGenerator.createService(MathQaRestApiInterface
             .class);
 
     List<AbstractFlexibleItem> mTopicConceptItems = new ArrayList<AbstractFlexibleItem>();
@@ -63,6 +66,12 @@ public class DataService {
     HashMap<Integer, Concept> mConcepts = new HashMap<>();
     HashMap<Integer, SubConcept> mSubConcepts = new HashMap<>();
 
+    /**
+     * Gets list of topics and all concepts under each topic based on the chosen subject level.
+     *
+     * @param subjectId
+     * @param mListener
+     */
     public void getTopicConceptData(int subjectId, final IDataListener mListener){
         final DataType dataType = DataType.TOPIC_CONCEPT;
         clearItems(dataType);
@@ -121,6 +130,12 @@ public class DataService {
                 });
     }
 
+    /**
+     * Gets all questions for the subject level and group them based on concepts which are available
+     * under the chosen subject level.
+     * @param subjectId
+     * @param mListener
+     */
     public void getQuestionTopicData(int subjectId, final IDataListener mListener){
         final DataType dataType = DataType.QUESTION_TOPIC;
         clearItems(dataType);
@@ -194,6 +209,11 @@ public class DataService {
             });
     }
 
+    /**
+     * Gets all the available concept keypoints under the chosen concept.
+     * @param conceptId
+     * @param mListener
+     */
     public void getConceptKeypointData(int conceptId, final IDataListener mListener){
         final DataType dataType = DataType.KEYPOINT_CONCEPT;
         clearItems(dataType);
@@ -233,6 +253,11 @@ public class DataService {
                 });
     }
 
+    /**
+     * Gets all the available formula keypoints under the chosen concept.
+     * @param conceptId
+     * @param mListener
+     */
     public void getConceptFormulaData(int conceptId, final IDataListener mListener){
         final DataType dataType = DataType.KEYPOINT_FORMULA;
         clearItems(dataType);
@@ -272,6 +297,12 @@ public class DataService {
                 });
     }
 
+    /**
+     * Get all questions available for the chosen concept and group them based on subconcepts which
+     * are available under the chosen concept.
+     * @param conceptid
+     * @param mListener
+     */
     public void getQuestionConceptData(int conceptid, final IDataListener mListener){
         final DataType dataType = DataType.QUESTION_CONCEPT;
         clearItems(dataType);
@@ -331,6 +362,11 @@ public class DataService {
                 });
     }
 
+    /**
+     * Gets the solution for the selected Question.
+     * @param questionId
+     * @param mListener
+     */
     public void getSolution(String questionId, final IDataListener mListener){
         client.getSolutionsByQuestion(questionId)
                 .subscribeOn(Schedulers.io())
@@ -361,6 +397,11 @@ public class DataService {
                 });
     }
 
+    /**
+     * Sends a regular text query to requests for a database text search.
+     * @param textQuery
+     * @param mListener
+     */
     public void searchTextDb(String textQuery, final IDataListener mListener){
         final DataType dataType = DataType.QUESTION_RESULT;
         clearItems(dataType);
@@ -401,6 +442,11 @@ public class DataService {
                 });
     }
 
+    /**
+     * Sends a regular text query to requests for a full text search.
+     * @param textQuery
+     * @param mListener
+     */
     public void searchFullText(String textQuery, final IDataListener mListener){
         final DataType dataType = DataType.QUESTION_RESULT;
         clearItems(dataType);
@@ -441,6 +487,11 @@ public class DataService {
                 });
     }
 
+    /**
+     * Sends a formula query in LaTeX to requests for a mathematical document search.
+     * @param formulaQuery
+     * @param mListener
+     */
     public void searchFormula(String formulaQuery, final IDataListener mListener){
         final DataType  dataType = DataType.QUESTION_RESULT;
         clearItems(dataType);
@@ -521,6 +572,10 @@ public class DataService {
         }
     }
 
+    /**
+     * All list items are sorted alphabetically with exception of question. Questions are sorted
+     * according to their difficulty levels.
+     */
     Comparator<AbstractFlexibleItem> mComparator = new Comparator<AbstractFlexibleItem>() {
 
         @Override
@@ -650,7 +705,7 @@ public class DataService {
         });
     }
 
-    public static void updateClient(MathQaInterface newService){
+    public static void updateClient(MathQaRestApiInterface newService){
         client = newService;
     }
 }

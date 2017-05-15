@@ -19,8 +19,9 @@ import dekauliya.fyp.mathqa.R;
 
 /**
  * Created by dekauliya on 10/2/17.
+ *
+ * OCR implementation for Google Text API.
  */
-
 @EBean
 public class TextRecogniserTextApi extends TextRecogniserBase {
 

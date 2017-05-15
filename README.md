@@ -1,5 +1,62 @@
 # MathQA for Android
 
+## Demo
+[![MathQA for Android](http://i.imgur.com/TyZSJZe.gif)](https://www.youtube.com/watch?v=-ySJp6QnE3w)
+[MathQA Android Demo Video](https://youtu.be/-ySJp6QnE3w)
+
+## Build and Installation
+0. Download and Install Android Studio.
+1. Clean and Build. Note that app building process will **fail** at first time because it uses AndroidAnnotation which will only be successful at runtime but fails at compile time.
+2. Connect an Android phone to the laptop or starts an Android emulator.
+3. Make sure that the server is running. Note since MathQA server is not deployed to a remote server, we must modify the IP address for MathQA server manually by editting `MathQA/app/src/main/java/dekauliya/fyp/mathqa/MathQaInterface.java` and changing the BASE_URL's address into the local address where MathQA server is running.
+4. Run the app and install it to the phone or Android emulator. It should be successful now.
+5. Work and develop the code using AndroidAnnotation framework and libraries under `app/build.gradle`
+    1. Modify or add new libraries as necessary by modifying `app/build.gradle`
+
+## Project Structure
+```
+path: MathQA/app/src/main/
+
+.
+├── AndroidManifest.xml: Android dependencies and 
+├── assets
+│   └── tessdata: contains training data for Tesseract
+├── java
+│   └── dekauliya
+│       └── fyp
+│           └── mathqa
+│               ├── CameraOcr: contains related tools for performing OCR.
+│               │   ├── ImageOcrActivity.java: Image preview and menus for performing Image
+│               │   │   processing or OCR.
+│               │   ├── ImagePreprocessorLeptonica.java: Image processor implementation for Leptonica.
+│               │   └── TextRecogniserTextApi.java:  OCR engine implementation for Google Text API.
+│               ├── DataServices: relevant services for performing Rest API with the MathQA server
+│               │   ├── DataService.java: REST API client service implementations.
+│               │   ├── MathQaRestApiInterface.java: MathQA server REST API interfaces
+│               ├── MathQaInterface.java: MathQA common interfaces.
+│               ├── MathQaPrefs.java: MathQA SharedPreference.
+│               ├── Models: available Java object models
+│               ├── Utils: Commonly used functions and utilities.
+│               │   ├── DrawableUtils.java: displaying MaterialDesign icons for MathQA.
+│               │   ├── FabUtils.java: displaying FloatingActionButtons for mathematical document search.
+│               │   ├── ImagePickerUtils.java: image picking utilities for selecting image from file system / cameras.
+│               │   ├── OcrUtils.java: OCR utilities for selecting image processor and OCR engine.
+│               │   ├── SearchDialogUtils.java: displaying search input dialogs.
+│               │   └── ViewUtils.java: include LaTeX rendering utilities.
+│               └── Views: provides MathQA UI component.
+│                   ├── BaseActivity.java
+│                   ├── BaseFragment.java
+│                   ├── BaseListActivity.java
+│                   ├── DetailViews: Detailed Activities.
+│                   ├── ListViews: List Activities
+│                   │   ├── AbstractListFragment.java: Base MathQA ListFragment.
+│                   │   └── Items: contains both header and subitem of a list item.
+│                   └── SearchViews: Search Activities
+└── res
+    ├── layout: provides the layout for all MathQA activities, fragments, and list items.
+    └── values: provides common numerical, color, string values and styles used in MathQA.
+```
+
 ## Best Practices
 Below are Android libraries that I have used throughout the project.
 1. Dependency Injection

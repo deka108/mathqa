@@ -1,5 +1,9 @@
 package dekauliya.fyp.mathqa.Views;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,14 +17,18 @@ import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
 
 /**
  * Created by dekauliya on 18/3/17.
+ *
+ * Provides the common features of a MathQA ListActivity which contains
+ * {@link android.support.v7.widget.RecyclerView} and scrolling actions via
+ * {@link eu.davidea.fastscroller.FastScroller}
  */
-
 public class BaseListActivity extends BaseActivity implements
         OnListFragmentInteractionListener,
         FlexibleAdapter.OnUpdateListener,
         FastScroller.OnScrollStateChangeListener{
     RecyclerView mRecyclerView;
     FlexibleAdapter<AbstractFlexibleItem> mAdapter;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     /**
      * Handling RecyclerView when empty.
@@ -36,9 +44,11 @@ public class BaseListActivity extends BaseActivity implements
             emptyText.setText(getString(R.string.no_items));
         if (size > 0) {
             fastScroller.setVisibility(View.VISIBLE);
+            mRefreshHandler.removeMessages(2);
             emptyView.setAlpha(0);
         } else {
             emptyView.setAlpha(0);
+            mRefreshHandler.sendEmptyMessage(2);
             fastScroller.setVisibility(View.GONE);
         }
     }
@@ -48,6 +58,33 @@ public class BaseListActivity extends BaseActivity implements
                                  int mode) {
         mRecyclerView = recyclerView;
         mAdapter = (FlexibleAdapter) recyclerView.getAdapter();
+        mSwipeRefreshLayout = swipeRefreshLayout;
+//        initializeSwipeToRefresh();
+    }
+
+    public final Handler mRefreshHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
+        public boolean handleMessage(Message message) {
+            switch (message.what) {
+                case 0: // Stop
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    return true;
+                case 1: // Start
+                    mSwipeRefreshLayout.setRefreshing(true);
+                    return true;
+                case 2: // Show empty view
+                    ViewCompat.animate(findViewById(R.id.empty_view)).alpha(1);
+                    return true;
+                default:
+                    return false;
+            }
+        }
+    });
+
+    public void initializeSwipeToRefresh() {
+        // Swipe down to force synchronize
+        mSwipeRefreshLayout.setColorSchemeResources(
+                android.R.color.holo_purple, android.R.color.holo_blue_light,
+                android.R.color.holo_green_light, android.R.color.holo_orange_light);
     }
 
     @Override

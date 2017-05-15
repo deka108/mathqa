@@ -26,8 +26,11 @@ import io.github.kexanie.library.MathView;
 
 /**
  * Created by dekauliya on 5/3/17.
+ *
+ * Search result item content which displays the mathematical question as a preview (not full
+ * question content). Note for formula search, the relevant formula contained in the search result
+ * will get displayed too.
  */
-
 public class SearchResultSubItem extends AbstractSectionableItem<
         SearchResultSubItem.SearchResultSubItemViewHolder,
         IHeader> {

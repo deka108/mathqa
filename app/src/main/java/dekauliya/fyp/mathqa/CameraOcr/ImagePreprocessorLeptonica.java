@@ -21,6 +21,9 @@ import org.androidannotations.annotations.EBean;
 
 /**
  * Created by dekauliya on 21/1/17.
+ *
+ * Image processor implementation using Leptonica.
+ *
  */
 @EBean
 public class ImagePreprocessorLeptonica extends ImagePreprocessorBase{

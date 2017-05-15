@@ -5,6 +5,8 @@ import org.parceler.ParcelConstructor;
 
 /**
  * Created by dekauliya on 29/1/17.
+ * 
+ * KeyPoint Java object model equivalent with KeyPoint table in MathQA database.
  */
 @Parcel
 public class KeyPoint {

@@ -24,6 +24,9 @@ import dekauliya.fyp.mathqa.R;
 
 /**
  * Created by dekauliya on 10/2/17.
+ *
+ * Utilities for picking image from file system or camera, including asking for permissions for
+ * Android version >= 22.
  */
 @EBean
 public class ImagePickerUtils {

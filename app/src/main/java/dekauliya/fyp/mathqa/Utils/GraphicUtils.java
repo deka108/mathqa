@@ -2,6 +2,8 @@ package dekauliya.fyp.mathqa.Utils;
 
 /**
  * Created by dekauliya on 30/1/17.
+ *
+ * Related utilities for app Graphics.
  */
 
 import android.animation.Animator;

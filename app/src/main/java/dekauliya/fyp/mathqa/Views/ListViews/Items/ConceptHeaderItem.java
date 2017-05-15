@@ -18,8 +18,9 @@ import eu.davidea.viewholders.ExpandableViewHolder;
 
 /**
  * Created by dekauliya on 2/2/17.
+ *
+ * Concept header which groups the questions under a chosen subject level.
  */
-
 public class ConceptHeaderItem extends ExpandableHeaderItem<ConceptHeaderItem
         .ConceptHeaderItemViewHolder, QuestionSubItem> {
 

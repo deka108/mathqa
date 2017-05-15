@@ -15,6 +15,10 @@ import dekauliya.fyp.mathqa.R;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
+
+/**
+ * Activity for selecting MathQA subject level.
+ */
 @EActivity
 public class SelectSubjectActivity extends AppCompatActivity{
 

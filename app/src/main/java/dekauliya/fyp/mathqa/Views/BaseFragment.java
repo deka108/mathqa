@@ -14,6 +14,11 @@ import dekauliya.fyp.mathqa.Utils.DrawableType;
 import dekauliya.fyp.mathqa.Utils.DrawableUtils;
 import dekauliya.fyp.mathqa.Utils.NetworkUtils;
 
+/**
+ * Provides common features and actions of a MathQA Fragment which includes
+ * {@link com.vlonjatg.progressactivity.ProgressFrameLayout} for displaying activity's progress
+ * and network utilities.
+ */
 @EFragment
 public class BaseFragment extends Fragment {
     @ViewById(R.id.progress_activity)

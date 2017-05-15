@@ -18,8 +18,9 @@ import eu.davidea.viewholders.ExpandableViewHolder;
 
 /**
  * Created by dekauliya on 2/2/17.
+ *
+ * SubConcept header which groups the questions under a chosen mathematical concept.
  */
-
 public class SubConceptHeaderItem extends ExpandableHeaderItem<
         SubConceptHeaderItem.SubConceptHeaderItemViewHolder, QuestionSubItem>{
     private SubConcept subConcept;

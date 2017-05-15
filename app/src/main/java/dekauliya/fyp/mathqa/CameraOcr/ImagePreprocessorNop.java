@@ -5,6 +5,9 @@ import android.graphics.Bitmap;
 
 /**
  * Created by dekauliya on 19/3/17.
+ *
+ * Image processor implementation for no action.
+ *
  */
 
 public class ImagePreprocessorNop extends ImagePreprocessorBase {

@@ -31,6 +31,8 @@ import io.github.kexanie.library.MathView;
 
 /**
  * Created by dekauliya on 11/2/17.
+ *
+ * Utilities for inputting search queries which involves text queries, and formula search queries.
  */
 @EBean
 public class SearchDialogUtils {

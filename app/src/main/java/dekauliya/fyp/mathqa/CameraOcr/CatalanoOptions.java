@@ -2,6 +2,8 @@ package dekauliya.fyp.mathqa.CameraOcr;
 
 /**
  * Created by dekauliya on 18/3/17.
+ *
+ * Catalano Image pre-processing options.
  */
 
 public class CatalanoOptions extends PreprocessingOptions {

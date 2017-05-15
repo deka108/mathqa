@@ -24,8 +24,9 @@ import io.github.kexanie.library.MathView;
 
 /**
  * Created by dekauliya on 2/2/17.
+ *
+ * Question item content which displays the question as a preview (not full question content).
  */
-
 public class QuestionSubItem extends AbstractSectionableItem<
         QuestionSubItem.QuestionSubItemViewHolder,
         IHeader> {

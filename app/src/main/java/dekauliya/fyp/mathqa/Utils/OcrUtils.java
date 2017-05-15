@@ -22,6 +22,9 @@ import static dekauliya.fyp.mathqa.MathQaInterface.PROCESSOR_NOP;
 
 /**
  * Created by dekauliya on 18/3/17.
+ *
+ * Utilities for performing OCR including Image preprocessing, OCR engine, and Image preprocessing
+ * option selection, and state-progress update.
  */
 @EBean
 public class OcrUtils {

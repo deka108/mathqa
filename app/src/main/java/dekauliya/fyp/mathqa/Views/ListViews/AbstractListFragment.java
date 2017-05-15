@@ -16,6 +16,10 @@ import eu.davidea.flexibleadapter.common.SmoothScrollLinearLayoutManager;
 
 /**
  * Created by dekauliya on 5/2/17.
+ *
+ * Provides common features and actions of a MathQA ListFragment which has LinearLayout layout,
+ * contains SharedPreference {@link dekauliya.fyp.mathqa.MathQaPrefs} and
+ * {@link eu.davidea.flexibleadapter.FlexibleAdapter}
  */
 @EFragment
 public abstract class AbstractListFragment extends BaseFragment implements IDataListener,

@@ -28,7 +28,7 @@ import retrofit2.http.Query;
  * Created by dekauliya on 29/1/17.
  */
 
-public interface MathQaInterface {
+public interface MathQaRestApiInterface {
     @GET("subjects/")
     Observable<List<Subject>> getSubjects();
     @GET("subjects/{id}")

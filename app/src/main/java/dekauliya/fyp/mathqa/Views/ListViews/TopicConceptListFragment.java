@@ -25,7 +25,9 @@ import eu.davidea.flexibleadapter.common.DividerItemDecoration;
 import eu.davidea.flexibleadapter.items.IFlexible;
 
 /**
- * A fragment representing a list of Items.
+ *
+ * Provides list of concepts under subject level grouped by topic.
+ *
  * <p/>
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.

@@ -23,6 +23,10 @@ import static dekauliya.fyp.mathqa.MathQaInterface.MAX_RESCALED_SIZE;
 
 /**
  * Created by dekauliya on 21/1/17.
+ *
+ * Provides common features and methods of an Image processor which involve bitmap processing,
+ * preprocessing and downsampling.
+ *
  */
 @EBean
 public class ImagePreprocessorBase {

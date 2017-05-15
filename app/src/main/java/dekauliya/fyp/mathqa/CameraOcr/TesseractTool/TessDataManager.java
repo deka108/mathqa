@@ -21,6 +21,8 @@ import java.io.OutputStream;
 
 /**
  * Created by dekauliya on 25/9/16.
+ *
+ * Utilities for copying Tesseract training data onto the phone.
  */
 @EBean
 public class TessDataManager {

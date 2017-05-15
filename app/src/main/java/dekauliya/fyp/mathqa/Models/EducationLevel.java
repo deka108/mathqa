@@ -5,6 +5,8 @@ import org.parceler.ParcelConstructor;
 
 /**
  * Created by dekauliya on 29/1/17.
+ *
+ * EducationLevel Java object model equivalent with EducationLevel table in MathQA database.
  */
 @Parcel
 public class EducationLevel {

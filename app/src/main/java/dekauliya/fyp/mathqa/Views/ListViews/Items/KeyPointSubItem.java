@@ -23,8 +23,9 @@ import io.github.kexanie.library.MathView;
 
 /**
  * Created by dekauliya on 2/2/17.
+ *
+ * Full content of a concept or formula keypoints.
  */
-
 public class KeyPointSubItem extends AbstractSectionableItem<KeyPointSubItem
         .KeyPointSubItemViewHolder, IHeader> {
 

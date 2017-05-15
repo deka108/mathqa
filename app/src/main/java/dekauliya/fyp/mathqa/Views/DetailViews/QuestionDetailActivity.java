@@ -21,6 +21,9 @@ import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.Utils.FabUtils;
 import dekauliya.fyp.mathqa.Views.BaseListActivity;
 
+/**
+ * Activity for viewing Question and its Solution.
+ */
 @EActivity
 public class QuestionDetailActivity extends BaseListActivity implements OnDetailFragmentInteractionListener {
 

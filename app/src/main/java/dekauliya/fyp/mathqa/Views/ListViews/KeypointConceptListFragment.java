@@ -23,7 +23,9 @@ import eu.davidea.flexibleadapter.SelectableAdapter;
 import eu.davidea.flexibleadapter.common.DividerItemDecoration;
 
 /**
- * A fragment representing a list of Items.
+ *
+ * Provides list of concept keypoints. The full content of concept keypoint is collapsed under the
+ * keypoint concept title header item.
  * <p/>
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.

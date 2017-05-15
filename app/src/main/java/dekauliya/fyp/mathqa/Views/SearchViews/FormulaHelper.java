@@ -9,6 +9,8 @@ import dekauliya.fyp.mathqa.R;
 
 /**
  * Created by dekauliya on 11/2/17.
+ *
+ * Utilities for getting formula query in LaTeX.
  */
 public class FormulaHelper {
 

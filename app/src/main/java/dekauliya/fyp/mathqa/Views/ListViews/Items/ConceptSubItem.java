@@ -21,8 +21,9 @@ import eu.davidea.viewholders.FlexibleViewHolder;
 
 /**
  * Created by dekauliya on 30/1/17.
+ *
+ * Concept item content.
  */
-
 public class ConceptSubItem extends AbstractSectionableItem<ConceptSubItem.ConceptSubItemViewHolder,
         IHeader> {
     private Concept concept;

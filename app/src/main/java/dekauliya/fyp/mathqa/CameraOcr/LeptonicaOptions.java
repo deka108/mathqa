@@ -2,6 +2,8 @@ package dekauliya.fyp.mathqa.CameraOcr;
 
 /**
  * Created by dekauliya on 18/3/17.
+ *
+ * Leptonica Image Pre-processing options.
  */
 
 public class LeptonicaOptions extends PreprocessingOptions {

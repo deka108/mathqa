@@ -22,6 +22,8 @@ import dekauliya.fyp.mathqa.R;
 
 /**
  * Created by dekauliya on 7/2/17.
+ *
+ * Utilities for displaying FloatingActionButton for mathematical question searching in MathQA app.
  */
 @EBean
 public class FabUtils {

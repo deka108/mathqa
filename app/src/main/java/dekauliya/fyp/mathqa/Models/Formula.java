@@ -5,6 +5,8 @@ import org.parceler.ParcelConstructor;
 
 /**
  * Created by dekauliya on 6/3/17.
+ *
+ * Formula Java object model equivalent with Formula table in MathQA database.
  */
 @Parcel
 public class Formula {

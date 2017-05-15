@@ -18,6 +18,10 @@ import dekauliya.fyp.mathqa.R;
 import dekauliya.fyp.mathqa.Utils.ViewUtils;
 import io.github.kexanie.library.MathView;
 
+/**
+ * Fragment for displaying a full mathematical solution to the Question which uses LaTeX for the
+ * mathematical content.
+ */
 @EFragment(R.layout.fragment_solution_detail)
 public class SolutionDetailFragment extends BaseFragment implements IDataListener{
     private OnDetailFragmentInteractionListener mListener;

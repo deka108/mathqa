@@ -5,6 +5,8 @@ import org.parceler.ParcelConstructor;
 
 /**
  * Created by dekauliya on 29/1/17.
+ *
+ * Concept Java object model equivalent with Concept table in MathQA database.
  */
 @Parcel
 public class Concept {

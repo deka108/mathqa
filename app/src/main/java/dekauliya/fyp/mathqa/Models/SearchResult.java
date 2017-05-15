@@ -5,6 +5,9 @@ import org.parceler.ParcelConstructor;
 
 /**
  * Created by dekauliya on 6/3/17.
+ *
+ * SearchResult Java object model that acts as the container for storing the result of mathematical
+ * question search queries.
  */
 @Parcel
 public class SearchResult {

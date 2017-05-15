@@ -23,6 +23,10 @@ import dekauliya.fyp.mathqa.Views.ListViews.QuestionSearchResultFragment_;
 import eu.davidea.fastscroller.FastScroller;
 import eu.davidea.flexibleadapter.SelectableAdapter;
 
+/**
+ * Activity for displaying the mathematical document search result which involves latest query, and
+ * list of relevant questions that match the query.
+ */
 @EActivity
 public class SearchActivity extends BaseActivity implements OnListFragmentInteractionListener, FastScroller.OnScrollStateChangeListener {
     @Extra

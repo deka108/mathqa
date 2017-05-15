@@ -21,6 +21,10 @@ import static dekauliya.fyp.mathqa.MathQaInterface.OCR_TESSERACT;
 import static dekauliya.fyp.mathqa.MathQaInterface.PROCESSOR_NOP;
 
 
+/**
+ * Provides common features and actions of a MathQA Activity, which includes image picker request
+ * handling.
+ */
 @EActivity
 public class BaseActivity extends AppCompatActivity {
     Uri originalImgUri;

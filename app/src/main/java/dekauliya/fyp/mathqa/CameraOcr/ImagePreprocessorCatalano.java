@@ -40,6 +40,9 @@ import Catalano.Imaging.Tools.DocumentSkewChecker;
 
 /**
  * Created by dekauliya on 21/1/17.
+ *
+ * Image processor implementation using Catalano.
+ *
  */
 @EBean
 public class ImagePreprocessorCatalano extends ImagePreprocessorBase {

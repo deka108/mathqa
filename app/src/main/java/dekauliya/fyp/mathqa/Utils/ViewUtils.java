@@ -19,8 +19,9 @@ import static android.view.View.GONE;
 
 /**
  * Created by dekauliya on 6/2/17.
+ *
+ * Common utilities for displaying MathQA UI component, including rendering LaTeX.
  */
-
 public class ViewUtils {
 
     public static String convertLatex(String originalLatex){

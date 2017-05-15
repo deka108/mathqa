@@ -10,8 +10,9 @@ import dekauliya.fyp.mathqa.CameraOcr.TesseractTool.TessEngine;
 
 /**
  * Created by dekauliya on 10/2/17.
+ *
+ * OCR processor implementation for Tesseract.
  */
-
 @EBean
 public class TextRecogniserTesseract extends TextRecogniserBase {
     TessEngine mTessEngine;

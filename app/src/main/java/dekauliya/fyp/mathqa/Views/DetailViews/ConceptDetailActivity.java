@@ -28,7 +28,10 @@ import dekauliya.fyp.mathqa.Views.ListViews.QuestionConceptListFragment_;
 import eu.davidea.fastscroller.FastScroller;
 import eu.davidea.flexibleadapter.SelectableAdapter;
 
-
+/**
+ * Activity for viewing a concept, which includes important concept keypoints, formulas and
+ * available questions under a concept grouped by subconcept.
+ */
 @EActivity
 public class ConceptDetailActivity extends BaseListActivity implements
         FastScroller.OnScrollStateChangeListener, OnDetailFragmentInteractionListener{

@@ -5,6 +5,8 @@ import org.parceler.ParcelConstructor;
 
 /**
  * Created by dekauliya on 29/1/17.
+ * 
+ * Paper Java object model equivalent with Paper table in MathQA database.
  */
 @Parcel
 public class Paper {

@@ -12,6 +12,8 @@ import dekauliya.fyp.mathqa.CameraOcr.IOnOcrProcessingListener;
 
 /**
  * Created by dekauliya on 25/9/16.
+ *
+ * Tesseract OCR Engine for initialising Tesseract, getting Tesseract instance and OCR processing.
  */
 @EBean
 public class TessEngine {

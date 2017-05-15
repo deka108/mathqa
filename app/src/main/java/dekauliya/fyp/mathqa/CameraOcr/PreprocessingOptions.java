@@ -5,6 +5,8 @@ import java.util.Set;
 
 /**
  * Created by dekauliya on 19/3/17.
+ *
+ * Definitions and common features of Image processing options.
  */
 
 public class PreprocessingOptions {

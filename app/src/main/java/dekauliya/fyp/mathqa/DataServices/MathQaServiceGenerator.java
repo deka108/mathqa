@@ -50,6 +50,6 @@ public class MathQaServiceGenerator  {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
 
-        DataService.updateClient(createService(MathQaInterface.class));
+        DataService.updateClient(createService(MathQaRestApiInterface.class));
     }
 }

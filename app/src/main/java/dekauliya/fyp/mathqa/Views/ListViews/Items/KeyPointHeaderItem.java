@@ -19,8 +19,9 @@ import eu.davidea.viewholders.ExpandableViewHolder;
 
 /**
  * Created by dekauliya on 2/2/17.
+ *
+ * KeyPoint header which collapses the keypoint concept or formula full content.
  */
-
 public class KeyPointHeaderItem extends ExpandableHeaderItem<KeyPointHeaderItem
         .KeypointHeaderViewHolder, KeyPointSubItem> {
 

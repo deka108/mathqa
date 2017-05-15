@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 
 /**
  * Created by dekauliya on 21/1/17.
+ *
+ * Common interfaces for image processor.
  */
 
 public interface IOnOcrProcessingListener {

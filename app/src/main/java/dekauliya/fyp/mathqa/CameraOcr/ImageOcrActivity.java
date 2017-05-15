@@ -39,7 +39,12 @@ import static dekauliya.fyp.mathqa.MathQaInterface.PROCESSOR_CATALANO;
 import static dekauliya.fyp.mathqa.MathQaInterface.PROCESSOR_LEPTONICA;
 import static dekauliya.fyp.mathqa.MathQaInterface.PROCESSOR_NOP;
 
-
+/**
+ *
+ * Provides the image preview of the image source for OCR and main menus for performing editing,
+ * image processing, performing OCR and searching using OCR results.
+ *
+ */
 @EActivity(R.layout.activity_image_preview)
 public class ImageOcrActivity extends BaseActivity implements IOnOcrProcessingListener, IOnOcrOptionSetListener {
     Activity activity = this;

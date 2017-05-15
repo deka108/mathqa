@@ -20,6 +20,10 @@ import io.github.kexanie.library.MathView;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+/**
+ * Fragment for displaying a full mathematical Question which uses LaTeX for the mathematical
+ * content and star bar rating for its difficulty level.
+ */
 @EFragment(R.layout.fragment_question_detail)
 public class QuestionDetailFragment extends BaseFragment {
     private OnDetailFragmentInteractionListener mListener;

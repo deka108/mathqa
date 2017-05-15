@@ -7,6 +7,8 @@ import eu.davidea.flexibleadapter.SelectableAdapter;
 
 /**
  * Created by dekauliya on 5/2/17.
+ *
+ * Common interfaces of a MathQA ListFragment.
  */
 
 public interface OnListFragmentInteractionListener {

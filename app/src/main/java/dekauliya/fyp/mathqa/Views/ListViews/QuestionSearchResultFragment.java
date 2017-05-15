@@ -36,6 +36,10 @@ import eu.davidea.flexibleadapter.items.IFlexible;
 import io.github.kexanie.library.MathView;
 
 /**
+ *
+ * Provides list of search results depending on the search type and availability of the search
+ * result.
+ *
  * Created by dekauliya on 6/2/17.
  */
 @EFragment(R.layout.fragment_search_result_recyclerview_list)

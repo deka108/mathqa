@@ -2,8 +2,9 @@ package dekauliya.fyp.mathqa.DataServices;
 
 /**
  * Created by dekauliya on 31/1/17.
+ *
+ * Available MathQA data types.
  */
-
 public enum DataType {
     NONE,
     TOPIC_CONCEPT,

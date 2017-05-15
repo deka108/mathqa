@@ -15,6 +15,8 @@ import static dekauliya.fyp.mathqa.DataServices.MathQaServiceGenerator.BASE_URL;
 
 /**
  * Created by dekauliya on 12/3/17.
+ *
+ * Utilities for network access.
  */
 @EBean
 public class NetworkUtils {

@@ -17,8 +17,9 @@ import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.viewholders.ExpandableViewHolder;
 /**
  * Created by dekauliya on 30/1/17.
+ *
+ * Topic header which groups the concepts under a chosen subject level.
  */
-
 public class TopicHeaderItem extends ExpandableHeaderItem<
         TopicHeaderItem.TopicHeaderItemViewHolder, ConceptSubItem> {
 
