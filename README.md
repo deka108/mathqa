@@ -1,5 +1,7 @@
 # MathQA for Android
 
+[Link to Presentation Slides](http://bit.ly/fyp_deka)
+
 ## Demo
 [![MathQA for Android](http://i.imgur.com/TyZSJZe.gif)](https://www.youtube.com/watch?v=-ySJp6QnE3w)
 [MathQA Android Demo Video](https://youtu.be/-ySJp6QnE3w)
