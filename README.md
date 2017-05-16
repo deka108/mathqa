@@ -1,11 +1,10 @@
 # MathQA for Android
-
-[Link to Presentation Slides](http://bit.ly/fyp_deka)
-Go through docs/ directory for implementation details
+- [Link to Presentation](http://bit.ly/fyp_deka)
+- Go inside docs/ directory for implementation details
 
 ## Demo
-[![MathQA for Android](http://i.imgur.com/TyZSJZe.gif)](https://www.youtube.com/watch?v=-ySJp6QnE3w)
-[MathQA Android Demo Video](https://youtu.be/-ySJp6QnE3w)
+- [![MathQA for Android](http://i.imgur.com/TyZSJZe.gif)](https://www.youtube.com/watch?v=-ySJp6QnE3w)
+- [MathQA Android Demo Video](https://youtu.be/-ySJp6QnE3w)
 
 ## Build and Installation
 0. Download and Install Android Studio.
