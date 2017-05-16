@@ -9,10 +9,10 @@ Go through docs/ directory for implementation details
 
 ## Build and Installation
 0. Download and Install Android Studio.
-1. Clean and Build. Note that app building process will **fail** at first time because it uses AndroidAnnotation which will only be successful at runtime but fails at compile time.
+1. Clean and Build (Build --> Clean --> Rebuild Project). Note that app building process will **fail** at first time because it uses AndroidAnnotation which will only be successful at runtime but fails at compile time.
 2. Connect an Android phone to the laptop or starts an Android emulator.
 3. Make sure that the server is running. Note since MathQA server is not deployed to a remote server, we must modify the IP address for MathQA server manually by editting `MathQA/app/src/main/java/dekauliya/fyp/mathqa/MathQaInterface.java` and changing the BASE_URL's address into the local address where MathQA server is running.
-4. Run the app and install it to the phone or Android emulator. It should be successful now.
+4. Run the app and install it to the phone or Android emulator (Run --> Run app). It should be successful now.
 5. Work and develop the code using AndroidAnnotation framework and libraries under `app/build.gradle`
     1. Modify or add new libraries as necessary by modifying `app/build.gradle`
 
